@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all help install
+.PHONY: all help install dev dev_client dev_server
 
 SHELL := /bin/bash
 
@@ -31,6 +31,12 @@ install:
 	@pnpm install --prefix "$(CODE_DIR)"
 
 dev:
+	@pnpm --prefix "$(CODE_DIR)" run dev
+
+dev_client:
+	@pnpm --prefix "$(CODE_DIR)" run dev:client
+
+dev_server:
 	@pnpm --prefix "$(CODE_DIR)" run dev:server
 
 # lance les tests (faire 70% du code)
@@ -47,6 +53,8 @@ help:
 	@echo ""
 	@echo "  make install     - Install dependencies"
 	@echo "  make dev         - Run application, en dev"
+	@echo "  make dev_server  - Run le server seulement, en dev"
+	@echo "  make dev_client  - Run le client seulement, en dev"
 	@echo "  make install     - Install dependencies"
 	@echo "  make build       - compile pour la production"
 	@echo "  make clean       - supprime node_modules"
