@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx src/server/main.ts & vite",
-    "dev:server": "tsx src/server/main.ts",
+    "dev": "tsx --env-file=.env src/server/main.ts & vite",
+    "dev:server": "tsx --env-file=.env src/server/main.ts",
     "dev:client": "vite"
   },
   "keywords": [],
@@ -28,6 +28,7 @@
     "fastify": "^5.8.5",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "socket.io": "^4.8.3"
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3"
   }
 }

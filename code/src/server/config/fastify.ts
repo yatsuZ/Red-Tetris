@@ -8,7 +8,11 @@ export async function buildFastify(): Promise<FastifyInstance> {
 		logger: showLog(),
 	});
 
-  const io = new Server(fastify.server);
+  const chemin_client_requet_socket : string = process.env.CORS_ORIGIN + ":" + process.env.CORS_PORT;
+
+  const io = new Server(fastify.server, {
+    cors: { origin: chemin_client_requet_socket }
+  });
 
   io.on('connection', (socket) => {
       console.log('client connecté :', socket.id);
