@@ -1,4 +1,8 @@
-export const Shapes = {
+import type { PieceShape, Rotations } from "../interface/I_Piece.js"
+
+export const ALL_SHAPES: PieceShape[] = ['I' , 'J' , 'L' , 'O' , 'S' , 'T' , 'Z'];
+
+export const Shapes: Record<PieceShape, Rotations> = {
   'I': [[[1],[1],[1],[1]], [[1,1,1,1]], [[1],[1],[1],[1]], [[1,1,1,1]]],
   'J': [[[1,0,0],[1,1,1]], [[1,1],[1,0],[1,0]], [[1,1,1],[0,0,1]], [[0,1],[0,1],[1,1]]],
   'L': [[[0,0,1],[1,1,1]], [[1,0],[1,0],[1,1]], [[1,1,1],[1,0,0]], [[1,1],[0,1],[0,1]]],
