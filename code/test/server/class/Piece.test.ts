@@ -3,18 +3,12 @@ import { Piece } from '../../../src/server/class/Piece.js';
 import { Shapes } from '../../../src/server/constant/Shapes.js';
 import type { PieceData } from '../../../src/server/interface/I_Piece.js';
 import { test_Constructeur } from './Piece/constructeur.js';
+import { test_rotation } from './Piece/rotate.js';
 
 describe('Piece', () => {
-    describe('constructor', test_Constructeur)/*
-    describe('rotate', () => { 
-      // Arrange
-      const piece = new Piece('I', { x: 0, y: 0 });
-
-      // Act — (ici rien, on teste juste l'état initial)
-      piece.rotate();
-      // Assert
-      expect(piece.orientation).toBe(1);
-     })
+    describe('constructor', test_Constructeur)
+    describe('rotate', test_rotation)
+      /*
     describe('getMatrix', () => { 
       // Arrange
       const piece = new Piece('I', { x: 0, y: 0 });
