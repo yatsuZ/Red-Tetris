@@ -1,7 +1,7 @@
 import type { I_Piece } from '../interface/I_Piece.js';
 import { Shapes } from './Shapes.js';
 
-class Piece implements I_Piece {
+export class Piece implements I_Piece {
   readonly shape: I_Piece['shape'];
   orientation: I_Piece['orientation'];
   x: number;
@@ -16,11 +16,10 @@ class Piece implements I_Piece {
 
   getMatrix(): number[][] {
     return Shapes[this.shape][this.orientation] as number[][];
-    throw new Error("Method not implemented.");
   }
   rotate(): void {
     this.orientation = (this.orientation + 1) % 4 as I_Piece['orientation'];
     return;
-    throw new Error("Method not implemented.");
+    // throw new Error("Method not implemented.");
   }
 }
