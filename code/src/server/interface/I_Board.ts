@@ -4,17 +4,26 @@ import type { I_Piece, Matrix } from "./I_Piece.js";
 export type MatrixCellule = Matrix<CelluleType>
 
 export type BoardData = {
+    readonly real_height: number;
+    readonly real_width: number;
     readonly height: number;
     readonly width: number;
-    readonly ceiling_limit: number;
     highest_point: number;
+    board: MatrixCellule;
 };
 
 export interface I_Board extends BoardData {
-  clone(): I_Board;
+  readonly ceiling_limit: number;
+
+  // Retourne les données du board (height, width, ceiling_limit, highest_point)
+  get(): BoardData;
 
   // Retourne la grille sous forme de matrice de CelluleType
   getMatrix(): MatrixCellule;
+
+  clone(): I_Board;
+
+  initBoard():void;
 
   // Vérifie si une pièce peut être placée. Retourne une matrice d'états (StatePieceCollision) et le résultat global
   canAddPiece(piece: I_Piece): {matrix : Matrix<StatePieceCollision>, res : ResultMethod};
@@ -42,7 +51,4 @@ export interface I_Board extends BoardData {
 
   // Ajoute une pièce dans la grille. Retourne SUCCESS ou FAIL
   addPiece(piece: I_Piece): ResultMethod;
-
-  // Retourne les données du board (height, width, ceiling_limit, highest_point)
-  get(): BoardData;
 }

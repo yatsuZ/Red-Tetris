@@ -35,6 +35,7 @@ export enum StateLine {
 export const CELLULE_SYMBOLS: string[] = [' ', 'O', '|', '_'];
 // Grille par défaut : 10 colonnes jouables, bordures (2=mur), plafond (3), sol (2)
 export const EXEMPLE_DEFAULT_BOARD_MATRIX: Matrix = [
+[2,3,3,3,3,3,3,3,3,3,3,2],// -4
 [2,3,3,3,3,3,3,3,3,3,3,2],// -3
 [2,3,3,3,3,3,3,3,3,3,3,2],// -2
 [2,3,3,3,3,3,3,3,3,3,3,2],// -1
