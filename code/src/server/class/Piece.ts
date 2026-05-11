@@ -1,4 +1,4 @@
-import type { I_Piece, Matrix, PieceData, PieceShape, Position } from '../interface/I_Piece.js';
+import type { I_Piece, MatrixBin, PieceData, Position } from '../interface/I_Piece.js';
 import { Shapes } from '../constant/Shapes.js';
 
 export class Piece implements I_Piece {
@@ -22,7 +22,7 @@ export class Piece implements I_Piece {
       return (new Piece(self_data.shape, {...self_data.position}, self_data.orientation));
     }
 
-  getMatrix(): Matrix {
+  getMatrix(): MatrixBin {
     return Shapes[this.shape][this.orientation];
   }
 
