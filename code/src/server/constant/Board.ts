@@ -31,10 +31,12 @@ export enum StateLine {
 
 // ARRAY
 
-// CelluleType longuer du nombre de celule type
-export const CELLULE_SYMBOLS: string[] = ['V', 'O', 'W', 'L'];
-// 10 sur 20, 0 == vide, 
+// Symboles d'affichage associés à chaque valeur de CelluleType (dans l'ordre de l'enum)
+export const CELLULE_SYMBOLS: string[] = [' ', 'O', '|', '_'];
+// Grille par défaut : 10 colonnes jouables, bordures (2=mur), plafond (3), sol (2)
 export const EXEMPLE_DEFAULT_BOARD_MATRIX: Matrix = [
+[2,3,3,3,3,3,3,3,3,3,3,2],// -3
+[2,3,3,3,3,3,3,3,3,3,3,2],// -2
 [2,3,3,3,3,3,3,3,3,3,3,2],// -1
 [2,0,0,0,0,0,0,0,0,0,0,2],//  0
 [2,0,0,0,0,0,0,0,0,0,0,2],//  1

@@ -11,36 +11,38 @@ export type BoardData = {
 };
 
 export interface I_Board extends BoardData {
-// Autre
   clone(): I_Board;
 
-  // Retourne le board avec CelluleType
+  // Retourne la grille sous forme de matrice de CelluleType
   getMatrix(): MatrixCellule;
 
-  // Verifie si on peut ajouter une piece retourne une matrix 0 si y a rien 1 si y a une cellule piece normal 2 si il y a une collision vertical 3 si il y a une collision horizontal
+  // Vérifie si une pièce peut être placée. Retourne une matrice d'états (StatePieceCollision) et le résultat global
   canAddPiece(piece: I_Piece): {matrix : Matrix<StatePieceCollision>, res : ResultMethod};
 
-  // Suprime une ligne. 0 a reussi a suprimer 1 ne peut pas surpimer
+  // Supprime la ligne à l'index donné. Retourne SUCCESS ou FAIL
   delLine(indexLine: number): ResultMethod;
 
-  // Suprime plusieur ligne. 0 a reussi a suprimer 1 ne peut pas surpimer
+  // Supprime plusieurs lignes. Retourne le résultat pour chaque index
   delLines(indexLines: number[]): ({indexLine:number, res: ResultMethod})[];
 
-  // verifie leta d'une ligne 0 si elle est vide 1 si il y a des piece sur la ligne 2 si la ligne est remple
+  // Retourne l'état d'une ligne : EMPTY, PARTIAL ou FULL
   stateLine(indexLine: number): StateLine;
-  // pareil que stateLine mais fais avec plusieur ligne 
+  // Idem pour plusieurs lignes
   stateLines(indexLines: number[]): ({indexLine:number, state: StateLine})[];
 
-  // Donne le point le plus haut de la colone
+  // Retourne l'indice de la cellule la plus haute dans une colonne
   highestPointColumn(indexColumn: number):number
-  // Donne les point les plus haut dse  colones
+  // Retourne l'indice de la cellule la plus haute pour plusieurs colonnes
   highestPointsColumns(indexColumns: number[]):number[]
 
-  // Si il y a des ligne vide et qua dessus il y a des ligne non vide alors toute les les lignes non vide dessende du nombre de ligne vide en dessous
+  // Fait descendre toutes les lignes non vides s'il y a des lignes vides en dessous
   lineCellFall(): ResultMethod;
-  // Setter
-  // essaye dajoueter une piece dans sont tableaux si tout se passe bien 0 sinon 1 plus envoie une throw error (es bete de faire 2 securité ?)
+  // Fait monter une nouvelle ligne depuis le bas, avec une colonne vide aléatoire
+  lineCellRise(): ResultMethod;
+
+  // Ajoute une pièce dans la grille. Retourne SUCCESS ou FAIL
   addPiece(piece: I_Piece): ResultMethod;
-// Getter d'attribut
+
+  // Retourne les données du board (height, width, ceiling_limit, highest_point)
   get(): BoardData;
 }
