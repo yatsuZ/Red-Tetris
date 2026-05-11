@@ -40,7 +40,8 @@ dev_server:
 	@pnpm --prefix "$(CODE_DIR)" run dev:server
 
 # lance les tests (faire 70% du code)
-# test:
+test:
+	@pnpm --prefix "$(CODE_DIR)" run test
 
 # compile pour la production
 # build:
@@ -55,6 +56,6 @@ help:
 	@echo "  make dev         - Run application, en dev"
 	@echo "  make dev_server  - Run le server seulement, en dev"
 	@echo "  make dev_client  - Run le client seulement, en dev"
-	@echo "  make install     - Install dependencies"
-	@echo "  make build       - compile pour la production"
-	@echo "  make clean       - supprime node_modules"
+	@echo "  make test        - Lance les testes"
+# 	@echo "  make build       - compile pour la production"
+# 	@echo "  make clean       - supprime node_modules"

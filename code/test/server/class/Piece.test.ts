@@ -4,20 +4,13 @@ import { Shapes } from '../../../src/server/constant/Shapes.js';
 import type { PieceData } from '../../../src/server/interface/I_Piece.js';
 import { test_Constructeur } from './Piece/constructeur.js';
 import { test_rotation } from './Piece/rotate.js';
+import { test_matrix } from './Piece/matrix.js';
 
 describe('Piece', () => {
     describe('constructor', test_Constructeur)
     describe('rotate', test_rotation)
+    describe('getMatrix', test_matrix)
       /*
-    describe('getMatrix', () => { 
-      // Arrange
-      const piece = new Piece('I', { x: 0, y: 0 });
-
-      // Act — (ici rien, on teste juste l'état initial)
-
-      // Assert
-      expect(piece.getMatrix()).toBe(Shapes.I[0]);
-     })
     describe('clone', () => { 
       // Arrange
       const piece = new Piece('I', { x: 5, y: 4 });

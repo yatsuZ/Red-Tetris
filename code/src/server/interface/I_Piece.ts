@@ -2,7 +2,6 @@ export type PieceShape = 'I' | 'J' | 'L' | 'O' | 'S' | 'T' | 'Z';
 export type Matrix = number[][];
 export type Rotations = [Matrix, Matrix, Matrix, Matrix];
 export type Position = { x: number; y: number };
-// export type PieceOrientation = ['→', '↓', '←', '↑']
 
 export type PieceData = {
     readonly shape: PieceShape;
@@ -11,13 +10,14 @@ export type PieceData = {
 };
 
 export interface I_Piece extends PieceData {
-// Autre
+// TODO:
   // shift(direction: 'L' | 'R'): void; // Probléme a besoin de son environement pour eviter les sortie de terrian ou colision
   // fall(): void; // Probléme a besoin de son environement pour eviter les sortie de terrian ou colision
+// Autre
   clone(): I_Piece;
   getMatrix(): Matrix;
-// Seteur
+// Setter
   rotate(): void;
-// Geteur d'attribut
+// Getter d'attribut
   get(): PieceData;
 }

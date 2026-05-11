@@ -9,9 +9,9 @@ export class Piece implements I_Piece {
 
 // Constructeur
 
-  constructor(shape: I_Piece['shape'], position: Position) {
+  constructor(shape: I_Piece['shape'], position: Position, orientation: 0|1|2|3 = 0) {
     this.shape = shape;
-    this.orientation = 0;
+    this.orientation = orientation;
     this.position = {...position};
   }
 
@@ -19,7 +19,7 @@ export class Piece implements I_Piece {
 
   clone(): I_Piece {
       const self_data : PieceData = this.get();
-      return (new Piece(self_data.shape, {...self_data.position}));
+      return (new Piece(self_data.shape, {...self_data.position}, self_data.orientation));
     }
 
   getMatrix(): Matrix {
