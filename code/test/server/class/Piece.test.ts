@@ -12,19 +12,6 @@ describe('Piece', () => {
     describe('rotate', test_rotation);
     describe('getMatrix', test_matrix);
     describe('clone', test_clone);
-      /*
-    describe('get', () => { 
-      // Arrange
-      const piece = new Piece('I', { x: 5, y: 4 });
-      piece.rotate()
-      // Act — (ici rien, on teste juste l'état initial)
-      const ref : PieceData = {
-        shape: 'I',
-        orientation : 1,
-        position:{ x: 5, y: 4 }
-      }
-      // Assert
-      expect(piece.get()).toEqual(ref);
-     })
-     */
+    // OSEF on test deja dans constructor
+    // describe('get', test_get); 
 })
