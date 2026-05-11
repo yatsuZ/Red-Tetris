@@ -1,7 +1,4 @@
-import { describe, it, expect } from 'vitest'
-import { Piece } from '../../../src/server/class/Piece.js';
-import { Shapes } from '../../../src/server/constant/Shapes.js';
-import type { PieceData } from '../../../src/server/interface/I_Piece.js';
+import { describe } from 'vitest'
 import { test_Constructeur } from './Piece/constructeur.js';
 import { test_rotation } from './Piece/rotate.js';
 import { test_matrix } from './Piece/matrix.js';

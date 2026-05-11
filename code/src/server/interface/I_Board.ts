@@ -23,7 +23,7 @@ export interface I_Board extends BoardData {
 
   clone(): I_Board;
 
-  initBoard():void;
+  initBoard(): MatrixCellule;
 
   // Vérifie si une pièce peut être placée. Retourne une matrice d'états (StatePieceCollision) et le résultat global
   canAddPiece(piece: I_Piece): {matrix : Matrix<StatePieceCollision>, res : ResultMethod};

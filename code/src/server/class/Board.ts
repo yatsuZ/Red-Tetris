@@ -1,4 +1,3 @@
-import { arrayBuffer } from "node:stream/consumers";
 import { type StatePieceCollision, type ResultMethod, type StateLine, CelluleType } from "../constant/Board.js";
 import type { BoardData, I_Board, MatrixCellule } from "../interface/I_Board.js";
 import type { I_Piece, Matrix } from "../interface/I_Piece.js";
@@ -12,7 +11,7 @@ export class Board implements I_Board {
   highest_point: number;
   board: MatrixCellule;
 
-  constructor(height: number, width: number) {
+  constructor(height: number = 20, width: number = 10) {
     this.height = height;
     this.width = width;
     if (this.height < 4 || this.height > 80 || this.height < this.width || this.width < 4 || this.width > 40)
