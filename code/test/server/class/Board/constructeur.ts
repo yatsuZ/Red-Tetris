@@ -2,32 +2,60 @@ import { expect, it } from "vitest";
 import { Piece } from "../../../../src/server/class/Piece.js";
 import { type I_Piece, type PieceData, type Position } from "../../../../src/server/interface/I_Piece.js";
 import { getRandomInt } from "../../../../src/server/utils/rng.js";
-import { ALL_SHAPES, PieceOrientationAffichage } from "../../../../src/server/constant/Shapes.js";
-/*
-function defaut({ shape, position, rotation}: { shape: I_Piece['shape'], position: Position, rotation : 0|1|2|3}) {
+import { Board } from "../../../../src/server/class/Board.js";
+import type { BoardData, MatrixCellule } from "../../../../src/server/interface/I_Board.js";
+import { CELLULE_EMOJI, CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD, ErrorInitMsgBoard, EXEMPLE_DEFAULT_BOARD_MATRIX } from "../../../../src/server/constant/Board.js";
+
+function defaut() {
     // Arrange
-      const piece = new Piece(shape, position, rotation);
+    const terrain = new Board();
     // Act — (ici rien, on teste juste l'état initial)
 
     // Assert
-    const ref : PieceData = {
-      shape: shape,
-      orientation : rotation,
-      position:position
+    const ref : BoardData = {
+      width: DEFAULT_WIDTH_BOARD,
+      height: DEFAULT_HEIGHT_BOARD,
+      real_height: DEFAULT_HEIGHT_BOARD + 4,
+      real_width: DEFAULT_WIDTH_BOARD + 2,
+      highest_point: DEFAULT_HEIGHT_BOARD,
+      board: [...EXEMPLE_DEFAULT_BOARD_MATRIX]
     }
-    expect(piece.get()).toEqual(ref);
-  }
+    expect(terrain.get()).toEqual(ref);
+}
 
-*/
+function init(width : number, height : number)
+{
+  const terrain : Board = new Board(height, width);
+  const ref : BoardData = {
+    width: width,
+    height: height,
+    real_height: height + 4,
+    real_width: width + 2,
+    highest_point: height,
+    board: [...terrain.getMatrix()]
+  }
+  expect(terrain.get()).toEqual(ref);
+}
 
 export function test_Constructeur(): void
 { 
-  // const rng_rotation : 0|1|2|3 = getRandomInt(0, 3) % 4 as 0|1|2|3;
+  const height_too_small: number = getRandomInt(-100, 3);
+  const height_too_high: number = getRandomInt(81, 100);
+  const width_too_small: number = getRandomInt(-100, 3);
+  const width_too_high: number = getRandomInt(41, 100);
+  const w = getRandomInt(4, 40);
+  const h = w*2;
 
-  // const rng_pos : Position = {x: getRandomInt(-100, 100), y:getRandomInt(-100, 100)};
+  it.each([{ affichage_h: DEFAULT_HEIGHT_BOARD, affichage_w: DEFAULT_WIDTH_BOARD }])('Generation Board par defaut (h: $affichage_h, w: $affichage_w)', defaut);
+  it.each([{ h: h, w: w }])('Generation Board par defaut (h: $h, w: $w)', () => {init(w, h)});
 
-  // const all_param: {shape: I_Piece['shape'], position: Position, rotation: 0|1|2|3, arrow_init: string}[] =
-  //   ALL_SHAPES.map(shape => ({ shape, position: rng_pos, rotation: rng_rotation, arrow_init: PieceOrientationAffichage[rng_rotation] }));
-
-  // it.each(all_param)('Shape $shape en ($position.x, $position.y) — orientation de départ $arrow_init', defaut);
+  it.each([
+    [height_too_small, 10, ErrorInitMsgBoard.HEIGHT_LOW],  // [height, width, specific_error]
+    [height_too_high, 10, ErrorInitMsgBoard.HEIGHT_HIGH],
+    [20, width_too_small, ErrorInitMsgBoard.WIDTH_LOW],
+    [20, width_too_high, ErrorInitMsgBoard.WIDTH_HIGH],
+    [20, 40, ErrorInitMsgBoard.WIDTH_HEIGHT], // height < width
+  ])('Doit throw la bonne erreur pour h:%i, w:%i', (h, w, specificError) => {
+    expect(() => new Board(h, w)).toThrow(ErrorInitMsgBoard.DEFAULT + specificError);
+  });
 }

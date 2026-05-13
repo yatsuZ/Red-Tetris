@@ -13,9 +13,8 @@ export type BoardData = {
 };
 
 export interface I_Board extends BoardData {
-  readonly ceiling_limit: number;
 
-  // Retourne les données du board (height, width, ceiling_limit, highest_point)
+  // Retourne les données du board (height, width, highest_point)
   get(): BoardData;
 
   // Retourne la grille sous forme de matrice de CelluleType

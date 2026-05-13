@@ -1,4 +1,4 @@
-import { type StatePieceCollision, type ResultMethod, type StateLine, CelluleType } from "../constant/Board.js";
+import { type StatePieceCollision, type ResultMethod, type StateLine, CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD, ErrorInitMsgBoard, CELLULE_EMOJI, CELLULE_SYMBOLS } from "../constant/Board.js";
 import type { BoardData, I_Board, MatrixCellule } from "../interface/I_Board.js";
 import type { I_Piece, Matrix } from "../interface/I_Piece.js";
 
@@ -7,16 +7,24 @@ export class Board implements I_Board {
   readonly real_width: number;
   readonly height: number;
   readonly width: number;
-  readonly ceiling_limit : number;
   highest_point: number;
   board: MatrixCellule;
 
-  constructor(height: number = 20, width: number = 10) {
+  constructor(height: number = DEFAULT_HEIGHT_BOARD, width: number = DEFAULT_WIDTH_BOARD) {
     this.height = height;
     this.width = width;
-    if (this.height < 4 || this.height > 80 || this.height < this.width || this.width < 4 || this.width > 40)
-      throw new Error("No valid input constructor Board.");
-    this.ceiling_limit = 4;
+
+    if (this.height < 4)
+      throw new Error(ErrorInitMsgBoard.DEFAULT + ErrorInitMsgBoard.HEIGHT_LOW);
+    else if (this.height > 80)
+      throw new Error(ErrorInitMsgBoard.DEFAULT + ErrorInitMsgBoard.HEIGHT_HIGH);
+    else if (this.width < 4)
+      throw new Error(ErrorInitMsgBoard.DEFAULT + ErrorInitMsgBoard.WIDTH_LOW);
+    else if (this.width > 40)
+      throw new Error(ErrorInitMsgBoard.DEFAULT + ErrorInitMsgBoard.WIDTH_HIGH);
+    else if (this.height < this.width)
+      throw new Error(ErrorInitMsgBoard.DEFAULT + ErrorInitMsgBoard.WIDTH_HEIGHT);
+
     this.highest_point = this.height;
     this.real_height = height + 4;
     this.real_width = width + 2;
@@ -27,10 +35,8 @@ export class Board implements I_Board {
     return Array.from({length: this.real_height}, 
       (_, i) => Array.from({length: this.real_width}, 
         (_, j) => {
-          if (j === 0 || j === this.real_width - 1 || i === this.real_height - 1)
+          if (j === 0 || j === this.real_width - 1 || i === this.real_height - 1 || i === 0)
             return (CelluleType.WALL);
-          else if (i < this.ceiling_limit)
-            return (CelluleType.CEILING_LIMIT);
           return (CelluleType.EMPTY);
         }))
   }
@@ -40,7 +46,17 @@ export class Board implements I_Board {
     throw new Error("Method not implemented.");
   }
   getMatrix(): MatrixCellule {
-    throw new Error("Method not implemented.");
+    return ([...this.board]);
+  }
+  get(): BoardData {
+    return ({
+      real_height: this.real_height,
+      real_width: this.real_width,
+      height: this.height,
+      width: this.width,
+      highest_point: this.highest_point,
+      board: this.getMatrix()
+    });
   }
   canAddPiece(piece: I_Piece): { matrix: Matrix<StatePieceCollision>; res: ResultMethod; } {
     throw new Error("Method not implemented.");
@@ -72,7 +88,20 @@ export class Board implements I_Board {
   addPiece(piece: I_Piece): ResultMethod {
     throw new Error("Method not implemented.");
   }
-  get(): BoardData {
-    throw new Error("Method not implemented.");
-  }
+}
+
+export function show_board(board: MatrixCellule, type : "EMOJI" | "ASCII" = "EMOJI")
+{
+    board.forEach((element, i) => {
+      let ligneStr = ""; // 1. On initialise une chaîne vide pour la ligne en cours
+    
+      element.forEach((celule, j) => {
+        if (type == "ASCII")
+          ligneStr += CELLULE_SYMBOLS[celule] + " "; // 2. On ajoute le symbole de la cellule
+        else
+          ligneStr += CELLULE_EMOJI[celule] + " "; // 2. On ajoute le symbole de la cellule
+      });
+    
+      console.log(`Ligne ${i}:\t ${ligneStr}`); // 3. On affiche la ligne complète une fois le second forEach fini
+    });
 }
