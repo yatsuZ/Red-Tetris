@@ -1,4 +1,4 @@
-import { type StatePieceCollision, type ResultMethod, type StateLine, CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD, ErrorInitMsgBoard, CELLULE_EMOJI, CELLULE_SYMBOLS } from "../constant/Board.js";
+import { type StatePieceCollision, type ResultMethod, type StateLine, CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD, ErrorInitMsgBoard} from "../constant/Board.js";
 import type { BoardData, I_Board, MatrixCellule } from "../interface/I_Board.js";
 import type { I_Piece, Matrix } from "../interface/I_Piece.js";
 
@@ -88,20 +88,4 @@ export class Board implements I_Board {
   addPiece(piece: I_Piece): ResultMethod {
     throw new Error("Method not implemented.");
   }
-}
-
-export function show_board(board: MatrixCellule, type : "EMOJI" | "ASCII" = "EMOJI")
-{
-    board.forEach((element, i) => {
-      let ligneStr = ""; // 1. On initialise une chaîne vide pour la ligne en cours
-    
-      element.forEach((celule, j) => {
-        if (type == "ASCII")
-          ligneStr += CELLULE_SYMBOLS[celule] + " "; // 2. On ajoute le symbole de la cellule
-        else
-          ligneStr += CELLULE_EMOJI[celule] + " "; // 2. On ajoute le symbole de la cellule
-      });
-    
-      console.log(`Ligne ${i}:\t ${ligneStr}`); // 3. On affiche la ligne complète une fois le second forEach fini
-    });
 }
