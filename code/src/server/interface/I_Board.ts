@@ -24,6 +24,9 @@ export interface I_Board extends BoardData {
 
   initBoard(): MatrixCellule;
 
+  // Vérifie si une pièce peut aparaitre. Retourne le résultat
+  canSpawnPiece(piece: I_Piece): ResultMethod;
+
   // Vérifie si une pièce peut être placée. Retourne une matrice d'états (StatePieceCollision) et le résultat global
   canAddPiece(piece: I_Piece): {matrix : Matrix<StatePieceCollision>, res : ResultMethod};
 

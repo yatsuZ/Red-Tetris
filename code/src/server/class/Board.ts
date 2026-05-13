@@ -30,6 +30,9 @@ export class Board implements I_Board {
     this.real_width = width + 2;
     this.board = this.initBoard()
   }
+  canSpawnPiece(piece: I_Piece): ResultMethod {
+    throw new Error("Method not implemented.");
+  }
 
   initBoard(): MatrixCellule {
     return Array.from({length: this.real_height}, 
