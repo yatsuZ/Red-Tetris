@@ -1,6 +1,6 @@
-import { type StatePieceCollision, type ResultMethod, type StateLine, CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD, ErrorInitMsgBoard} from "../constant/Board.js";
+import { type StatePieceCollision, type StateLine, CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD, ErrorInitMsgBoard, ResultMethod} from "../constant/Board.js";
 import type { BoardData, I_Board, MatrixCellule } from "../interface/I_Board.js";
-import type { I_Piece, Matrix } from "../interface/I_Piece.js";
+import type { I_Piece, Matrix, Position } from "../interface/I_Piece.js";
 
 export class Board implements I_Board {
   readonly real_height: number;
@@ -38,13 +38,6 @@ export class Board implements I_Board {
     return board;
   }
 
-  static fromData(data: BoardData): Board {
-    return new Board(data);
-  }
-  canSpawnPiece(piece: I_Piece): ResultMethod {
-    throw new Error("Method not implemented.");
-  }
-
   initBoard(): MatrixCellule {
     return Array.from({length: this.real_height}, 
       (_, i) => Array.from({length: this.real_width}, 
@@ -55,10 +48,14 @@ export class Board implements I_Board {
         }))
   }
 
+  static fromData(data: BoardData): Board {
+    return new Board(data);
+  }
 
   clone(): Board {
     return Board.fromData(this.get());
   }
+
   getMatrix(): MatrixCellule {
     return ([...this.board]);
   }
@@ -72,9 +69,34 @@ export class Board implements I_Board {
       board: this.getMatrix()
     });
   }
-  canAddPiece(piece: I_Piece): { matrix: Matrix<StatePieceCollision>; res: ResultMethod; } {
+
+  addPiece(piece: I_Piece, pos: Position): ResultMethod {
+    const matrix = piece.getMatrix();
+
+    for (let i = 0; i < matrix.length; i++) {
+      const pieceRow = matrix[i]!;
+      for (let j = 0; j < pieceRow.length; j++) {
+        if (pieceRow[j] !== 1) continue;
+        const r = pos.x + i;
+        const c = pos.y + j;
+        const boardRow = this.board[r];
+        if (boardRow === undefined || boardRow[c] === undefined)
+          throw new Error(`addPiece: écriture hors mémoire (${r}, ${c})`);
+        boardRow[c] = CelluleType.PIECE;
+      }
+    }
+    piece.position = { ...pos };
+    return ResultMethod.SUCCESS;
+  }
+
+  canAddPiece(piece: I_Piece, pos: Position): { matrix: Matrix<StatePieceCollision>; res: ResultMethod; } {
     throw new Error("Method not implemented.");
   }
+
+  canSpawnPiece(piece: I_Piece): ResultMethod {
+    throw new Error("Method not implemented.");
+  }
+
   delLine(indexLine: number): ResultMethod {
     throw new Error("Method not implemented.");
   }
@@ -97,9 +119,6 @@ export class Board implements I_Board {
     throw new Error("Method not implemented.");
   }
   lineCellRise(): ResultMethod {
-    throw new Error("Method not implemented.");
-  }
-  addPiece(piece: I_Piece): ResultMethod {
     throw new Error("Method not implemented.");
   }
 }

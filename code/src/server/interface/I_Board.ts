@@ -1,5 +1,5 @@
 import type { CelluleType, ResultMethod, StateLine, StatePieceCollision } from "../constant/Board.js";
-import type { I_Piece, Matrix } from "./I_Piece.js";
+import type { I_Piece, Matrix, Position } from "./I_Piece.js";
 
 export type MatrixCellule = Matrix<CelluleType>
 
@@ -28,7 +28,7 @@ export interface I_Board extends BoardData {
   canSpawnPiece(piece: I_Piece): ResultMethod;
 
   // Vérifie si une pièce peut être placée. Retourne une matrice d'états (StatePieceCollision) et le résultat global
-  canAddPiece(piece: I_Piece): {matrix : Matrix<StatePieceCollision>, res : ResultMethod};
+  canAddPiece(piece: I_Piece, pos: Position): {matrix : Matrix<StatePieceCollision>, res : ResultMethod};
 
   // Supprime la ligne à l'index donné. Retourne SUCCESS ou FAIL
   delLine(indexLine: number): ResultMethod;
@@ -52,5 +52,5 @@ export interface I_Board extends BoardData {
   lineCellRise(): ResultMethod;
 
   // Ajoute une pièce dans la grille. Retourne SUCCESS ou FAIL
-  addPiece(piece: I_Piece): ResultMethod;
+  addPiece(piece: I_Piece, pos: Position): ResultMethod;
 }
