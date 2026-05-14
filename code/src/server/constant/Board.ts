@@ -31,8 +31,7 @@ export enum StatePieceCollision {
   EMPTY = 0,
   PIECE  = 1,
   SIDE_COLLISION = 2,
-  GROUND_COLLISION = 3,
-  SPAWN_COLISION = 4,
+  GROUND_COLLISION = 3
 }
 
 export enum StateLine {

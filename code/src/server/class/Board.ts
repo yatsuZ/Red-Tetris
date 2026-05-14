@@ -1,4 +1,4 @@
-import { type StatePieceCollision, type StateLine, CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD, ErrorInitMsgBoard, ResultMethod} from "../constant/Board.js";
+import { StatePieceCollision, type StateLine, CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD, ErrorInitMsgBoard, ResultMethod} from "../constant/Board.js";
 import type { BoardData, I_Board, MatrixCellule } from "../interface/I_Board.js";
 import type { I_Piece, Matrix, Position } from "../interface/I_Piece.js";
 
@@ -90,7 +90,38 @@ export class Board implements I_Board {
   }
 
   canAddPiece(piece: I_Piece, pos: Position): { matrix: Matrix<StatePieceCollision>; res: ResultMethod; } {
-    throw new Error("Method not implemented.");
+    let res = ResultMethod.SUCCESS;
+    const pieceMatrix = piece.getMatrix();
+
+    const matrix: Matrix<StatePieceCollision> = pieceMatrix.map((pieceRow, i) =>
+      pieceRow.map((cell, j) => {
+        if (cell !== 1) return StatePieceCollision.EMPTY;
+
+        const r = pos.x + i;
+        const c = pos.y + j;
+        const boardRow = this.board[r];
+
+        if (boardRow === undefined || boardRow[c] === undefined) {
+          res = ResultMethod.ERROR;
+          return StatePieceCollision.OUT_BOARD;
+        }
+
+        const boardCell = boardRow[c];
+        if (boardCell === CelluleType.WALL) {
+          if (res !== ResultMethod.ERROR) res = ResultMethod.FAIL;
+          return r === this.real_height - 1
+            ? StatePieceCollision.GROUND_COLLISION
+            : StatePieceCollision.SIDE_COLLISION;
+        }
+        if (boardCell === CelluleType.PIECE) {
+          if (res !== ResultMethod.ERROR) res = ResultMethod.FAIL;
+          return StatePieceCollision.PIECE;
+        }
+        return StatePieceCollision.EMPTY;
+      })
+    );
+
+    return { matrix, res };
   }
 
   canSpawnPiece(piece: I_Piece): ResultMethod {

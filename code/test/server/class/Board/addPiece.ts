@@ -6,7 +6,7 @@ import { show_board } from "../../../../src/server/utils/showBoard.js";
 import { getRandomInt } from "../../../../src/server/utils/rng.js";
 import type { Position } from "../../../../src/server/interface/I_Piece.js";
 
-const SHOW_LOGS = true;
+const SHOW_LOGS = false;
 
 // Piece 'O' = [[1,1],[1,1]] — 2x2, simple a verifier
 // Board defaut : real_height=24, real_width=12
