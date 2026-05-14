@@ -8,7 +8,7 @@ import { CELLULE_EMOJI, CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD, 
 
 function defaut() {
     // Arrange
-    const terrain = new Board();
+    const terrain = Board.create();
     // Act — (ici rien, on teste juste l'état initial)
 
     // Assert
@@ -25,7 +25,7 @@ function defaut() {
 
 function init(width : number, height : number)
 {
-  const terrain : Board = new Board(height, width);
+  const terrain : Board = Board.create(height, width);
   const ref : BoardData = {
     width: width,
     height: height,
@@ -56,6 +56,6 @@ export function test_Constructeur(): void
     [20, width_too_high, ErrorInitMsgBoard.WIDTH_HIGH],
     [20, 40, ErrorInitMsgBoard.WIDTH_HEIGHT], // height < width
   ])('Doit throw la bonne erreur pour h:%i, w:%i', (h, w, specificError) => {
-    expect(() => new Board(h, w)).toThrow(ErrorInitMsgBoard.DEFAULT + specificError);
+    expect(() => Board.create(h, w)).toThrow(ErrorInitMsgBoard.DEFAULT + specificError);
   });
 }

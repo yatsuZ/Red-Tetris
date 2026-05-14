@@ -10,25 +10,36 @@ export class Board implements I_Board {
   highest_point: number;
   board: MatrixCellule;
 
-  constructor(height: number = DEFAULT_HEIGHT_BOARD, width: number = DEFAULT_WIDTH_BOARD) {
-    this.height = height;
-    this.width = width;
+  private constructor(data: BoardData) {
+    this.height = data.height;
+    this.width = data.width;
+    this.real_height = data.real_height;
+    this.real_width = data.real_width;
+    this.highest_point = data.highest_point;
+    this.board = data.board.map(row => [...row]);
+  }
 
-    if (this.height < 4)
+  static create(height: number = DEFAULT_HEIGHT_BOARD, width: number = DEFAULT_WIDTH_BOARD): Board {
+    if (height < 4)
       throw new Error(ErrorInitMsgBoard.DEFAULT + ErrorInitMsgBoard.HEIGHT_LOW);
-    else if (this.height > 80)
+    else if (height > 80)
       throw new Error(ErrorInitMsgBoard.DEFAULT + ErrorInitMsgBoard.HEIGHT_HIGH);
-    else if (this.width < 4)
+    else if (width < 4)
       throw new Error(ErrorInitMsgBoard.DEFAULT + ErrorInitMsgBoard.WIDTH_LOW);
-    else if (this.width > 40)
+    else if (width > 40)
       throw new Error(ErrorInitMsgBoard.DEFAULT + ErrorInitMsgBoard.WIDTH_HIGH);
-    else if (this.height < this.width)
+    else if (height < width)
       throw new Error(ErrorInitMsgBoard.DEFAULT + ErrorInitMsgBoard.WIDTH_HEIGHT);
 
-    this.highest_point = this.height;
-    this.real_height = height + 4;
-    this.real_width = width + 2;
-    this.board = this.initBoard()
+    const real_height = height + 4;
+    const real_width = width + 2;
+    const board = new Board({ height, width, real_height, real_width, highest_point: height, board: [] });
+    board.board = board.initBoard();
+    return board;
+  }
+
+  static fromData(data: BoardData): Board {
+    return new Board(data);
   }
   canSpawnPiece(piece: I_Piece): ResultMethod {
     throw new Error("Method not implemented.");
@@ -45,8 +56,8 @@ export class Board implements I_Board {
   }
 
 
-  clone(): I_Board {
-    throw new Error("Method not implemented.");
+  clone(): Board {
+    return Board.fromData(this.get());
   }
   getMatrix(): MatrixCellule {
     return ([...this.board]);
