@@ -127,6 +127,10 @@ export class Board implements I_Board {
   }
 
   canSpawnPiece(piece: I_Piece): ResultMethod {
+    // prend la piece et on le coupe en 2 pour trouver le milieux   et essaye de le placer au mileux du terrain si  possible de faire 50 50 on decale a droite + et le point le plus haut
+    // trouver ou placer la piece sur le terrain 
+    // donc trouver son colone spawn
+    // const colone_spawn : number = this.real_width / 2  - 
     throw new Error("Method not implemented.");
   }
 

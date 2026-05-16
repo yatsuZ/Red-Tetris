@@ -21,4 +21,6 @@ export interface I_Piece extends PieceData {
   rotate(): void;
 // Getter d'attribut
   get(): PieceData;
+  getLargeur(): number;
+  getHauteur(): number;
 }

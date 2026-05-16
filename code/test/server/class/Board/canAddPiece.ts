@@ -4,8 +4,9 @@ import { Piece } from "../../../../src/server/class/Piece.js";
 import { CelluleType, ResultMethod, StatePieceCollision } from "../../../../src/server/constant/Board.js";
 import { show_board } from "../../../../src/server/utils/showBoard.js";
 import type { Position } from "../../../../src/server/interface/I_Piece.js";
+import { log_collision_matrix } from "../../../../src/server/utils/showStateColision.js";
 
-const SHOW_LOGS = false;
+const SHOW_LOGS = true;
 
 // Piece 'O' = [[1,1],[1,1]] — 2x2
 // Board defaut : real_height=24 (sol=ligne 23), real_width=12 (murs col 0 et 11)
@@ -13,8 +14,9 @@ const SHOW_LOGS = false;
 function log(board: Board, label: string) {
   if (!SHOW_LOGS) return;
   console.log(label);
-  show_board(board.board, "ASCII");
+  // show_board(board.board, "ASCII");
 }
+
 
 function position_valide() {
   // Arrange
@@ -26,6 +28,7 @@ function position_valide() {
 
   // Act
   const { matrix, res } = board.canAddPiece(piece, pos);
+  log_collision_matrix(matrix, "  collision matrix:", SHOW_LOGS);
 
   // Assert
   expect(res).toBe(ResultMethod.SUCCESS);
@@ -45,6 +48,7 @@ function hors_memoire() {
 
   // Act
   const { matrix, res } = board.canAddPiece(piece, pos);
+  log_collision_matrix(matrix, "  collision matrix:", SHOW_LOGS);
 
   // Assert
   expect(res).toBe(ResultMethod.ERROR);
@@ -64,6 +68,7 @@ function collision_mur_lateral() {
 
   // Act
   const { matrix, res } = board.canAddPiece(piece, pos);
+  log_collision_matrix(matrix, "  collision matrix:", SHOW_LOGS);
 
   // Assert — col 0 = SIDE, col 1 = NO_COLLISION
   expect(res).toBe(ResultMethod.FAIL);
@@ -83,6 +88,7 @@ function collision_sol() {
 
   // Act
   const { matrix, res } = board.canAddPiece(piece, pos);
+  log_collision_matrix(matrix, "  collision matrix:", SHOW_LOGS);
 
   // Assert — ligne 22 = NO_COLLISION, ligne 23 = sol
   expect(res).toBe(ResultMethod.FAIL);
@@ -103,6 +109,7 @@ function collision_piece_existante() {
 
   // Act
   const { matrix, res } = board.canAddPiece(piece, pos);
+  log_collision_matrix(matrix, "  collision matrix:", SHOW_LOGS);
 
   // Assert
   expect(res).toBe(ResultMethod.FAIL);

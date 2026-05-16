@@ -20,7 +20,7 @@ function defaut({ shape, position, rotation}: { shape: I_Piece['shape'], positio
 
     // Assert
     expect(piece.orientation).not.equal(clonePiece.orientation);
-  }
+}
 
 export function test_clone(): void
 { 
