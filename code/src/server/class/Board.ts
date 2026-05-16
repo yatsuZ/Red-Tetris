@@ -95,7 +95,7 @@ export class Board implements I_Board {
 
     const matrix: Matrix<StatePieceCollision> = pieceMatrix.map((pieceRow, i) =>
       pieceRow.map((cell, j) => {
-        if (cell !== 1) return StatePieceCollision.EMPTY;
+        if (cell !== 1) return StatePieceCollision.NO_COLLISION;
 
         const r = pos.x + i;
         const c = pos.y + j;
@@ -108,16 +108,18 @@ export class Board implements I_Board {
 
         const boardCell = boardRow[c];
         if (boardCell === CelluleType.WALL) {
-          if (res !== ResultMethod.ERROR) res = ResultMethod.FAIL;
+          if (res !== ResultMethod.ERROR)
+            res = ResultMethod.FAIL;
+
           return r === this.real_height - 1
             ? StatePieceCollision.GROUND_COLLISION
             : StatePieceCollision.SIDE_COLLISION;
         }
         if (boardCell === CelluleType.PIECE) {
           if (res !== ResultMethod.ERROR) res = ResultMethod.FAIL;
-          return StatePieceCollision.PIECE;
+          return StatePieceCollision.PIECE_COLLISION;
         }
-        return StatePieceCollision.EMPTY;
+        return StatePieceCollision.NO_COLLISION;
       })
     );
 

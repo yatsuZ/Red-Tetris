@@ -30,8 +30,8 @@ function position_valide() {
   // Assert
   expect(res).toBe(ResultMethod.SUCCESS);
   expect(matrix).toEqual([
-    [StatePieceCollision.EMPTY, StatePieceCollision.EMPTY],
-    [StatePieceCollision.EMPTY, StatePieceCollision.EMPTY],
+    [StatePieceCollision.NO_COLLISION, StatePieceCollision.NO_COLLISION],
+    [StatePieceCollision.NO_COLLISION, StatePieceCollision.NO_COLLISION],
   ]);
 }
 
@@ -65,11 +65,11 @@ function collision_mur_lateral() {
   // Act
   const { matrix, res } = board.canAddPiece(piece, pos);
 
-  // Assert — col 0 = SIDE, col 1 = EMPTY
+  // Assert — col 0 = SIDE, col 1 = NO_COLLISION
   expect(res).toBe(ResultMethod.FAIL);
   expect(matrix).toEqual([
-    [StatePieceCollision.SIDE_COLLISION, StatePieceCollision.EMPTY],
-    [StatePieceCollision.SIDE_COLLISION, StatePieceCollision.EMPTY],
+    [StatePieceCollision.SIDE_COLLISION, StatePieceCollision.NO_COLLISION],
+    [StatePieceCollision.SIDE_COLLISION, StatePieceCollision.NO_COLLISION],
   ]);
 }
 
@@ -84,10 +84,10 @@ function collision_sol() {
   // Act
   const { matrix, res } = board.canAddPiece(piece, pos);
 
-  // Assert — ligne 22 = EMPTY, ligne 23 = sol
+  // Assert — ligne 22 = NO_COLLISION, ligne 23 = sol
   expect(res).toBe(ResultMethod.FAIL);
   expect(matrix).toEqual([
-    [StatePieceCollision.EMPTY,            StatePieceCollision.EMPTY],
+    [StatePieceCollision.NO_COLLISION,            StatePieceCollision.NO_COLLISION],
     [StatePieceCollision.GROUND_COLLISION, StatePieceCollision.GROUND_COLLISION],
   ]);
 }
@@ -107,15 +107,15 @@ function collision_piece_existante() {
   // Assert
   expect(res).toBe(ResultMethod.FAIL);
   expect(matrix).toEqual([
-    [StatePieceCollision.PIECE, StatePieceCollision.PIECE],
-    [StatePieceCollision.PIECE, StatePieceCollision.PIECE],
+    [StatePieceCollision.PIECE_COLLISION, StatePieceCollision.PIECE_COLLISION],
+    [StatePieceCollision.PIECE_COLLISION, StatePieceCollision.PIECE_COLLISION],
   ]);
 }
 
 export function test_canAddPiece(): void {
-  it('Position valide : res SUCCESS, matrix tout EMPTY',      position_valide);
+  it('Position valide : res SUCCESS, matrix tout NO_COLLISION',      position_valide);
   it('Hors memoire   : res ERROR,   matrix tout OUT_BOARD',   hors_memoire);
   it('Mur lateral    : res FAIL,    SIDE_COLLISION col 0',    collision_mur_lateral);
   it('Sol            : res FAIL,    GROUND_COLLISION ligne 23', collision_sol);
-  it('Piece existante: res FAIL,    PIECE sur toutes les cases', collision_piece_existante);
+  it('Piece existante: res FAIL,    PIECE_COLLISION sur toutes les cases', collision_piece_existante);
 }

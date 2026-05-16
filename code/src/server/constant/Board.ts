@@ -28,8 +28,8 @@ export enum CelluleType {
 
 export enum StatePieceCollision {
   OUT_BOARD = -1,
-  EMPTY = 0,
-  PIECE  = 1,
+  NO_COLLISION = 0,
+  PIECE_COLLISION  = 1,
   SIDE_COLLISION = 2,
   GROUND_COLLISION = 3
 }
