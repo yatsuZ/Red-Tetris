@@ -26,10 +26,8 @@ export function test_getLargeurHauteur(): void
       { shape: 'Z' as const, pair: { h: 2, l: 3 }, impair: { h: 3, l: 2 } },
     ];
 
-    // 2. On génère automatiquement le gros all_param à partir de tes saisies
     const all_param = valeursSaisies.flatMap(({ shape, pair, impair }) => {
       return ([0, 1, 2, 3] as const).map(orientation => {
-        // Si l'orientation est 0 ou 2 (pair) -> on utilise 'pair', sinon (1 ou 3) -> 'impair'
         const cible = (orientation % 2 === 0) ? pair : impair;
 
         return {
