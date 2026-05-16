@@ -17,15 +17,6 @@ export class Piece implements I_Piece {
 
 // Autre
 
-  getLargeur(): number{
-    const matrix = this.getMatrix();
-    return ((matrix[0]?.length === undefined) ? -1 : matrix[0].length);
-  }
-  getHauteur(): number{
-    return (this.getMatrix().length);
-  }
-
-
   clone(): Piece {
       const self_data : PieceData = this.get();
       return (new Piece(self_data.shape, {...self_data.position}, self_data.orientation));
@@ -50,5 +41,13 @@ export class Piece implements I_Piece {
         orientation: this.orientation,
         position: {...this.position}
       });
+  }
+
+  getLargeur(): number{
+    const matrix = this.getMatrix();
+    return ((matrix[0]?.length === undefined) ? -1 : matrix[0].length);
+  }
+  getHauteur(): number{
+    return (this.getMatrix().length);
   }
 }
