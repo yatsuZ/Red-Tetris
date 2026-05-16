@@ -1,4 +1,4 @@
-import { StatePieceCollision, type StateLine, CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD, ErrorInitMsgBoard, ResultMethod} from "../constant/Board.js";
+import { StatePieceCollision, CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD, ErrorInitMsgBoard, ResultMethod, StateLine} from "../constant/Board.js";
 import type { BoardData, I_Board, MatrixCellule } from "../interface/I_Board.js";
 import type { I_Piece, Matrix, Position } from "../interface/I_Piece.js";
 
@@ -129,7 +129,10 @@ export class Board implements I_Board {
   canSpawnPiece(piece: I_Piece): ResultMethod {
     const largeurPiece = piece.getLargeur();
     if (largeurPiece === -1)
-      throw new Error("canSpawnPiece : problème lors de la récupération de la largeur de la pièce");
+    {
+      // throw new Error("canSpawnPiece : problème lors de la récupération de la largeur de la pièce");
+      return (ResultMethod.ERROR);
+    }
 
     const espaceRestant = this.width - largeurPiece;
     const margeGauche = Math.ceil(espaceRestant / 2);
@@ -139,18 +142,59 @@ export class Board implements I_Board {
     return (res.res);
   }
 
-  delLine(indexLine: number): ResultMethod {
-    throw new Error("Method not implemented.");
+  delLine(indexLine: number, verif : true | false = true): ResultMethod {
+    if (verif)
+    {
+      if (indexLine <= 0 || indexLine >= this.real_height - 1)
+        return (ResultMethod.ERROR);
+    }
+    const row = this.board[indexLine];
+    if (row === undefined)
+      return (ResultMethod.ERROR);
+
+    row.forEach((_, indexRow) => {
+      if (indexRow === 0 || indexRow === this.real_width - 1) return;
+
+      row[indexRow] = CelluleType.EMPTY;
+    })
+
+    return (ResultMethod.SUCCESS);
   }
+
   delLines(indexLines: number[]): ({ indexLine: number; res: ResultMethod; })[] {
-    throw new Error("Method not implemented.");
+    return indexLines.map(index => {
+        const res = this.delLine(index); 
+        return { indexLine: index, res };
+      });
   }
+
   stateLine(indexLine: number): StateLine {
-    throw new Error("Method not implemented.");
+    const row = this.board[indexLine];
+    if (row === undefined || row[1] == undefined)
+      return (StateLine.ERROR);
+
+    const firstCelluleType = row[1];
+    for (let index = 1; index < row.length - 2; index++) {
+      const element = row[index];
+      if (element !== firstCelluleType)
+        return (StateLine.PARTIAL);
+    }
+
+    return (firstCelluleType === CelluleType.EMPTY ? StateLine.EMPTY : StateLine.FULL);
   }
+
+  // pareil on map mais on y associe l'index pour pas s'y perdre
   stateLines(indexLines: number[]): ({ indexLine: number; state: StateLine; })[] {
+    return indexLines.map(index => {
+        const res = this.stateLine(index); 
+        return { indexLine: index, state: res };
+      });
+  }
+
+  lineCellRise(): ResultMethod {
     throw new Error("Method not implemented.");
   }
+
   highestPointColumn(indexColumn: number): number {
     throw new Error("Method not implemented.");
   }
@@ -158,9 +202,6 @@ export class Board implements I_Board {
     throw new Error("Method not implemented.");
   }
   lineCellFall(): ResultMethod {
-    throw new Error("Method not implemented.");
-  }
-  lineCellRise(): ResultMethod {
     throw new Error("Method not implemented.");
   }
 }

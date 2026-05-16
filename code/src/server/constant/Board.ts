@@ -14,9 +14,9 @@ export const DEFAULT_WIDTH_BOARD : number = 10;
 
 // ENUM
 export enum ResultMethod {
+  ERROR  = -1,
   SUCCESS = 0,
-  FAIL = 1,
-  ERROR  = 2
+  FAIL = 1
 }
 
 export enum CelluleType {
@@ -35,6 +35,7 @@ export enum StatePieceCollision {
 }
 
 export enum StateLine {
+  ERROR  = -1,
   EMPTY = 0,
   PARTIAL = 1,
   FULL = 2
