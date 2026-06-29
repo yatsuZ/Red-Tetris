@@ -5,6 +5,7 @@ import { test_addPiece } from './Board/addPiece.js';
 import { test_canAddPiece } from './Board/canAddPiece.js';
 import { test_canSpawnPiece } from './Board/canSpawnPiece.js';
 import { test_delLine } from './Board/delLine.js';
+import { test_delLines } from './Board/delLines.js';
 
 describe('Board', () => {
     describe('constructor', test_Constructeur);
@@ -13,4 +14,5 @@ describe('Board', () => {
     describe('canAddPiece', test_canAddPiece);
     describe('canSpawnPiece', test_canSpawnPiece);
     describe('delLine', test_delLine);
+    describe('delLines', test_delLines);
 })
