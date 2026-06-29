@@ -4,7 +4,7 @@ import { Piece } from "../../../../src/server/class/Piece.js";
 import { show_board } from "../../../../src/server/utils/showBoard.js";
 import { ResultMethod } from "../../../../src/server/constant/Board.js";
 
-const SHOW_LOGS = true;
+const SHOW_LOGS = false;
 const SHOW_BOARD = false;
 
 function spawn_valide() {

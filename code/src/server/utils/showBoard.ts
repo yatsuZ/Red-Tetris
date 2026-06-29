@@ -15,4 +15,5 @@ export function show_board(board: MatrixCellule, type : "EMOJI" | "ASCII" = "EMO
     
       console.log(`Ligne ${i}:\t ${ligneStr}`); // 3. On affiche la ligne complète une fois le second forEach fini
     });
+    console.log("");
 }

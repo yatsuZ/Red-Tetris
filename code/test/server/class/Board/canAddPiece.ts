@@ -6,7 +6,7 @@ import { show_board } from "../../../../src/server/utils/showBoard.js";
 import type { Position } from "../../../../src/server/interface/I_Piece.js";
 import { log_collision_matrix } from "../../../../src/server/utils/showStateColision.js";
 
-const SHOW_LOGS = true;
+const SHOW_LOGS = false;
 const SHOW_BOARD = false;
 // Piece 'O' = [[1,1],[1,1]] — 2x2
 // Board defaut : real_height=24 (sol=ligne 23), real_width=12 (murs col 0 et 11)
