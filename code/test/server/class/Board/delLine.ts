@@ -49,6 +49,18 @@ function delLine_valide() {
   expect(row_apres[board.real_width - 1]).toBe(CelluleType.WALL);
 }
 
+function delLine_invalide() {
+  // Arrange
+  const board = Board.create();
+
+
+  const res = board.delLine(100);
+
+  // Assert
+  expect(res).toBe(ResultMethod.ERROR);
+}
+
 export function test_delLine(): void {
   it('delLine valide   : res SUCCESS', delLine_valide);
+  it('delLine invalide : res ERROR', delLine_invalide);
 }
