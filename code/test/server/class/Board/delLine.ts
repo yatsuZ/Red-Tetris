@@ -52,12 +52,27 @@ function delLine_valide() {
 function delLine_invalide() {
   // Arrange
   const board = Board.create();
+  const overflow_max = board.real_height - 1; // = 23, mur du bas
+  const overflow_min = 0;                      // = 0,  mur du haut
 
+  if (SHOW_LOGS) {
+    console.log(`=== delLine invalide ===`);
+    console.log(`overflow_max = ${overflow_max} (attendu: ERROR)`);
+    console.log(`overflow_min = ${overflow_min} (attendu: ERROR)`);
+  }
 
-  const res = board.delLine(100);
+  // Act
+  const res_MAX = board.delLine(overflow_max);
+  const res_MIN = board.delLine(overflow_min);
+
+  if (SHOW_LOGS) {
+    console.log(`res_MAX = ${res_MAX} (attendu: ${ResultMethod.ERROR})`);
+    console.log(`res_MIN = ${res_MIN} (attendu: ${ResultMethod.ERROR})`);
+  }
 
   // Assert
-  expect(res).toBe(ResultMethod.ERROR);
+  expect(res_MAX).toBe(ResultMethod.ERROR);
+  expect(res_MIN).toBe(ResultMethod.ERROR);
 }
 
 export function test_delLine(): void {
