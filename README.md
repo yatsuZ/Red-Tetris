@@ -12,7 +12,7 @@ Avant de lancer quoi que ce soit, il faut avoir installé sur la machine :
 | Outil | Version minimale | Installation |
 |-------|-----------------|--------------|
 | **Node.js** | >= 20.x (LTS) | https://nodejs.org ou via `nvm` |
-| **pnpm** | 10.33.0 | `npm install -g pnpm@10.33.0` |
+| **pnpm** | 12.11.2 | `npm install -g pnpm` |
 | **make** | n'importe | fourni par défaut sur Linux/macOS |
 
 ### Installer Node.js via nvm (recommandé)
@@ -27,7 +27,7 @@ nvm use --lts
 ### Installer pnpm
 
 ```bash
-npm install -g pnpm@10.33.0
+npm install -g pnpm
 ```
 
 ---
