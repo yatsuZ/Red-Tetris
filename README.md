@@ -59,7 +59,7 @@ Cette commande installe toutes les dépendances Node du projet via pnpm.
 Copier le fichier `.env.template` en `.env` dans le dossier `code/` et remplir les valeurs :
 
 ```bash
-cp .env.template code/.env
+cp code/.env.example code/.env
 ```
 
 ---
@@ -70,4 +70,4 @@ cp .env.template code/.env
 - **Frontend** : React 19 + TypeScript (sans `this` côté client)
 - **Tests** : Vitest + coverage V8 (objectif : 70% de couverture)
 - **Build** : Vite 8
-- **Gestionnaire de paquets** : pnpm 10.33.0
+- **Gestionnaire de paquets** : pnpm 12.11.2
