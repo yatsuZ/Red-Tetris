@@ -56,7 +56,7 @@ Cette commande installe toutes les dépendances Node du projet via pnpm.
 
 ## Configuration
 
-Copier le fichier `.env.template` en `.env` dans le dossier `code/` et remplir les valeurs :
+Copier le fichier `.env.example` en `.env` dans le dossier `code/` et remplir les valeurs :
 
 ```bash
 cp code/.env.example code/.env
