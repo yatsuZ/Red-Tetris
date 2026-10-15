@@ -7,6 +7,7 @@ import { test_canSpawnPiece } from './Board/canSpawnPiece.js';
 import { test_delLine } from './Board/delLine.js';
 import { test_delLines } from './Board/delLines.js';
 import { test_stateLine } from './Board/stateLine.js';
+import { test_stateLines } from './Board/stateLines.js';
 
 describe('Board', () => {
   describe('constructor', test_Constructeur);
@@ -16,5 +17,6 @@ describe('Board', () => {
   describe('canSpawnPiece', test_canSpawnPiece);
   describe('delLine', test_delLine);
   describe('delLines', test_delLines);
-  describe('stateLine', test_stateLine);
+	describe('stateLine', test_stateLine);
+	describe('stateLines', test_stateLines);
 })

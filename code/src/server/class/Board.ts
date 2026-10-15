@@ -169,8 +169,13 @@ export class Board implements I_Board {
   }
 
   stateLine(indexLine: number): StateLine {
-    const row = this.board[indexLine];
-    if (row === undefined || row[1] == undefined)
+		const row = this.board[indexLine];
+
+		// Ne peut pas verifier les murs
+		if (indexLine == 0 || indexLine == this.real_height - 1)
+      return (StateLine.ERROR);
+
+		if (row === undefined || row[1] == undefined)
       return (StateLine.ERROR);
 
     const firstCelluleType = row[1];

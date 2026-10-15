@@ -5,7 +5,7 @@ import { Piece } from "../../../../src/server/class/Piece.js";
 import { show_board } from "../../../../src/server/utils/showBoard.js";
 
 const SHOW_LOGS  = false;
-const SHOW_BOARD = true;
+const SHOW_BOARD = false;
 
 const LINE_SELECT = 1;
 
