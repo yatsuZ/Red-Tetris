@@ -1,7 +1,25 @@
 import { Piece } from "../../../../src/server/class/Piece.js";
 import { ALL_SHAPES, PieceOrientationAffichage } from "../../../../src/server/constant/Shapes.js";
 import type { I_Piece, Position } from "../../../../src/server/interface/I_Piece.js";
-import { expect, it } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
+
+function error_get_largeur()
+{
+	describe("Fail get largeur", () => {
+		afterEach(() => {
+			vi.restoreAllMocks(); // remet les vraies méthodes après chaque test
+		});
+
+		it("renvoie ERROR si la largeur de la pièce vaut -1", () => {
+			const piece = new Piece('.', {x:0, y:0});
+
+		// À partir d'ici, piece.getLargeur() renvoie -1
+			vi.spyOn(piece, "getMatrix").mockReturnValue([]);
+
+			expect(piece.getLargeur()).toBe(-1);
+		});
+	});
+}
 
 function defaut(
 	{ shape, orientation, ref_Hauteur, ref_Largeur }:
@@ -48,4 +66,5 @@ export function test_getLargeurHauteur(): void
 		'Shape $shape — rotation $arrow Pour {Hauteur: $ref_Hauteur\t, Largeur: $ref_Largeur}',
 		defaut);
 
+	error_get_largeur()
 }
