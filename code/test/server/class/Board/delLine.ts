@@ -64,6 +64,8 @@ function delLine_invalide() {
   // Act
   const res_MAX = board.delLine(overflow_max);
   const res_MIN = board.delLine(overflow_min);
+  const res_MAX_WithOutVerif = board.delLine(5000, false);
+  const res_MIN_WithOutVerif = board.delLine(-1, false);
 
   if (SHOW_LOGS) {
     console.log(`res_MAX = ${res_MAX} (attendu: ${ResultMethod.ERROR})`);
@@ -72,7 +74,9 @@ function delLine_invalide() {
 
   // Assert
   expect(res_MAX).toBe(ResultMethod.ERROR);
-  expect(res_MIN).toBe(ResultMethod.ERROR);
+	expect(res_MIN).toBe(ResultMethod.ERROR);
+	expect(res_MAX_WithOutVerif).toBe(ResultMethod.ERROR);
+  expect(res_MIN_WithOutVerif).toBe(ResultMethod.ERROR);
 }
 
 export function test_delLine(): void {
