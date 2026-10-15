@@ -41,7 +41,7 @@ dev_server:
 
 # lance les tests (faire 70% du code)
 test:
-	@pnpm --prefix "$(CODE_DIR)" run test
+	@pnpm --prefix "$(CODE_DIR)" run test:coverage
 
 # compile pour la production
 # build:
