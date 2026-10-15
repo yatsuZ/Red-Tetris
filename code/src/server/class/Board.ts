@@ -39,8 +39,8 @@ export class Board implements I_Board {
   }
 
   initBoard(): MatrixCellule {
-    return Array.from({length: this.real_height}, 
-      (_, i) => Array.from({length: this.real_width}, 
+    return Array.from({length: this.real_height},
+      (_, i) => Array.from({length: this.real_width},
         (_, j) => {
           if (j === 0 || j === this.real_width - 1 || i === this.real_height - 1 || i === 0)
             return (CelluleType.WALL);
@@ -163,7 +163,7 @@ export class Board implements I_Board {
 
   delLines(indexLines: number[]): ({ indexLine: number; res: ResultMethod; })[] {
     return indexLines.map(index => {
-        const res = this.delLine(index); 
+        const res = this.delLine(index);
         return { indexLine: index, res };
       });
   }
@@ -174,7 +174,7 @@ export class Board implements I_Board {
       return (StateLine.ERROR);
 
     const firstCelluleType = row[1];
-    for (let index = 1; index < row.length - 2; index++) {
+    for (let index = 1; index < row.length - 1; index++) {
       const element = row[index];
       if (element !== firstCelluleType)
         return (StateLine.PARTIAL);
@@ -186,7 +186,7 @@ export class Board implements I_Board {
   // pareil on map mais on y associe l'index pour pas s'y perdre
   stateLines(indexLines: number[]): ({ indexLine: number; state: StateLine; })[] {
     return indexLines.map(index => {
-        const res = this.stateLine(index); 
+        const res = this.stateLine(index);
         return { indexLine: index, state: res };
       });
   }

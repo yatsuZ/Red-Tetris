@@ -6,13 +6,15 @@ import { test_canAddPiece } from './Board/canAddPiece.js';
 import { test_canSpawnPiece } from './Board/canSpawnPiece.js';
 import { test_delLine } from './Board/delLine.js';
 import { test_delLines } from './Board/delLines.js';
+import { test_stateLine } from './Board/stateLine.js';
 
 describe('Board', () => {
-    describe('constructor', test_Constructeur);
-    describe('clone', test_clone);
-    describe('addPiece', test_addPiece);
-    describe('canAddPiece', test_canAddPiece);
-    describe('canSpawnPiece', test_canSpawnPiece);
-    describe('delLine', test_delLine);
-    describe('delLines', test_delLines);
+  describe('constructor', test_Constructeur);
+  describe('clone', test_clone);
+  describe('addPiece', test_addPiece);
+  describe('canAddPiece', test_canAddPiece);
+  describe('canSpawnPiece', test_canSpawnPiece);
+  describe('delLine', test_delLine);
+  describe('delLines', test_delLines);
+  describe('stateLine', test_stateLine);
 })
