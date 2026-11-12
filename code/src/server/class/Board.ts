@@ -1,6 +1,7 @@
 import { StatePieceCollision, CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD, ErrorInitMsgBoard, ResultMethod, StateLine} from "../constant/Board.js";
 import type { BoardData, I_Board, MatrixCellule } from "../interface/I_Board.js";
 import type { I_Piece, Matrix, Position } from "../interface/I_Piece.js";
+import { getRandomInt } from "../utils/rng.js";
 
 export class Board implements I_Board {
   readonly real_height: number;
@@ -195,16 +196,21 @@ export class Board implements I_Board {
       });
   }
 
-	createPartialLine(indexLine: number): ResultMethod{
+	createPartialLine(indexLine: number): ResultMethod {
 		const row = this.board[indexLine];
 		const stateRow = this.stateLine(indexLine);
-		// Si je peux cree l ligen je mets succes
-		// Si je ne peux pas car non vide je mets fail
-		// Et si probleme je mets Error
 		if (row && stateRow === StateLine.EMPTY)
 		{
-			//
+			const indexEmptyColumn = getRandomInt(1, this.real_width - 1); 
+			for (let i = 1; i < this.real_width - 1; i++){
+        if (i !== indexEmptyColumn)
+          row[i]  = CelluleType.PIECE;
+      }
+      return ResultMethod.SUCCESS;
 		}
+    else if (row && (stateRow === StateLine.PARTIAL || stateRow === StateLine.FULL))
+      return ResultMethod.FAIL;
+    return ResultMethod.ERROR;
 	}
 
 	lineCellRise(): ResultMethod {
@@ -216,7 +222,7 @@ export class Board implements I_Board {
 				return ResultMethod.FAIL;
 			if (row && stateRowAbove === StateLine.EMPTY && (stateRow === StateLine.FULL || stateRow === StateLine.PARTIAL))
 			{
-				for (let j = 1; j < this.real_width - j; j++)
+				for (let j = 1; j < this.real_width - 1; j++)
 				{
 					(this.board[i - 1] as CelluleType[])[j]  = row[j] as CelluleType;
 					row[j] = CelluleType.EMPTY;
@@ -224,7 +230,7 @@ export class Board implements I_Board {
 			}
 		}
 		// faire aparaitre une nouvelle ligne avec un colone vide
-		return ResultMethod.SUCCESS;
+		return this.createPartialLine(this.real_width - 2);
 	}
 
   highestPointColumn(indexColumn: number): number {
