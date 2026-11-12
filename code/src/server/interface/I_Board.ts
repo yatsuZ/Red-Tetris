@@ -41,6 +41,9 @@ export interface I_Board extends BoardData {
   // Idem pour plusieurs lignes
   stateLines(indexLines: number[]): ({indexLine:number, state: StateLine})[];
 
+	// Cree une ligne avec une celule vide
+	createPartialLine(indexLine: number): ResultMethod;
+
   // Retourne l'indice de la cellule la plus haute dans une colonne
   highestPointColumn(indexColumn: number):number
   // Retourne l'indice de la cellule la plus haute pour plusieurs colonnes

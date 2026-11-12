@@ -39,8 +39,8 @@ function stateLine_partial() {
 
   // Act
   for (let i = 0; i < 4; i++) {
-  board.addPiece(piece, piece.position)
-  piece.position.y += 2;
+		board.addPiece(piece, piece.position)
+		piece.position.y += 2;
   }
   piece.position.y -= 1;
   board.addPiece(piece, piece.position)

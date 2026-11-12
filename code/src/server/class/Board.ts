@@ -188,7 +188,6 @@ export class Board implements I_Board {
     return (firstCelluleType === CelluleType.EMPTY ? StateLine.EMPTY : StateLine.FULL);
   }
 
-  // pareil on map mais on y associe l'index pour pas s'y perdre
   stateLines(indexLines: number[]): ({ indexLine: number; state: StateLine; })[] {
     return indexLines.map(index => {
         const res = this.stateLine(index);
@@ -196,9 +195,37 @@ export class Board implements I_Board {
       });
   }
 
-  lineCellRise(): ResultMethod {
-    throw new Error("Method not implemented.");
-  }
+	createPartialLine(indexLine: number): ResultMethod{
+		const row = this.board[indexLine];
+		const stateRow = this.stateLine(indexLine);
+		// Si je peux cree l ligen je mets succes
+		// Si je ne peux pas car non vide je mets fail
+		// Et si probleme je mets Error
+		if (row && stateRow === StateLine.EMPTY)
+		{
+			//
+		}
+	}
+
+	lineCellRise(): ResultMethod {
+		for (let i = 1; i < this.real_height - 1; i++) {
+			const row = this.board[i];
+			const stateRow = this.stateLine(i);
+			const stateRowAbove = this.stateLine(i - 1);
+			if (i === 1 && (stateRow === StateLine.FULL || stateRow === StateLine.PARTIAL))
+				return ResultMethod.FAIL;
+			if (row && stateRowAbove === StateLine.EMPTY && (stateRow === StateLine.FULL || stateRow === StateLine.PARTIAL))
+			{
+				for (let j = 1; j < this.real_width - j; j++)
+				{
+					(this.board[i - 1] as CelluleType[])[j]  = row[j] as CelluleType;
+					row[j] = CelluleType.EMPTY;
+				}
+			}
+		}
+		// faire aparaitre une nouvelle ligne avec un colone vide
+		return ResultMethod.SUCCESS;
+	}
 
   highestPointColumn(indexColumn: number): number {
     throw new Error("Method not implemented.");
