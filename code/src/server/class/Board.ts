@@ -230,7 +230,7 @@ export class Board implements I_Board {
 			}
 		}
 		// faire aparaitre une nouvelle ligne avec un colone vide
-		return this.createPartialLine(this.real_width - 2);
+		return this.createPartialLine(this.real_height - 2);
 	}
 
   highestPointColumn(indexColumn: number): number {
