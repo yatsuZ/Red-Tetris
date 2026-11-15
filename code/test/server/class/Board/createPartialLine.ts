@@ -4,6 +4,7 @@ import { CelluleType, ResultMethod, StateLine} from "../../../../src/server/cons
 import { Piece } from "../../../../src/server/class/Piece.js";
 import { show_board } from "../../../../src/server/utils/showBoard.js";
 import { getRandomInt } from "../../../../src/server/utils/rng.js";
+import { AllLineAre } from "../../../../src/server/utils/allLineAre.js";
 
 const SHOW_LOGS  = false;
 const SHOW_BOARD = false;
@@ -25,7 +26,9 @@ function filledWithPartialLines() {
     }
 
 
-  if (SHOW_BOARD) show_board(board.board, "ASCII");
+    if (SHOW_BOARD) show_board(board.board, "ASCII");
+    expect(AllLineAre(board, StateLine.PARTIAL)).toBe(true);
+
 }
 
 function failCreatePartialLine() {
@@ -56,7 +59,7 @@ function failCreatePartialLine() {
 function filledWithPartialLinesChosen() {
   // create
   const board = Board.create();
-  const indexEmptyColumn: number = getRandomInt(1, board.real_width - 1);
+  const indexEmptyColumn: number = getRandomInt(1, board.real_width - 2);
 
     for (let i = -1; i < board.real_height + 1; i++) {
         // Act
@@ -77,9 +80,8 @@ function filledWithPartialLinesChosen() {
         }
 
     }
-
-
-  if (SHOW_BOARD) show_board(board.board, "ASCII");
+    if (SHOW_BOARD) show_board(board.board, "ASCII");
+    expect(AllLineAre(board, StateLine.PARTIAL)).toBe(true);
 }
 
 function failCreatePartialLineChosen() {

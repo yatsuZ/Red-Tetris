@@ -196,7 +196,7 @@ export class Board implements I_Board {
       });
   }
 
-	createPartialLine(indexLine: number, indexEmptyColumn: number = getRandomInt(1, this.real_width - 1)): ResultMethod {
+	createPartialLine(indexLine: number, indexEmptyColumn: number = getRandomInt(1, this.real_width - 2)): ResultMethod {
     if (indexEmptyColumn < 1 || indexEmptyColumn >= this.real_width || indexLine < 1 || indexLine >= this.real_height - 1)
       return ResultMethod.ERROR;
     const row = this.board[indexLine];
