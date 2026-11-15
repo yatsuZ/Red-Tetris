@@ -173,7 +173,7 @@ export class Board implements I_Board {
 		const row = this.board[indexLine];
 
 		// Ne peut pas verifier les murs
-		if (indexLine == 0 || indexLine == this.real_height - 1)
+		if (indexLine <= 0 || indexLine >= this.real_height - 1)
       return (StateLine.ERROR);
 
 		if (row === undefined || row[1] == undefined)
@@ -196,12 +196,14 @@ export class Board implements I_Board {
       });
   }
 
-	createPartialLine(indexLine: number): ResultMethod {
-		const row = this.board[indexLine];
+	createPartialLine(indexLine: number, indexEmptyColumn: number = getRandomInt(1, this.real_width - 1)): ResultMethod {
+    if (indexEmptyColumn < 1 || indexEmptyColumn >= this.real_width || indexLine < 1 || indexLine >= this.real_height - 1)
+      return ResultMethod.ERROR;
+    const row = this.board[indexLine];
 		const stateRow = this.stateLine(indexLine);
+
 		if (row && stateRow === StateLine.EMPTY)
 		{
-			const indexEmptyColumn = getRandomInt(1, this.real_width - 1); 
 			for (let i = 1; i < this.real_width - 1; i++){
         if (i !== indexEmptyColumn)
           row[i]  = CelluleType.PIECE;

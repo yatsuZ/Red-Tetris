@@ -8,6 +8,7 @@ import { test_delLine } from './Board/delLine.js';
 import { test_delLines } from './Board/delLines.js';
 import { test_stateLine } from './Board/stateLine.js';
 import { test_stateLines } from './Board/stateLines.js';
+import { test_createPartialLine } from './Board/createPartialLine.js';
 
 describe('Board', () => {
   describe('constructor', test_Constructeur);
@@ -19,4 +20,5 @@ describe('Board', () => {
   describe('delLines', test_delLines);
 	describe('stateLine', test_stateLine);
 	describe('stateLines', test_stateLines);
+	describe('createPartialLine', test_createPartialLine);
 })
