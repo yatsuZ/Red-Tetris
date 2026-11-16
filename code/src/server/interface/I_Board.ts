@@ -47,7 +47,7 @@ export interface I_Board extends BoardData {
   // Retourne l'indice de la cellule la plus haute dans une colonne
   highestPointColumn(indexColumn: number):number
   // Retourne l'indice de la cellule la plus haute pour plusieurs colonnes
-  highestPointsColumns(indexColumns: number[]):number[]
+  highestPointsColumns(indexColumns: number[]): ({ indexColumn: number; highestPoint: number; })[]
 
   // Fait descendre toutes les lignes non vides s'il y a des lignes vides en dessous
   lineCellFall(): ResultMethod;

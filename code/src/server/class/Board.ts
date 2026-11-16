@@ -1,6 +1,7 @@
 import { StatePieceCollision, CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD, ErrorInitMsgBoard, ResultMethod, StateLine} from "../constant/Board.js";
 import type { BoardData, I_Board, MatrixCellule } from "../interface/I_Board.js";
 import type { I_Piece, Matrix, Position } from "../interface/I_Piece.js";
+import { BoardIsFull } from "../utils/allLineAre.js";
 import { getRandomInt } from "../utils/rng.js";
 
 export class Board implements I_Board {
@@ -236,12 +237,39 @@ export class Board implements I_Board {
 	}
 
   highestPointColumn(indexColumn: number): number {
-    throw new Error("Method not implemented.");
-  }
-  highestPointsColumns(indexColumns: number[]): number[] {
-    throw new Error("Method not implemented.");
-  }
-  lineCellFall(): ResultMethod {
-    throw new Error("Method not implemented.");
-  }
+		if (indexColumn <= 0 || indexColumn >= this.real_width - 1)
+      return (-1);
+
+		for (let index = 0; index < this.real_height - 1; index++) {
+			if (this.board[index] === undefined) return -1;
+			else if ((this.board[index] as CelluleType[])[indexColumn] === CelluleType.PIECE)
+				return (index);
+		}
+		return (this.real_height - 1);
+	}
+
+	highestPointsColumns(indexColumns: number[]): ({ indexColumn: number; highestPoint: number; })[] {
+		return indexColumns.map(index => {
+			const res = this.highestPointColumn(index);
+			return { indexColumn: index, highestPoint: res };
+		});
+	}
+
+	lineCellFall(): ResultMethod {
+		if (BoardIsFull(this)) return ResultMethod.FAIL;
+		for (let i = this.real_height - 3; i < 0; i--) {
+			const row = this.board[i];
+			const stateRow = this.stateLine(i);
+			const stateRowBelow = this.stateLine(i + 1);
+			if (row && stateRowBelow === StateLine.EMPTY && (stateRow === StateLine.FULL || stateRow === StateLine.PARTIAL))
+			{
+				for (let j = 1; j < this.real_width - 1; j++)
+				{
+					(this.board[i + 1] as CelluleType[])[j] = row[j] as CelluleType;
+					row[j] = CelluleType.EMPTY;
+				}
+			}
+		}
+		return ResultMethod.SUCCESS;
+	}
 }
