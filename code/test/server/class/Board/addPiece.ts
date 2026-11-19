@@ -76,6 +76,25 @@ function hors_memoire() {
   expect(() => board.addPiece(piece, pos)).toThrow("addPiece: écriture hors mémoire");
 }
 
+function imbriquer() {
+  // Arrange
+  const board = Board.create();
+  const piece_1 = new Piece('I', { x: 18, y: 1 }, 1);
+  const piece_2 = new Piece('T', { x: 21, y: 1 }, 2);
+  const piece_3 = new Piece('Z', { x: 21, y: 3 });
+
+
+  // Act
+  expect(board.addPiece(piece_1, piece_1.position)).toBe(ResultMethod.SUCCESS);
+  if (SHOW_LOGS) {show_board(board.board, "ASCII"); }
+  expect(board.addPiece(piece_2, piece_2.position)).toBe(ResultMethod.SUCCESS);
+  if (SHOW_LOGS) {show_board(board.board, "ASCII"); }
+
+  expect(board.addPiece(piece_3, piece_3.position)).toBe(ResultMethod.SUCCESS);
+  if (SHOW_LOGS) {show_board(board.board, "ASCII"); }
+}
+
+
 export function test_addPiece(): void {
   const rand_x = getRandomInt(1, 21);
   const rand_y = getRandomInt(1, 9);
@@ -91,4 +110,5 @@ export function test_addPiece(): void {
 
   it('Ecrase les cellules PIECE existantes sans throw', ecrase_piece_precedente);
   it('Throw si la position depasse les limites du tableau', hors_memoire);
+  it('Imbriquer', imbriquer);
 }

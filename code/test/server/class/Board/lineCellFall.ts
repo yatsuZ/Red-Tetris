@@ -41,8 +41,6 @@ function basic_lineCellFall() {
     while (loop)
     {
         loop--;
-        if (BoardIsFull(board)) console.log("FULL");
-        else if (BoardIsEmpty(board)) console.log("EMPTY");
         const res = board.lineCellFall();
         expect(ResultMethod.SUCCESS).toBe(res);
         if (SHOW_BOARD) show_board(board.board, "ASCII");

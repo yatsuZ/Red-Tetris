@@ -110,15 +110,14 @@ export class Board implements I_Board {
 
         const boardCell = boardRow[c];
         if (boardCell === CelluleType.WALL) {
-          if (res !== ResultMethod.ERROR)
-            res = ResultMethod.FAIL;
+          res = ResultMethod.FAIL;
 
           return r === this.real_height - 1
             ? StatePieceCollision.GROUND_COLLISION
             : StatePieceCollision.SIDE_COLLISION;
         }
         if (boardCell === CelluleType.PIECE) {
-          if (res !== ResultMethod.ERROR) res = ResultMethod.FAIL;
+          res = ResultMethod.FAIL;
           return StatePieceCollision.PIECE_COLLISION;
         }
         return StatePieceCollision.NO_COLLISION;
@@ -174,10 +173,7 @@ export class Board implements I_Board {
 		const row = this.board[indexLine];
 
 		// Ne peut pas verifier les murs
-		if (indexLine <= 0 || indexLine >= this.real_height - 1)
-      return (StateLine.ERROR);
-
-		if (row === undefined || row[1] == undefined)
+		if (indexLine <= 0 || indexLine >= this.real_height - 1 || row === undefined || row[1] == undefined)
       return (StateLine.ERROR);
 
     const firstCelluleType = row[1];
@@ -200,20 +196,19 @@ export class Board implements I_Board {
 	createPartialLine(indexLine: number, indexEmptyColumn: number = getRandomInt(1, this.real_width - 2)): ResultMethod {
     if (indexEmptyColumn < 1 || indexEmptyColumn >= this.real_width || indexLine < 1 || indexLine >= this.real_height - 1)
       return ResultMethod.ERROR;
-    const row = this.board[indexLine];
+    const row = this.board[indexLine] as CelluleType[];
 		const stateRow = this.stateLine(indexLine);
 
-		if (row && stateRow === StateLine.EMPTY)
+		if (stateRow === StateLine.EMPTY)
 		{
 			for (let i = 1; i < this.real_width - 1; i++){
         if (i !== indexEmptyColumn)
           row[i]  = CelluleType.PIECE;
       }
-      return ResultMethod.SUCCESS;
 		}
-    else if (row && (stateRow === StateLine.PARTIAL || stateRow === StateLine.FULL))
+    else
       return ResultMethod.FAIL;
-    return ResultMethod.ERROR;
+    return ResultMethod.SUCCESS;
 	}
 
 	lineCellRise(): ResultMethod {

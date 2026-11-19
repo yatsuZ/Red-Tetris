@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import { Board } from "../../../../src/server/class/Board.js";
-import { StateLine} from "../../../../src/server/constant/Board.js";
+import { CelluleType, StateLine} from "../../../../src/server/constant/Board.js";
 import { Piece } from "../../../../src/server/class/Piece.js";
 import { show_board } from "../../../../src/server/utils/showBoard.js";
 
@@ -16,6 +16,10 @@ function highestPointColumn_error() {
 
   // Assert
   expect(results).toBe(-1);
+//
+  // create
+  (board as any).real_height = 30;
+  expect(board.highestPointColumn(1)).toBe(-1);
 }
 
 function highestPointColumn_test() {

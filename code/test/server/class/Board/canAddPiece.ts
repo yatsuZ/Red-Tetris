@@ -133,8 +133,31 @@ function collision_piece_existante() {
   ]);
 }
 
+function imbriquer() {
+  // Arrange
+  const board = Board.create();
+  const piece_1 = new Piece('I', { x: 18, y: 1 }, 1);
+  const piece_2 = new Piece('T', { x: 21, y: 1 }, 2);
+  const piece_3 = new Piece('Z', { x: 21, y: 3 });
+
+
+  // Act
+  expect(board.canAddPiece(piece_1, piece_1.position).res).toBe(ResultMethod.SUCCESS);
+  expect(board.addPiece(piece_1, piece_1.position)).toBe(ResultMethod.SUCCESS);
+  if (SHOW_LOGS) {show_board(board.board, "ASCII"); }
+  expect(board.canAddPiece(piece_2, piece_2.position).res).toBe(ResultMethod.SUCCESS);
+  expect(board.addPiece(piece_2, piece_2.position)).toBe(ResultMethod.SUCCESS);
+  if (SHOW_LOGS) {show_board(board.board, "ASCII"); }
+
+  expect(board.canAddPiece(piece_3, piece_3.position).res).toBe(ResultMethod.SUCCESS);
+  expect(board.addPiece(piece_3, piece_3.position)).toBe(ResultMethod.SUCCESS);
+  if (SHOW_LOGS) {show_board(board.board, "ASCII"); }
+}
+
+
 export function test_canAddPiece(): void {
   it('Position valide : res SUCCESS, matrix tout NO_COLLISION',      position_valide);
+  it('Position valide : res SUCCESS, Imbriquer',      imbriquer);
   it('Hors memoire   : res ERROR,   matrix tout OUT_BOARD',   hors_memoire);
   it('Mur lateral    : res FAIL,    SIDE_COLLISION col 0',    collision_mur_lateral);
   it('Sol            : res FAIL,    GROUND_COLLISION ligne 23', collision_sol);
