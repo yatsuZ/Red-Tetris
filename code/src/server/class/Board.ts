@@ -1,7 +1,7 @@
 import { StatePieceCollision, CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD, ErrorInitMsgBoard, ResultMethod, StateLine} from "../constant/Board.js";
 import type { BoardData, I_Board, MatrixCellule } from "../interface/I_Board.js";
 import type { I_Piece, Matrix, Position } from "../interface/I_Piece.js";
-import { BoardIsFull } from "../utils/allLineAre.js";
+import { BoardIsEmpty, BoardIsFull } from "../utils/allLineAre.js";
 import { getRandomInt } from "../utils/rng.js";
 
 export class Board implements I_Board {
@@ -256,13 +256,15 @@ export class Board implements I_Board {
 	}
 
 	lineCellFall(): ResultMethod {
-		if (BoardIsFull(this)) return ResultMethod.FAIL;
-		for (let i = this.real_height - 3; i < 0; i--) {
+    let same = true;
+		if (BoardIsFull(this) || BoardIsEmpty(this)) return ResultMethod.FAIL;
+		for (let i = this.real_height - 3; i > 0; i--) {
 			const row = this.board[i];
 			const stateRow = this.stateLine(i);
 			const stateRowBelow = this.stateLine(i + 1);
 			if (row && stateRowBelow === StateLine.EMPTY && (stateRow === StateLine.FULL || stateRow === StateLine.PARTIAL))
 			{
+        same = false;
 				for (let j = 1; j < this.real_width - 1; j++)
 				{
 					(this.board[i + 1] as CelluleType[])[j] = row[j] as CelluleType;
@@ -270,6 +272,7 @@ export class Board implements I_Board {
 				}
 			}
 		}
+    if (same) return ResultMethod.FAIL;
 		return ResultMethod.SUCCESS;
 	}
 }

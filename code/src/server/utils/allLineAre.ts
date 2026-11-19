@@ -2,31 +2,18 @@ import type { Board } from "../class/Board.js";
 import { StateLine } from "../constant/Board.js";
 
 export function AllLineAre(board: Board, state: StateLine): boolean{
-    const ligneToVerif = Array.from({ length: board.real_height - 2 }, (_, i) => i);
+    const ligneToVerif = Array.from({ length: board.real_height - 3 }, (_, i) => i + 1);
     const verif = board.stateLines(ligneToVerif);
-    verif.forEach(element => {
-        if (element.state !== state)
-            return false;
-    });
-    return true;
+    return verif.every(element => element.state === state);
 }
 
 export function BoardIsEmpty(board: Board): boolean{
-    const ligneToVerif = Array.from({ length: board.real_height - 2 }, (_, i) => i);
-    const verif = board.stateLines(ligneToVerif);
-    verif.forEach(element => {
-        if (element.state !== StateLine.EMPTY)
-            return false;
-    });
-    return true;
+    return AllLineAre(board, StateLine.EMPTY);
 }
 
+// Full si different de vide
 export function BoardIsFull(board: Board): boolean{
-    const ligneToVerif = Array.from({ length: board.real_height - 2 }, (_, i) => i);
+    const ligneToVerif = Array.from({ length: board.real_height - 3 }, (_, i) => i + 1);
     const verif = board.stateLines(ligneToVerif);
-    verif.forEach(element => {
-        if (element.state === StateLine.EMPTY || element.state === StateLine.ERROR)
-            return false;
-    });
-    return true;
+    return verif.every(element => element.state === StateLine.FULL || element.state === StateLine.PARTIAL);
 }

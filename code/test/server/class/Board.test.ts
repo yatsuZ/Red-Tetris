@@ -10,6 +10,9 @@ import { test_stateLine } from './Board/stateLine.js';
 import { test_stateLines } from './Board/stateLines.js';
 import { test_createPartialLine } from './Board/createPartialLine.js';
 import { test_lineCellRise } from './Board/lineCellRise.js';
+import { test_highestPointColumn } from './Board/highestPointColumn.js';
+import { test_highestPointsColumns } from './Board/highestPointsColumns.js';
+import { test_lineCellFall } from './Board/lineCellFall.js';
 
 describe('Board', () => {
   describe('constructor', test_Constructeur);
@@ -23,4 +26,7 @@ describe('Board', () => {
 	describe('stateLines', test_stateLines);
 	describe('createPartialLine', test_createPartialLine);
 	describe('lineCellRise', test_lineCellRise);
+	describe('highestPointColumn', test_highestPointColumn);
+	describe('highestPointsColumns', test_highestPointsColumns);
+	describe('lineCellFall', test_lineCellFall);
 })
