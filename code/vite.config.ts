@@ -13,6 +13,11 @@ export default defineConfig(({ mode }) => {
       coverage: {
         provider: 'v8',
         include: ['src/server/**/*.ts'],
+        exclude: [
+          'src/server/interface/**',
+          'src/server/constant/**',
+          "src/server/main.ts"
+        ],
         thresholds: {
           statements: 70, // 70% des instructions exécutées par les tests
           functions: 70,  // 70% des fonctions appelées
