@@ -4,7 +4,7 @@ import { Piece } from '../../../../src/server/class/Piece.js';
 import { ResultMethod, StatePieceCollision } from '../../../../src/server/constant/Board.js';
 import { showBoard } from '../../../../src/server/utils/showBoard.js';
 import type { Position } from '../../../../src/server/interface/I_Piece.js';
-import { logCollisionMatrix } from '../../../../src/server/utils/showStateColision.js';
+import { logCollisionMatrix } from '../../../../src/server/utils/showCollision.js';
 
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;

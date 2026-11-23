@@ -9,7 +9,7 @@ import {
 } from '../constant/Board.js';
 import type { BoardData, I_Board, MatrixCellule } from '../interface/I_Board.js';
 import type { I_Piece, Matrix, Position } from '../interface/I_Piece.js';
-import { isBoardEmpty, isBoardFull } from '../utils/allLineAre.js';
+import { isBoardEmpty, isBoardFull } from '../utils/boardState.js';
 import { getRandomInt } from '../utils/rng.js';
 
 export class Board implements I_Board {

@@ -4,7 +4,7 @@ import { CelluleType, ResultMethod, StateLine } from '../../../../src/server/con
 import { Piece } from '../../../../src/server/class/Piece.js';
 import { showBoard } from '../../../../src/server/utils/showBoard.js';
 import { getRandomInt } from '../../../../src/server/utils/rng.js';
-import { allLinesAre } from '../../../../src/server/utils/allLineAre.js';
+import { allLinesAre } from '../../../../src/server/utils/boardState.js';
 
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;

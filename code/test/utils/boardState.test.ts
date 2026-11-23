@@ -2,7 +2,7 @@ import { describe } from 'vitest';
 import { Board } from '../../src/server/class/Board.js';
 import { expect, it } from 'vitest';
 import { StateLine } from '../../src/server/constant/Board.js';
-import { allLinesAre, isBoardEmpty, isBoardFull } from '../../src/server/utils/allLineAre.js';
+import { allLinesAre, isBoardEmpty, isBoardFull } from '../../src/server/utils/boardState.js';
 import { Piece } from '../../src/server/class/Piece.js';
 
 function test_allLinesAre() {
@@ -41,7 +41,7 @@ function test_isBoardFull() {
 	});
 }
 
-describe('allLineAre', () => {
+describe('boardState', () => {
 	describe('allLinesAre ', test_allLinesAre);
 	describe('isBoardEmpty ', test_isBoardEmpty);
 	describe('isBoardFull ', test_isBoardFull);
