@@ -42,14 +42,14 @@ function defaut({
 
 export function test_getWidthHeight(): void {
 	const valeursSaisies = [
-		{ shape: 'I' as const, pair: { h: 1, l: 4 }, impair: { h: 4, l: 1 } },
-		{ shape: 'J' as const, pair: { h: 2, l: 3 }, impair: { h: 3, l: 2 } },
-		{ shape: 'L' as const, pair: { h: 2, l: 3 }, impair: { h: 3, l: 2 } },
-		{ shape: 'O' as const, pair: { h: 2, l: 2 }, impair: { h: 2, l: 2 } },
-		{ shape: 'S' as const, pair: { h: 2, l: 3 }, impair: { h: 3, l: 2 } },
-		{ shape: 'T' as const, pair: { h: 2, l: 3 }, impair: { h: 3, l: 2 } },
-		{ shape: 'Z' as const, pair: { h: 2, l: 3 }, impair: { h: 3, l: 2 } },
-		{ shape: '.' as const, pair: { h: 1, l: 1 }, impair: { h: 1, l: 1 } },
+		{ shape: 'I' as const, pair: { h: 1, w: 4 }, impair: { h: 4, w: 1 } },
+		{ shape: 'J' as const, pair: { h: 2, w: 3 }, impair: { h: 3, w: 2 } },
+		{ shape: 'L' as const, pair: { h: 2, w: 3 }, impair: { h: 3, w: 2 } },
+		{ shape: 'O' as const, pair: { h: 2, w: 2 }, impair: { h: 2, w: 2 } },
+		{ shape: 'S' as const, pair: { h: 2, w: 3 }, impair: { h: 3, w: 2 } },
+		{ shape: 'T' as const, pair: { h: 2, w: 3 }, impair: { h: 3, w: 2 } },
+		{ shape: 'Z' as const, pair: { h: 2, w: 3 }, impair: { h: 3, w: 2 } },
+		{ shape: '.' as const, pair: { h: 1, w: 1 }, impair: { h: 1, w: 1 } },
 	];
 
 	const all_param = valeursSaisies.flatMap(({ shape, pair, impair }) => {
@@ -61,7 +61,7 @@ export function test_getWidthHeight(): void {
 				orientation,
 				arrow: PieceOrientationAffichage[orientation],
 				ref_Height: cible.h,
-				ref_Width: cible.l,
+				ref_Width: cible.w,
 			};
 		});
 	});

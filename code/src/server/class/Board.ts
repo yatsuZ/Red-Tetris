@@ -96,17 +96,17 @@ export class Board implements I_Board {
 	// =====================================================
 
 	canSpawnPiece(piece: I_Piece): ResultMethod {
-		const largeurPiece = piece.getWidth();
-		if (largeurPiece === -1) {
+		const pieceWidth = piece.getWidth();
+		if (pieceWidth === -1) {
 			// throw new Error("canSpawnPiece : problème lors de la récupération de la largeur de la pièce");
 			return ResultMethod.ERROR;
 		}
 
-		const espaceRestant = this.width - largeurPiece;
-		const margeGauche = Math.ceil(espaceRestant / 2);
-		const colone_spawn = 1 + margeGauche;
+		const remainingSpace = this.width - pieceWidth;
+		const leftMargin = Math.ceil(remainingSpace / 2);
+		const spawnColumn = 1 + leftMargin;
 
-		const res = this.canAddPiece(piece, { x: 1, y: colone_spawn });
+		const res = this.canAddPiece(piece, { x: 1, y: spawnColumn });
 		return res.res;
 	}
 
