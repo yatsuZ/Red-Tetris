@@ -28,18 +28,19 @@ export const Logger = {
 	},
 
 	route: (method: string, path: string) => {
-		const methodColor = {
-			GET: chalk.green,
-			POST: chalk.blue,
-			PUT: chalk.yellow,
-			DELETE: chalk.red,
-			PATCH: chalk.cyan,
-		}[method] || chalk.white;
+		const methodColor =
+			{
+				GET: chalk.green,
+				POST: chalk.blue,
+				PUT: chalk.yellow,
+				DELETE: chalk.red,
+				PATCH: chalk.cyan,
+			}[method] || chalk.white;
 
 		if (isDev) console.log(chalk.gray('[ROUTE]'), methodColor(method.padEnd(6)), path);
 	},
 };
 
 export function showLog() {
-  return process.env.NODE_ENV !== 'production';
+	return process.env.NODE_ENV !== 'production';
 }

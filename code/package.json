@@ -1,39 +1,40 @@
 {
-  "name": "red-tetris",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "vitest",
-    "test:verbose": "vitest run --reporter=verbose",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "dev": "tsx --env-file=.env src/server/main.ts & vite",
-    "dev:server": "tsx --env-file=.env src/server/main.ts",
-    "dev:client": "vite"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
-  "packageManager": "pnpm@12.11.2+sha512.25a51652a196785af5f28bda6dfe8dc582ebefa4ac1d180221ce1390231c5fb76637822ea4b6e4633ce74acdcb0a77f725af11bad38177fdeddaee818a955cb9",
-  "devDependencies": {
-    "@types/node": "^25.6.0",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "@vitest/coverage-v8": "^4.1.5",
-    "tsx": "^4.21.0",
-    "typescript": "^6.0.3",
-    "vite": "^8.0.10",
-    "vitest": "^4.1.5"
-  },
-  "dependencies": {
-    "chalk": "^5.6.2",
-    "fastify": "^5.8.5",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
-    "socket.io": "^4.8.3",
-    "socket.io-client": "^4.8.3"
-  }
+	"name": "red-tetris",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "vitest",
+		"test:verbose": "vitest run --reporter=verbose",
+		"test:watch": "vitest",
+		"test:coverage": "vitest run --coverage",
+		"dev": "tsx --env-file=.env src/server/main.ts & vite",
+		"dev:server": "tsx --env-file=.env src/server/main.ts",
+		"dev:client": "vite"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "module",
+	"packageManager": "pnpm@12.11.2+sha512.25a51652a196785af5f28bda6dfe8dc582ebefa4ac1d180221ce1390231c5fb76637822ea4b6e4633ce74acdcb0a77f725af11bad38177fdeddaee818a955cb9",
+	"devDependencies": {
+		"@types/node": "^25.6.0",
+		"@types/react": "^19.2.14",
+		"@types/react-dom": "^19.2.3",
+		"@vitejs/plugin-react": "^6.0.1",
+		"@vitest/coverage-v8": "^4.1.5",
+		"prettier": "^3.10.1",
+		"tsx": "^4.21.0",
+		"typescript": "^6.0.3",
+		"vite": "^8.0.10",
+		"vitest": "^4.1.5"
+	},
+	"dependencies": {
+		"chalk": "^5.6.2",
+		"fastify": "^5.8.5",
+		"react": "^19.2.5",
+		"react-dom": "^19.2.5",
+		"socket.io": "^4.8.3",
+		"socket.io-client": "^4.8.3"
+	}
 }
