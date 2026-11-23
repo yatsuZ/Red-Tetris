@@ -28,12 +28,12 @@ export class Piece implements I_Piece {
 		};
 	}
 
-	getLargeur(): number {
+	getWidth(): number {
 		const matrix = this.getMatrix();
 		return matrix[0]?.length === undefined ? -1 : matrix[0].length;
 	}
 
-	getHauteur(): number {
+	getHeight(): number {
 		return this.getMatrix().length;
 	}
 

@@ -12,10 +12,10 @@ function error_get_largeur() {
 		it('renvoie ERROR si la largeur de la pièce vaut -1', () => {
 			const piece = new Piece('.', { x: 0, y: 0 });
 
-			// À partir d'ici, piece.getLargeur() renvoie -1
+			// À partir d'ici, piece.getWidth() renvoie -1
 			vi.spyOn(piece, 'getMatrix').mockReturnValue([]);
 
-			expect(piece.getLargeur()).toBe(-1);
+			expect(piece.getWidth()).toBe(-1);
 		});
 	});
 }
@@ -23,24 +23,24 @@ function error_get_largeur() {
 function defaut({
 	shape,
 	orientation,
-	ref_Hauteur,
-	ref_Largeur,
+	ref_Height,
+	ref_Width,
 }: {
 	shape: I_Piece['shape'];
 	orientation: 0 | 1 | 2 | 3;
-	ref_Hauteur: number;
-	ref_Largeur: number;
+	ref_Height: number;
+	ref_Width: number;
 }) {
 	// Arrange
 	const piece = new Piece(shape, { x: 0, y: 0 }, orientation);
 	// Act
 
 	// Assert
-	expect(piece.getHauteur()).toBe(ref_Hauteur);
-	expect(piece.getLargeur()).toBe(ref_Largeur);
+	expect(piece.getHeight()).toBe(ref_Height);
+	expect(piece.getWidth()).toBe(ref_Width);
 }
 
-export function test_getLargeurHauteur(): void {
+export function test_getWidthHeight(): void {
 	const valeursSaisies = [
 		{ shape: 'I' as const, pair: { h: 1, l: 4 }, impair: { h: 4, l: 1 } },
 		{ shape: 'J' as const, pair: { h: 2, l: 3 }, impair: { h: 3, l: 2 } },
@@ -60,13 +60,13 @@ export function test_getLargeurHauteur(): void {
 				shape,
 				orientation,
 				arrow: PieceOrientationAffichage[orientation],
-				ref_Hauteur: cible.h,
-				ref_Largeur: cible.l,
+				ref_Height: cible.h,
+				ref_Width: cible.l,
 			};
 		});
 	});
 
-	it.each(all_param)('Shape $shape — rotation $arrow Pour {Hauteur: $ref_Hauteur\t, Largeur: $ref_Largeur}', defaut);
+	it.each(all_param)('Shape $shape — rotation $arrow Pour {Height: $ref_Height\t, Width: $ref_Width}', defaut);
 
 	error_get_largeur();
 }

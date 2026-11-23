@@ -59,7 +59,7 @@ function error_get_largeur() {
 				if (SHOW_BOARD) show_board(board.board, 'ASCII');
 			}
 
-			// À partir d'ici, piece.getLargeur() renvoie -1
+			// À partir d'ici, piece.getWidth() renvoie -1
 			vi.spyOn(piece, 'getMatrix').mockReturnValue([]);
 
 			// Act

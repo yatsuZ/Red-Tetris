@@ -96,7 +96,7 @@ export class Board implements I_Board {
 	// =====================================================
 
 	canSpawnPiece(piece: I_Piece): ResultMethod {
-		const largeurPiece = piece.getLargeur();
+		const largeurPiece = piece.getWidth();
 		if (largeurPiece === -1) {
 			// throw new Error("canSpawnPiece : problème lors de la récupération de la largeur de la pièce");
 			return ResultMethod.ERROR;

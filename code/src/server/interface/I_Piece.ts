@@ -20,8 +20,8 @@ export interface I_Piece extends PieceData {
 	// =====================================================
 
 	get(): PieceData;
-	getLargeur(): number;
-	getHauteur(): number;
+	getWidth(): number;
+	getHeight(): number;
 	clone(): I_Piece;
 	getMatrix(): MatrixBin;
 
