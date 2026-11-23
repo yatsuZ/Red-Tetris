@@ -1,36 +1,32 @@
-import { afterEach, describe, vi } from 'vitest';
-import { expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { Logger, showLog } from '../../src/server/utils/logger.js';
 
-function test_all_Log() {
-	afterEach(() => {
-		vi.restoreAllMocks();
-	});
-
-	// [méthode, préfixe attendu]
+function testAllLog(shouldLog: boolean) {
 	it.each([
-		['debug', '[DEBUG]'],
-		['error', '[ERROR]'],
-		['info', '[INFO]'],
-		['server', '[SERVER]'],
-		['success', '[OK]'],
-		['warn', '[WARN]'],
-	] as const)('%s affiche %s', (method, prefix) => {
+		// [méthode, préfixe, logue aussi en prod ?]
+		['debug', '[DEBUG]', false],
+		['error', '[ERROR]', true],
+		['info', '[INFO]', false],
+		['server', '[SERVER]', true],
+		['success', '[OK]', false],
+		['warn', '[WARN]', false],
+	] as const)('%s affiche %s', (method, prefix, alwaysLog) => {
 		const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
-
 		Logger[method]('TEST');
 
-		expect(spy).toHaveBeenCalledTimes(1); // 1 seul log
-		const args = spy.mock.calls[0]!; // arguments du 1er appel
-		expect(args[0]).toContain(prefix); // bon préfixe
-		expect(args[1]).toBe('TEST'); // message transmis tel quel
+		if (!shouldLog && !alwaysLog) return expect(spy).not.toHaveBeenCalled();
+
+		expect(spy).toHaveBeenCalledTimes(1);
+		expect(spy.mock.calls[0]![0]).toContain(prefix);
+		expect(spy.mock.calls[0]![1]).toBe('TEST');
 	});
 
 	it('route affiche méthode + path', () => {
 		const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
-
 		Logger.route('GET', '/api');
-		Logger.route('TRUC', '/x'); // méthode inconnue → branche chalk.white
+		Logger.route('TRUC', '/x');
+
+		if (!shouldLog) return expect(spy).not.toHaveBeenCalled();
 
 		expect(spy).toHaveBeenCalledTimes(2);
 		expect(spy.mock.calls[0]![0]).toContain('[ROUTE]');
@@ -40,10 +36,19 @@ function test_all_Log() {
 	});
 }
 
-describe('logger', () => {
-	it('are we in prod ?  ', () => {
-		if (process.env.NODE_ENV === 'dev') expect(showLog()).toBeTruthy();
-		else expect(showLog()).toBeFalsy();
-	});
-	describe('test All Logger (dev)', test_all_Log);
+afterEach(() => {
+	vi.unstubAllEnvs();
+	vi.restoreAllMocks();
+});
+
+describe('logger en dev', () => {
+	beforeEach(() => vi.stubEnv('NODE_ENV', 'dev'));
+	it('showLog() renvoie true', () => expect(showLog()).toBe(true));
+	testAllLog(true);
+});
+
+describe('logger en prod', () => {
+	beforeEach(() => vi.stubEnv('NODE_ENV', 'prod'));
+	it('showLog() renvoie false', () => expect(showLog()).toBe(false));
+	testAllLog(false);
 });
