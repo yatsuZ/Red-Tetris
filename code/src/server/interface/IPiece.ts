@@ -2,7 +2,7 @@ export type PieceShape = 'I' | 'J' | 'L' | 'O' | 'S' | 'T' | 'Z' | '.';
 export type Matrix<T = number> = T[][];
 export type MatrixBin = Matrix<0 | 1>;
 export type Rotations = [MatrixBin, MatrixBin, MatrixBin, MatrixBin];
-export type Position = { x: number; y: number };
+export type Position = { row: number; col: number };
 
 // =====================================================
 // Attributs

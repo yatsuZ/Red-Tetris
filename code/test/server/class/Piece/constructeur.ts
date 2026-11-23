@@ -29,7 +29,7 @@ function defaut({
 export function test_Constructeur(): void {
 	const randomRotation: 0 | 1 | 2 | 3 = (getRandomInt(0, 3) % 4) as 0 | 1 | 2 | 3;
 
-	const randomPos: Position = { x: getRandomInt(-100, 100), y: getRandomInt(-100, 100) };
+	const randomPos: Position = { row: getRandomInt(-100, 100), col: getRandomInt(-100, 100) };
 
 	const allParams: { shape: IPiece['shape']; position: Position; rotation: 0 | 1 | 2 | 3; initialArrow: string }[] =
 		ALL_SHAPES.map((shape) => ({
@@ -39,5 +39,5 @@ export function test_Constructeur(): void {
 			initialArrow: ORIENTATION_SYMBOLS[randomRotation],
 		}));
 
-	it.each(allParams)('Shape $shape en ($position.x, $position.y) — orientation de départ $initialArrow', defaut);
+	it.each(allParams)('Shape $shape en ($position.row, $position.col) — orientation de départ $initialArrow', defaut);
 }

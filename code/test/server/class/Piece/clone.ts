@@ -32,7 +32,7 @@ function defaut({
 
 export function test_clone(): void {
 	const randomRotation: 0 | 1 | 2 | 3 = (getRandomInt(0, 3) % 4) as 0 | 1 | 2 | 3;
-	const randomPos: Position = { x: getRandomInt(-100, 100), y: getRandomInt(-100, 100) };
+	const randomPos: Position = { row: getRandomInt(-100, 100), col: getRandomInt(-100, 100) };
 
 	const allParams: {
 		shape: IPiece['shape'];
@@ -46,5 +46,5 @@ export function test_clone(): void {
 		initialArrow: ORIENTATION_SYMBOLS[randomRotation],
 	}));
 
-	it.each(allParams)('Shape $shape en $initialArrow($position.x, $position.y) cloné, objet distinct.', defaut);
+	it.each(allParams)('Shape $shape en $initialArrow($position.row, $position.col) cloné, objet distinct.', defaut);
 }

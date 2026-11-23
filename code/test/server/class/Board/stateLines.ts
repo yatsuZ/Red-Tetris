@@ -14,13 +14,13 @@ const ERROR = [-1, 0, 23, 24, 25];
 
 // Place les pièces sur le terrain
 function placePiece(board: Board) {
-	const piece = new Piece('.', { x: 1, y: 1 });
+	const piece = new Piece('.', { row: 1, col: 1 });
 
 	for (let i = 1; i < board.realWidth - 1; i++) {
 		for (let j = 1; j < board.realHeight; j++) {
-			if (FULL.includes(j)) board.addPiece(piece, { x: j, y: i });
+			if (FULL.includes(j)) board.addPiece(piece, { row: j, col: i });
 			else if (PARTIAL.includes(j)) {
-				if (i != board.realWidth - 2) board.addPiece(piece, { x: j, y: i });
+				if (i != board.realWidth - 2) board.addPiece(piece, { row: j, col: i });
 			}
 		}
 	}

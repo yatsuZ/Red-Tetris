@@ -10,7 +10,7 @@ function errorGetWidth() {
 		});
 
 		it('renvoie ERROR si la largeur de la pièce vaut -1', () => {
-			const piece = new Piece('.', { x: 0, y: 0 });
+			const piece = new Piece('.', { row: 0, col: 0 });
 
 			// À partir d'ici, piece.getWidth() renvoie -1
 			vi.spyOn(piece, 'getMatrix').mockReturnValue([]);
@@ -32,7 +32,7 @@ function defaut({
 	ref_Width: number;
 }) {
 	// Arrange
-	const piece = new Piece(shape, { x: 0, y: 0 }, orientation);
+	const piece = new Piece(shape, { row: 0, col: 0 }, orientation);
 	// Act
 
 	// Assert

@@ -36,7 +36,7 @@ function defaut({
 export function test_rotation(): void {
 	const randomRotation: 0 | 1 | 2 | 3 = (getRandomInt(0, 3) % 4) as 0 | 1 | 2 | 3;
 	const turnCount: number = getRandomInt(0, 200);
-	const randomPos: Position = { x: getRandomInt(-100, 100), y: getRandomInt(-100, 100) };
+	const randomPos: Position = { row: getRandomInt(-100, 100), col: getRandomInt(-100, 100) };
 	const resultat: 0 | 1 | 2 | 3 = ((randomRotation + turnCount) % 4) as 0 | 1 | 2 | 3;
 
 	const allParams: {

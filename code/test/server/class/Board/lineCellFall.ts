@@ -16,7 +16,7 @@ function test_lineCellFall_Empty_or_Full() {
 	expect(MethodResult.FAIL).toBe(board.lineCellFall());
 
 	for (let i = 1; i < board.realHeight - 1; i++) {
-		board.addPiece(new Piece('.', { x: 0, y: 0 }), { x: i, y: 1 });
+		board.addPiece(new Piece('.', { row: 0, col: 0 }), { row: i, col: 1 });
 	}
 	// if (SHOW_BOARD) showBoard(board.grid, "ASCII");
 	expect(MethodResult.FAIL).toBe(board.lineCellFall());
@@ -25,14 +25,14 @@ function test_lineCellFall_Empty_or_Full() {
 function basic_lineCellFall() {
 	// create
 	const board = Board.create();
-	const piece = new Piece('.', { x: 0, y: 0 });
+	const piece = new Piece('.', { row: 0, col: 0 });
 
 	expect(MethodResult.FAIL).toBe(board.lineCellFall());
 	let loop = 0;
 	for (let i = 1; i < board.realHeight - 1; i = i + 2) {
 		loop++;
 		for (let j = 1; j <= board.width; j++) {
-			board.addPiece(piece, { x: i, y: j });
+			board.addPiece(piece, { row: i, col: j });
 		}
 	}
 	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');

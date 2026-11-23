@@ -105,7 +105,7 @@ export class Board implements IBoard {
 		const leftMargin = Math.ceil(remainingSpace / 2);
 		const spawnColumn = 1 + leftMargin;
 
-		return this.canAddPiece(piece, { x: 1, y: spawnColumn }).result;
+		return this.canAddPiece(piece, { row: 1, col: spawnColumn }).result;
 	}
 
 	canAddPiece(piece: IPiece, pos: Position): { matrix: Matrix<CollisionState>; result: MethodResult } {
@@ -116,8 +116,8 @@ export class Board implements IBoard {
 			pieceRow.map((cell, j) => {
 				if (cell !== 1) return CollisionState.NO_COLLISION;
 
-				const r = pos.x + i;
-				const c = pos.y + j;
+				const r = pos.row + i;
+				const c = pos.col + j;
 				const boardRow = this.grid[r];
 
 				if (boardRow === undefined || boardRow[c] === undefined) {
@@ -149,8 +149,8 @@ export class Board implements IBoard {
 			const pieceRow = matrix[i]!;
 			for (let j = 0; j < pieceRow.length; j++) {
 				if (pieceRow[j] !== 1) continue;
-				const r = pos.x + i;
-				const c = pos.y + j;
+				const r = pos.row + i;
+				const c = pos.col + j;
 				const boardRow = this.grid[r];
 				if (boardRow === undefined || boardRow[c] === undefined)
 					throw new Error(`addPiece: out of bounds write at (${r}, ${c})`);

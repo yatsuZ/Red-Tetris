@@ -23,19 +23,19 @@ function highestPointColumns_error() {
 function highestPointColumns_test() {
 	// create
 	const board = Board.create();
-	const piece = new Piece('.', { x: 0, y: 0 });
+	const piece = new Piece('.', { row: 0, col: 0 });
 	const columns = Array.from({ length: board.realWidth - 2 }, (_, i) => i + 1);
 
 	// Act
 	for (let i = 1; i < board.realWidth - 2; i++) {
 		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 
-		const x = board.realHeight - 1 - i;
-		board.addPiece(piece, { x: x, y: i });
+		const row = board.realHeight - 1 - i;
+		board.addPiece(piece, { row, col: i });
 	}
 
-	const indexX = board.realHeight - board.realWidth + 1;
-	board.addPiece(piece, { x: indexX, y: board.realWidth - 2 });
+	const indexRow = board.realHeight - board.realWidth + 1;
+	board.addPiece(piece, { row: indexRow, col: board.realWidth - 2 });
 
 	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 

@@ -18,7 +18,7 @@ function clearLinesValid() {
 
 	// on place une piece O sur chaque ligne a tester
 	indexLines.forEach((indexLine) => {
-		const piece = new Piece('O', { x: indexLine, y: 4 });
+		const piece = new Piece('O', { row: indexLine, col: 4 });
 		board.addPiece(piece, piece.position);
 	});
 
@@ -77,7 +77,7 @@ function clearLinesInvalid() {
 function clearLinesMixed() {
 	// Arrange — indices valides et invalides melanges
 	const board = Board.create();
-	const piece = new Piece('O', { x: 6, y: 4 });
+	const piece = new Piece('O', { row: 6, col: 4 });
 	board.addPiece(piece, piece.position);
 
 	const indexLines = [0, 6, board.realHeight - 1]; // invalide, valide, invalide

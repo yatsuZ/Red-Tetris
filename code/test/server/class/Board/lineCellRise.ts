@@ -27,9 +27,9 @@ function filledWithlineCellRiseEmpty() {
 function filledWithlineCellRise() {
 	// create
 	const board = Board.create();
-	const piece = new Piece('O', { x: 0, y: 0 });
+	const piece = new Piece('O', { row: 0, col: 0 });
 
-	board.addPiece(piece, { x: 21, y: 1 });
+	board.addPiece(piece, { row: 21, col: 1 });
 
 	for (let i = 0; i < board.realHeight; i++) {
 		const res = board.lineCellRise();
@@ -45,9 +45,9 @@ function filledWithlineCellRise() {
 function failFilledWithlineCellRise() {
 	// create
 	const board = Board.create();
-	const piece = new Piece('O', { x: 0, y: 0 });
+	const piece = new Piece('O', { row: 0, col: 0 });
 
-	board.addPiece(piece, { x: 1, y: 1 });
+	board.addPiece(piece, { row: 1, col: 1 });
 	const res = board.lineCellRise();
 	expect(res).toBe(MethodResult.FAIL);
 	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');

@@ -14,11 +14,11 @@ const SHOW_BOARD = false;
 function validPosition() {
 	// Arrange
 	const board = Board.create();
-	const piece = new Piece('O', { x: 0, y: 0 });
-	const pos: Position = { x: 5, y: 5 };
+	const piece = new Piece('O', { row: 0, col: 0 });
+	const pos: Position = { row: 5, col: 5 };
 
 	if (SHOW_LOGS) {
-		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) ===`);
+		console.log(`=== canAddPiece O en (row:${pos.row} col:${pos.col}) ===`);
 		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	}
 
@@ -37,11 +37,11 @@ function validPosition() {
 function outOfBounds() {
 	// Arrange
 	const board = Board.create();
-	const piece = new Piece('O', { x: 0, y: 0 });
-	const pos: Position = { x: 100, y: 5 };
+	const piece = new Piece('O', { row: 0, col: 0 });
+	const pos: Position = { row: 100, col: 5 };
 
 	if (SHOW_LOGS) {
-		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) ===`);
+		console.log(`=== canAddPiece O en (row:${pos.row} col:${pos.col}) ===`);
 		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	}
 
@@ -60,11 +60,11 @@ function outOfBounds() {
 function sideWallCollision() {
 	// Arrange — O en (5,0) : col 0 = mur gauche
 	const board = Board.create();
-	const piece = new Piece('O', { x: 0, y: 0 });
-	const pos: Position = { x: 5, y: 0 };
+	const piece = new Piece('O', { row: 0, col: 0 });
+	const pos: Position = { row: 5, col: 0 };
 
 	if (SHOW_LOGS) {
-		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) ===`);
+		console.log(`=== canAddPiece O en (row:${pos.row} col:${pos.col}) ===`);
 		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	}
 
@@ -83,11 +83,11 @@ function sideWallCollision() {
 function groundCollision() {
 	// Arrange — O en (22,5) : ligne 23 = sol (realHeight-1)
 	const board = Board.create();
-	const piece = new Piece('O', { x: 0, y: 0 });
-	const pos: Position = { x: 22, y: 5 };
+	const piece = new Piece('O', { row: 0, col: 0 });
+	const pos: Position = { row: 22, col: 5 };
 
 	if (SHOW_LOGS) {
-		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) ===`);
+		console.log(`=== canAddPiece O en (row:${pos.row} col:${pos.col}) ===`);
 		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	}
 
@@ -106,12 +106,12 @@ function groundCollision() {
 function existingPieceCollision() {
 	// Arrange — on place d'abord une pièce, puis on vérifie la même position
 	const board = Board.create();
-	const piece = new Piece('O', { x: 0, y: 0 });
-	const pos: Position = { x: 5, y: 5 };
+	const piece = new Piece('O', { row: 0, col: 0 });
+	const pos: Position = { row: 5, col: 5 };
 
 	board.addPiece(piece, pos);
 	if (SHOW_LOGS) {
-		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) apres addPiece ===`);
+		console.log(`=== canAddPiece O en (row:${pos.row} col:${pos.col}) apres addPiece ===`);
 		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	}
 
@@ -130,9 +130,9 @@ function existingPieceCollision() {
 function imbriquer() {
 	// Arrange
 	const board = Board.create();
-	const piece1 = new Piece('I', { x: 18, y: 1 }, 1);
-	const piece2 = new Piece('T', { x: 21, y: 1 }, 2);
-	const piece3 = new Piece('Z', { x: 21, y: 3 });
+	const piece1 = new Piece('I', { row: 18, col: 1 }, 1);
+	const piece2 = new Piece('T', { row: 21, col: 1 }, 2);
+	const piece3 = new Piece('Z', { row: 21, col: 3 });
 
 	// Act
 	expect(board.canAddPiece(piece1, piece1.position).result).toBe(MethodResult.SUCCESS);

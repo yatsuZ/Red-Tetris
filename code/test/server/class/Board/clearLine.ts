@@ -11,7 +11,7 @@ function clearLineValid() {
 	// Arrange
 	const board = Board.create();
 	const indexLine = 5;
-	const piece = new Piece('O', { x: indexLine, y: 4 });
+	const piece = new Piece('O', { row: indexLine, col: 4 });
 
 	board.addPiece(piece, piece.position);
 	// ligne 5 : colonnes 4 et 5 sont maintenant PIECE

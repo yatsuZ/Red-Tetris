@@ -24,7 +24,7 @@ Tests dans `code/test/`, couverture à 100 %.
 - **Pas de factory `spawn` dans Piece** : le constructeur est public (`new Piece(shape, position, orientation)`), c'est le Board qui décide où une pièce peut apparaître (`canSpawnPiece`).
 - **La pièce ne connaît pas le terrain** : toute vérification de collision passe par le Board (`canAddPiece`).
 - **Point de référence = coin haut-gauche de la matrice de la pièce.**
-- **Position** : `x` = ligne, `y` = colonne (⚠️ inverse de l'habitude, renommage en `row` / `col` prévu).
+- **Position** : `{ row, col }` (ligne, colonne), `row = 1` est la première ligne jouable.
 - **Board avec bordures** : `realHeight = height + 4` (zone tampon au-dessus), `realWidth = width + 2` (murs). Défaut 20 × 10.
 - **Board créé via `Board.create(height, width)`** (constructeur privé), ou `Board.fromData(data)` pour reconstruire / cloner.
 - **Les méthodes renvoient un `MethodResult`** (`SUCCESS`, `FAIL`, `ERROR`) plutôt que de lever des erreurs, sauf `Board.create` et `addPiece` hors grille.

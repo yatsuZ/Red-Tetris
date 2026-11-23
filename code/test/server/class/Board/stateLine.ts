@@ -35,14 +35,14 @@ function stateLine_empty() {
 function stateLine_partial() {
 	// create
 	const board = Board.create();
-	const piece = new Piece('O', { x: LINE_SELECT, y: 1 });
+	const piece = new Piece('O', { row: LINE_SELECT, col: 1 });
 
 	// Act
 	for (let i = 0; i < 4; i++) {
 		board.addPiece(piece, piece.position);
-		piece.position.y += 2;
+		piece.position.col += 2;
 	}
-	piece.position.y -= 1;
+	piece.position.col -= 1;
 	board.addPiece(piece, piece.position);
 
 	// Vérification
@@ -56,12 +56,12 @@ function stateLine_partial() {
 function stateLine_full() {
 	// create
 	const board = Board.create();
-	const piece = new Piece('O', { x: LINE_SELECT, y: 1 });
+	const piece = new Piece('O', { row: LINE_SELECT, col: 1 });
 
 	// Act
 	for (let i = 0; i < 5; i++) {
 		board.addPiece(piece, piece.position);
-		piece.position.y += 2;
+		piece.position.col += 2;
 	}
 
 	// Vérification

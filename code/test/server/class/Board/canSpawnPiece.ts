@@ -10,7 +10,7 @@ const SHOW_BOARD = false;
 function validSpawn() {
 	// Arrange
 	const board = Board.create();
-	const piece = new Piece('O', { x: 0, y: 0 });
+	const piece = new Piece('O', { row: 0, col: 0 });
 
 	if (SHOW_LOGS) {
 		console.log(`=== canSpawnPiece O ===`);
@@ -27,9 +27,9 @@ function validSpawn() {
 function invalidSpawn() {
 	// Arrange
 	const board = Board.create();
-	const piece = new Piece('O', { x: 1, y: 4 });
+	const piece = new Piece('O', { row: 1, col: 4 });
 
-	board.addPiece(piece, { x: 1, y: 4 });
+	board.addPiece(piece, { row: 1, col: 4 });
 
 	if (SHOW_LOGS) {
 		console.log(`=== canSpawnPiece O ===`);
@@ -52,7 +52,7 @@ function errorGetWidth() {
 		it('renvoie ERROR si la largeur de la pièce vaut -1', () => {
 			// Arrange
 			const board = Board.create();
-			const piece = new Piece('O', { x: 0, y: 0 });
+			const piece = new Piece('O', { row: 0, col: 0 });
 
 			if (SHOW_LOGS) {
 				console.log(`=== canSpawnPiece O ===`);

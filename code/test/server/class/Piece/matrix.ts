@@ -21,7 +21,7 @@ function defaut({ shape, position, tour }: { shape: IPiece['shape']; position: P
 
 export function test_matrix(): void {
 	const turnCount: (0 | 1 | 2 | 3)[] = [0, 1, 2, 3] as const;
-	const randomPos: Position = { x: getRandomInt(-100, 100), y: getRandomInt(-100, 100) };
+	const randomPos: Position = { row: getRandomInt(-100, 100), col: getRandomInt(-100, 100) };
 
 	const allParams: { shape: IPiece['shape']; position: Position; tour: 0 | 1 | 2 | 3; arrow: string }[] =
 		turnCount.flatMap((tour) =>

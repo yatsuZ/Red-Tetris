@@ -21,7 +21,7 @@ function test_isBoardEmpty() {
 		expect(isBoardEmpty(board)).toBeTruthy();
 	});
 	it('false', () => {
-		board.addPiece(new Piece('O', { x: 1, y: 1 }), { x: 1, y: 1 });
+		board.addPiece(new Piece('O', { row: 1, col: 1 }), { row: 1, col: 1 });
 		expect(isBoardEmpty(board)).toBeFalsy();
 	});
 }
@@ -34,7 +34,7 @@ function test_isBoardFull() {
 	it('true', () => {
 		for (let i = 1; i < board.realHeight - 1; i++) {
 			for (let j = 1; j <= board.width; j++) {
-				board.addPiece(new Piece('.', { x: 1, y: 1 }), { x: i, y: j });
+				board.addPiece(new Piece('.', { row: 1, col: 1 }), { row: i, col: j });
 			}
 		}
 		expect(isBoardFull(board)).toBeTruthy();

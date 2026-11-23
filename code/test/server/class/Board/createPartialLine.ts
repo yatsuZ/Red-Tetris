@@ -29,14 +29,14 @@ function filledWithPartialLines() {
 function failCreatePartialLine() {
 	// create
 	const board = Board.create();
-	const piece = new Piece('O', { x: 0, y: 0 });
+	const piece = new Piece('O', { row: 0, col: 0 });
 
-	board.addPiece(piece, { x: 2, y: 2 });
+	board.addPiece(piece, { row: 2, col: 2 });
 
 	for (let i = -1; i < board.realHeight + 1; i++) {
 		board.createPartialLine(i, 1);
 		if (i >= 1 && i <= board.realHeight + -2 && i % 2)
-			board.addPiece(new Piece('.', { x: 0, y: 0 }), { x: i, y: 1 });
+			board.addPiece(new Piece('.', { row: 0, col: 0 }), { row: i, col: 1 });
 	}
 
 	for (let i = -1; i < board.realHeight + 1; i++) {

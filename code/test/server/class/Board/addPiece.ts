@@ -14,10 +14,10 @@ const SHOW_LOGS = false;
 function validPlacement(pos: Position) {
 	// Arrange
 	const board = Board.create();
-	const piece = new Piece('O', { x: 0, y: 0 });
+	const piece = new Piece('O', { row: 0, col: 0 });
 
 	if (SHOW_LOGS) {
-		console.log(`=== AVANT addPiece (O en x:${pos.x} y:${pos.y}) ===`);
+		console.log(`=== AVANT addPiece (O en row:${pos.row} col:${pos.col}) ===`);
 		showBoard(board.grid, 'ASCII');
 	}
 
@@ -25,20 +25,20 @@ function validPlacement(pos: Position) {
 	const result = board.addPiece(piece, pos);
 
 	if (SHOW_LOGS) {
-		console.log(`=== APRES addPiece (O en x:${pos.x} y:${pos.y}) ===`);
+		console.log(`=== APRES addPiece (O en row:${pos.row} col:${pos.col}) ===`);
 		showBoard(board.grid, 'ASCII');
 	}
 
 	// Assert
-	const row1 = board.grid[pos.x];
-	const row2 = board.grid[pos.x + 1];
+	const row1 = board.grid[pos.row];
+	const row2 = board.grid[pos.row + 1];
 	if (row1 === undefined || row2 === undefined) throw new Error('position hors board');
 
 	expect(result).toBe(MethodResult.SUCCESS);
-	expect(row1[pos.y]).toBe(CellType.PIECE);
-	expect(row1[pos.y + 1]).toBe(CellType.PIECE);
-	expect(row2[pos.y]).toBe(CellType.PIECE);
-	expect(row2[pos.y + 1]).toBe(CellType.PIECE);
+	expect(row1[pos.col]).toBe(CellType.PIECE);
+	expect(row1[pos.col + 1]).toBe(CellType.PIECE);
+	expect(row2[pos.col]).toBe(CellType.PIECE);
+	expect(row2[pos.col + 1]).toBe(CellType.PIECE);
 	expect(piece.position).toEqual(pos);
 }
 
@@ -47,18 +47,18 @@ function overwritePreviousPiece() {
 	// O1 en (2,2) occupe : (2,2)(2,3)(3,2)(3,3)
 	// O2 en (2,3) occupe : (2,3)(2,4)(3,3)(3,4)  ← (2,3) et (3,3) déjà PIECE
 	const board = Board.create();
-	const piece = new Piece('O', { x: 0, y: 0 });
+	const piece = new Piece('O', { row: 0, col: 0 });
 
-	board.addPiece(piece, { x: 2, y: 2 });
+	board.addPiece(piece, { row: 2, col: 2 });
 	if (SHOW_LOGS) {
-		console.log('=== APRES 1er addPiece (O en x:2 y:2) ===');
+		console.log('=== APRES 1er addPiece (O en row:2 col:2) ===');
 		showBoard(board.grid, 'ASCII');
 	}
 
 	// Act — doit réussir sans throw même si des cellules sont déjà PIECE
-	const result = board.addPiece(piece, { x: 2, y: 3 });
+	const result = board.addPiece(piece, { row: 2, col: 3 });
 	if (SHOW_LOGS) {
-		console.log('=== APRES 2eme addPiece (O en x:2 y:3) ===');
+		console.log('=== APRES 2eme addPiece (O en row:2 col:3) ===');
 		showBoard(board.grid, 'ASCII');
 	}
 
@@ -79,8 +79,8 @@ function overwritePreviousPiece() {
 function outOfBounds() {
 	// Arrange
 	const board = Board.create();
-	const piece = new Piece('O', { x: 0, y: 0 });
-	const pos = { x: -1, y: 1 };
+	const piece = new Piece('O', { row: 0, col: 0 });
+	const pos = { row: -1, col: 1 };
 
 	// Assert
 	expect(() => board.addPiece(piece, pos)).toThrow('addPiece: out of bounds write');
@@ -89,9 +89,9 @@ function outOfBounds() {
 function imbriquer() {
 	// Arrange
 	const board = Board.create();
-	const piece1 = new Piece('I', { x: 18, y: 1 }, 1);
-	const piece2 = new Piece('T', { x: 21, y: 1 }, 2);
-	const piece3 = new Piece('Z', { x: 21, y: 3 });
+	const piece1 = new Piece('I', { row: 18, col: 1 }, 1);
+	const piece2 = new Piece('T', { row: 21, col: 1 }, 2);
+	const piece3 = new Piece('Z', { row: 21, col: 3 });
 
 	// Act
 	expect(board.addPiece(piece1, piece1.position)).toBe(MethodResult.SUCCESS);
@@ -114,13 +114,13 @@ export function test_addPiece(): void {
 	const randY = getRandomInt(1, 9);
 
 	it.each([
-		{ x: 0, y: 0 }, // sur les murs (haut-gauche)
-		{ x: 1, y: 1 }, // coin haut-gauche interieur
-		{ x: 1, y: 9 }, // coin haut-droite interieur
-		{ x: 21, y: 1 }, // coin bas-gauche interieur
-		{ x: 21, y: 9 }, // coin bas-droite interieur
-		{ x: randX, y: randY }, // position aleatoire
-	])('Place une piece O en (x:$x, y:$y)', (pos) => validPlacement(pos));
+		{ row: 0, col: 0 }, // sur les murs (haut-gauche)
+		{ row: 1, col: 1 }, // coin haut-gauche interieur
+		{ row: 1, col: 9 }, // coin haut-droite interieur
+		{ row: 21, col: 1 }, // coin bas-gauche interieur
+		{ row: 21, col: 9 }, // coin bas-droite interieur
+		{ row: randX, col: randY }, // position aleatoire
+	])('Place une piece O en (row:$row, col:$col)', (pos) => validPlacement(pos));
 
 	it('Ecrase les cellules PIECE existantes sans throw', overwritePreviousPiece);
 	it('Throw si la position dépasse les limites du tableau', outOfBounds);
