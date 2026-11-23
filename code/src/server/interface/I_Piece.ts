@@ -15,7 +15,6 @@ export type PieceData = {
 };
 
 export interface I_Piece extends PieceData {
-
 	// =====================================================
 	// Creation / acces
 	// =====================================================
@@ -31,7 +30,6 @@ export interface I_Piece extends PieceData {
 	// =====================================================
 
 	rotate(): void;
-
 
 	// TODO:
 	// shift(direction: 'L' | 'R'): void;

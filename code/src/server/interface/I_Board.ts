@@ -17,7 +17,6 @@ export type BoardData = {
 };
 
 export interface I_Board extends BoardData {
-
 	// =====================================================
 	// Creation / acces
 	// =====================================================

@@ -13,7 +13,6 @@ import { BoardIsEmpty, BoardIsFull } from '../utils/allLineAre.js';
 import { getRandomInt } from '../utils/rng.js';
 
 export class Board implements I_Board {
-
 	// =====================================================
 	// Attribut
 	// =====================================================

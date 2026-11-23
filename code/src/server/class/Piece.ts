@@ -2,7 +2,6 @@ import type { I_Piece, MatrixBin, PieceData, Position } from '../interface/I_Pie
 import { Shapes } from '../constant/Shapes.js';
 
 export class Piece implements I_Piece {
-
 	// =====================================================
 	// Attribut
 	// =====================================================
@@ -54,5 +53,4 @@ export class Piece implements I_Piece {
 	rotate(): void {
 		this.orientation = ((this.orientation + 1) % 4) as 0 | 1 | 2 | 3;
 	}
-
 }
