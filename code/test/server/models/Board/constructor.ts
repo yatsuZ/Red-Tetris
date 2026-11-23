@@ -43,7 +43,7 @@ function init(width: number, height: number) {
 	expect(terrain.toData()).toEqual(ref);
 }
 
-export function testConstructeur(): void {
+export function testConstructor(): void {
 	const heightTooSmall: number = getRandomInt(-100, 3);
 	const heightTooHigh: number = getRandomInt(81, 100);
 	const widthTooSmall: number = getRandomInt(-100, 3);

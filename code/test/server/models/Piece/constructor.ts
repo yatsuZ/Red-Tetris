@@ -26,7 +26,7 @@ function defaut({
 	expect(piece.toData()).toEqual(ref);
 }
 
-export function testConstructeur(): void {
+export function testConstructor(): void {
 	const randomRotation: 0 | 1 | 2 | 3 = (getRandomInt(0, 3) % 4) as 0 | 1 | 2 | 3;
 
 	const randomPos: Position = { row: getRandomInt(-100, 100), col: getRandomInt(-100, 100) };

@@ -1,6 +1,7 @@
 import { describe } from 'vitest';
-import { testConstructeur } from './Board/constructor.js';
+import { testConstructor } from './Board/constructor.js';
 import { testClone } from './Board/clone.js';
+import { testGetMatrix } from './Board/getMatrix.js';
 import { testAddPiece } from './Board/addPiece.js';
 import { testCanAddPiece } from './Board/canAddPiece.js';
 import { testCanSpawnPiece } from './Board/canSpawnPiece.js';
@@ -15,8 +16,9 @@ import { testHighestPointsColumns } from './Board/highestPointsColumns.js';
 import { testLineCellFall } from './Board/lineCellFall.js';
 
 describe('Board', () => {
-	describe('constructor', testConstructeur);
+	describe('constructor', testConstructor);
 	describe('clone', testClone);
+	describe('getMatrix', testGetMatrix);
 	describe('addPiece', testAddPiece);
 	describe('canAddPiece', testCanAddPiece);
 	describe('canSpawnPiece', testCanSpawnPiece);

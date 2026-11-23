@@ -23,7 +23,7 @@ export interface IBoard extends BoardData {
 
 	initGrid(): CellMatrix;
 	clone(): IBoard;
-	// Retourne la grille sous forme de matrice de CellType
+	// Retourne une copie indépendante de la grille (pour modifier le board, passer par `grid`)
 	getMatrix(): CellMatrix;
 	// Retourne les données du board (height, width, highestPoint)
 	toData(): BoardData;

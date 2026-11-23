@@ -76,7 +76,7 @@ export class Board implements IBoard {
 	}
 
 	getMatrix(): CellMatrix {
-		return [...this.grid];
+		return this.grid.map((row) => [...row]);
 	}
 
 	toData(): BoardData {
