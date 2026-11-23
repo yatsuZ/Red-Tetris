@@ -2,7 +2,6 @@ import chalk from 'chalk';
 import { buildFastify } from './config/fastify.js';
 import { Logger } from './utils/logger.js';
 
-
 const PORT = parseInt(process.env.VITE_SERVER_PORT || '3000', 10);
 const HOST = '0.0.0.0';
 
@@ -31,7 +30,7 @@ const start = async () => {
 
 start();
 
-// Rapelle 
+// Rapelle
 /*
   main.ts — Incohérence
 

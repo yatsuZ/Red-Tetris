@@ -1,4 +1,4 @@
-import { describe } from 'vitest'
+import { describe } from 'vitest';
 import { test_Constructeur } from './Board/constructeur.js';
 import { test_clone } from './Board/clone.js';
 import { test_addPiece } from './Board/addPiece.js';
@@ -15,13 +15,13 @@ import { test_highestPointsColumns } from './Board/highestPointsColumns.js';
 import { test_lineCellFall } from './Board/lineCellFall.js';
 
 describe('Board', () => {
-  describe('constructor', test_Constructeur);
-  describe('clone', test_clone);
-  describe('addPiece', test_addPiece);
-  describe('canAddPiece', test_canAddPiece);
-  describe('canSpawnPiece', test_canSpawnPiece);
-  describe('delLine', test_delLine);
-  describe('delLines', test_delLines);
+	describe('constructor', test_Constructeur);
+	describe('clone', test_clone);
+	describe('addPiece', test_addPiece);
+	describe('canAddPiece', test_canAddPiece);
+	describe('canSpawnPiece', test_canSpawnPiece);
+	describe('delLine', test_delLine);
+	describe('delLines', test_delLines);
 	describe('stateLine', test_stateLine);
 	describe('stateLines', test_stateLines);
 	describe('createPartialLine', test_createPartialLine);
@@ -29,4 +29,4 @@ describe('Board', () => {
 	describe('highestPointColumn', test_highestPointColumn);
 	describe('highestPointsColumns', test_highestPointsColumns);
 	describe('lineCellFall', test_lineCellFall);
-})
+});
