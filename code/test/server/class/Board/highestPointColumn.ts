@@ -29,14 +29,14 @@ function highestPointColumn_test() {
 
 	// Act
 	for (let i = 1; i < board.realWidth - 2; i++) {
-		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 
 		const x = board.realHeight - 1 - i;
 		board.addPiece(piece, { x: x, y: i });
 	}
 	const indexX = board.realHeight - board.realWidth + 1;
 	board.addPiece(piece, { x: indexX, y: board.realWidth - 2 });
-	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 
 	// Vérification
 	for (let i = 1; i < board.realWidth - 1; i++) {

@@ -8,7 +8,7 @@ const COLLISION_SYMBOLS: Record<CollisionState, string> = {
 	[CollisionState.GROUND_COLLISION]: 'GRD',
 };
 
-export function logCollisionMatrix(matrix: CollisionState[][], label?: string, enabled: true | false = true) {
+export function logCollisionMatrix(matrix: CollisionState[][], label?: string, enabled: boolean = true) {
 	if (!enabled) return;
 	if (label) console.log(label);
 	const sep = '+' + (matrix[0] ? matrix[0].map(() => '-----').join('+') : '') + '+';

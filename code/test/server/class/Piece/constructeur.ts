@@ -23,7 +23,7 @@ function defaut({
 		orientation: rotation,
 		position: position,
 	};
-	expect(piece.get()).toEqual(ref);
+	expect(piece.toData()).toEqual(ref);
 }
 
 export function test_Constructeur(): void {

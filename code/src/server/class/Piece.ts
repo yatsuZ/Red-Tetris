@@ -20,7 +20,7 @@ export class Piece implements IPiece {
 		this.position = { ...position };
 	}
 
-	get(): PieceData {
+	toData(): PieceData {
 		return {
 			shape: this.shape,
 			orientation: this.orientation,
@@ -38,7 +38,7 @@ export class Piece implements IPiece {
 	}
 
 	clone(): Piece {
-		const selfData: PieceData = this.get();
+		const selfData: PieceData = this.toData();
 		return new Piece(selfData.shape, { ...selfData.position }, selfData.orientation);
 	}
 

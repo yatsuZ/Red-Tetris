@@ -48,7 +48,7 @@ function stateLine_partial() {
 	// Vérification
 	const results = board.stateLine(LINE_SELECT);
 
-	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	// Assert
 	expect(results).toBe(LineState.PARTIAL);
 }
@@ -67,7 +67,7 @@ function stateLine_full() {
 	// Vérification
 	const results = board.stateLine(LINE_SELECT);
 
-	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	// Assert
 	expect(results).toBe(LineState.FULL);
 }

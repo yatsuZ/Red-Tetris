@@ -14,7 +14,7 @@ function validSpawn() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== canSpawnPiece O ===`);
-		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	}
 
 	// Act
@@ -33,7 +33,7 @@ function invalidSpawn() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== canSpawnPiece O ===`);
-		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	}
 
 	// Act
@@ -56,7 +56,7 @@ function errorGetWidth() {
 
 			if (SHOW_LOGS) {
 				console.log(`=== canSpawnPiece O ===`);
-				if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+				if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 			}
 
 			// À partir d'ici, piece.getWidth() renvoie -1

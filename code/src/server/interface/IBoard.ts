@@ -13,7 +13,7 @@ export type BoardData = {
 	readonly height: number;
 	readonly width: number;
 	highestPoint: number;
-	board: CellMatrix;
+	grid: CellMatrix;
 };
 
 export interface IBoard extends BoardData {
@@ -21,12 +21,12 @@ export interface IBoard extends BoardData {
 	// Création / accès
 	// =====================================================
 
-	initBoard(): CellMatrix;
+	initGrid(): CellMatrix;
 	clone(): IBoard;
 	// Retourne la grille sous forme de matrice de CellType
 	getMatrix(): CellMatrix;
 	// Retourne les données du board (height, width, highestPoint)
-	get(): BoardData;
+	toData(): BoardData;
 
 	// =====================================================
 	// Pièces
@@ -35,7 +35,7 @@ export interface IBoard extends BoardData {
 	// Vérifie si une pièce peut apparaître. Retourne le résultat
 	canSpawnPiece(piece: IPiece): MethodResult;
 	// Vérifie si une pièce peut être placée. Retourne une matrice d'états (CollisionState) et le résultat global
-	canAddPiece(piece: IPiece, pos: Position): { matrix: Matrix<CollisionState>; res: MethodResult };
+	canAddPiece(piece: IPiece, pos: Position): { matrix: Matrix<CollisionState>; result: MethodResult };
 	// Ajoute une pièce dans la grille. Retourne SUCCESS, lève une erreur si hors de la grille
 	addPiece(piece: IPiece, pos: Position): MethodResult;
 
@@ -44,9 +44,9 @@ export interface IBoard extends BoardData {
 	// =====================================================
 
 	// Vide la ligne à l'index donné. Retourne SUCCESS ou ERROR
-	delLine(indexLine: number, verif?: boolean): MethodResult;
+	clearLine(indexLine: number, checkBounds?: boolean): MethodResult;
 	// Vide plusieurs lignes. Retourne le résultat pour chaque index
-	delLines(indexLines: number[]): { indexLine: number; res: MethodResult }[];
+	clearLines(indexLines: number[]): { indexLine: number; result: MethodResult }[];
 	// Retourne l'état d'une ligne : EMPTY, PARTIAL ou FULL
 	stateLine(indexLine: number): LineState;
 	// Idem pour plusieurs lignes

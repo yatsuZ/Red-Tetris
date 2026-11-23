@@ -22,7 +22,7 @@ export class Board implements IBoard {
 	readonly height: number;
 	readonly width: number;
 	highestPoint: number;
-	board: CellMatrix;
+	grid: CellMatrix;
 
 	// =====================================================
 	// Création / accès
@@ -34,7 +34,7 @@ export class Board implements IBoard {
 		this.realHeight = data.realHeight;
 		this.realWidth = data.realWidth;
 		this.highestPoint = data.highestPoint;
-		this.board = data.board.map((row) => [...row]);
+		this.grid = data.grid.map((row) => [...row]);
 	}
 
 	static create(height: number = DEFAULT_HEIGHT_BOARD, width: number = DEFAULT_WIDTH_BOARD): Board {
@@ -52,9 +52,9 @@ export class Board implements IBoard {
 			realHeight,
 			realWidth,
 			highestPoint: height,
-			board: [],
+			grid: [],
 		});
-		board.board = board.initBoard();
+		board.grid = board.initGrid();
 		return board;
 	}
 
@@ -62,7 +62,7 @@ export class Board implements IBoard {
 		return new Board(data);
 	}
 
-	initBoard(): CellMatrix {
+	initGrid(): CellMatrix {
 		return Array.from({ length: this.realHeight }, (_, i) =>
 			Array.from({ length: this.realWidth }, (_, j) => {
 				if (j === 0 || j === this.realWidth - 1 || i === this.realHeight - 1 || i === 0) return CellType.WALL;
@@ -72,21 +72,21 @@ export class Board implements IBoard {
 	}
 
 	clone(): Board {
-		return Board.fromData(this.get());
+		return Board.fromData(this.toData());
 	}
 
 	getMatrix(): CellMatrix {
-		return [...this.board];
+		return [...this.grid];
 	}
 
-	get(): BoardData {
+	toData(): BoardData {
 		return {
 			realHeight: this.realHeight,
 			realWidth: this.realWidth,
 			height: this.height,
 			width: this.width,
 			highestPoint: this.highestPoint,
-			board: this.getMatrix(),
+			grid: this.getMatrix(),
 		};
 	}
 
@@ -105,12 +105,11 @@ export class Board implements IBoard {
 		const leftMargin = Math.ceil(remainingSpace / 2);
 		const spawnColumn = 1 + leftMargin;
 
-		const res = this.canAddPiece(piece, { x: 1, y: spawnColumn });
-		return res.res;
+		return this.canAddPiece(piece, { x: 1, y: spawnColumn }).result;
 	}
 
-	canAddPiece(piece: IPiece, pos: Position): { matrix: Matrix<CollisionState>; res: MethodResult } {
-		let res = MethodResult.SUCCESS;
+	canAddPiece(piece: IPiece, pos: Position): { matrix: Matrix<CollisionState>; result: MethodResult } {
+		let result = MethodResult.SUCCESS;
 		const pieceMatrix = piece.getMatrix();
 
 		const matrix: Matrix<CollisionState> = pieceMatrix.map((pieceRow, i) =>
@@ -119,28 +118,28 @@ export class Board implements IBoard {
 
 				const r = pos.x + i;
 				const c = pos.y + j;
-				const boardRow = this.board[r];
+				const boardRow = this.grid[r];
 
 				if (boardRow === undefined || boardRow[c] === undefined) {
-					res = MethodResult.ERROR;
+					result = MethodResult.ERROR;
 					return CollisionState.OUT_BOARD;
 				}
 
 				const boardCell = boardRow[c];
 				if (boardCell === CellType.WALL) {
-					res = MethodResult.FAIL;
+					result = MethodResult.FAIL;
 
 					return r === this.realHeight - 1 ? CollisionState.GROUND_COLLISION : CollisionState.SIDE_COLLISION;
 				}
 				if (boardCell === CellType.PIECE) {
-					res = MethodResult.FAIL;
+					result = MethodResult.FAIL;
 					return CollisionState.PIECE_COLLISION;
 				}
 				return CollisionState.NO_COLLISION;
 			}),
 		);
 
-		return { matrix, res };
+		return { matrix, result };
 	}
 
 	addPiece(piece: IPiece, pos: Position): MethodResult {
@@ -152,7 +151,7 @@ export class Board implements IBoard {
 				if (pieceRow[j] !== 1) continue;
 				const r = pos.x + i;
 				const c = pos.y + j;
-				const boardRow = this.board[r];
+				const boardRow = this.grid[r];
 				if (boardRow === undefined || boardRow[c] === undefined)
 					throw new Error(`addPiece: out of bounds write at (${r}, ${c})`);
 				boardRow[c] = CellType.PIECE;
@@ -166,31 +165,31 @@ export class Board implements IBoard {
 	// Lignes
 	// =====================================================
 
-	delLine(indexLine: number, verif: boolean = true): MethodResult {
-		if (verif) {
+	clearLine(indexLine: number, checkBounds: boolean = true): MethodResult {
+		if (checkBounds) {
 			if (indexLine <= 0 || indexLine >= this.realHeight - 1) return MethodResult.ERROR;
 		}
-		const row = this.board[indexLine];
+		const row = this.grid[indexLine];
 		if (row === undefined) return MethodResult.ERROR;
 
-		row.forEach((_, indexRow) => {
-			if (indexRow === 0 || indexRow === this.realWidth - 1) return;
+		row.forEach((_, indexColumn) => {
+			if (indexColumn === 0 || indexColumn === this.realWidth - 1) return;
 
-			row[indexRow] = CellType.EMPTY;
+			row[indexColumn] = CellType.EMPTY;
 		});
 
 		return MethodResult.SUCCESS;
 	}
 
-	delLines(indexLines: number[]): { indexLine: number; res: MethodResult }[] {
+	clearLines(indexLines: number[]): { indexLine: number; result: MethodResult }[] {
 		return indexLines.map((index) => {
-			const res = this.delLine(index);
-			return { indexLine: index, res };
+			const result = this.clearLine(index);
+			return { indexLine: index, result };
 		});
 	}
 
 	stateLine(indexLine: number): LineState {
-		const row = this.board[indexLine];
+		const row = this.grid[indexLine];
 
 		// Impossible de vérifier les murs
 		if (indexLine <= 0 || indexLine >= this.realHeight - 1 || row === undefined || row[1] == undefined)
@@ -220,7 +219,7 @@ export class Board implements IBoard {
 			indexLine >= this.realHeight - 1
 		)
 			return MethodResult.ERROR;
-		const row = this.board[indexLine] as CellType[];
+		const row = this.grid[indexLine] as CellType[];
 		const stateRow = this.stateLine(indexLine);
 
 		if (stateRow === LineState.EMPTY) {
@@ -233,7 +232,7 @@ export class Board implements IBoard {
 
 	lineCellRise(): MethodResult {
 		for (let i = 1; i < this.realHeight - 1; i++) {
-			const row = this.board[i];
+			const row = this.grid[i];
 			const stateRow = this.stateLine(i);
 			const stateRowAbove = this.stateLine(i - 1);
 			if (i === 1 && (stateRow === LineState.FULL || stateRow === LineState.PARTIAL)) return MethodResult.FAIL;
@@ -243,7 +242,7 @@ export class Board implements IBoard {
 				(stateRow === LineState.FULL || stateRow === LineState.PARTIAL)
 			) {
 				for (let j = 1; j < this.realWidth - 1; j++) {
-					(this.board[i - 1] as CellType[])[j] = row[j] as CellType;
+					(this.grid[i - 1] as CellType[])[j] = row[j] as CellType;
 					row[j] = CellType.EMPTY;
 				}
 			}
@@ -256,7 +255,7 @@ export class Board implements IBoard {
 		let same = true;
 		if (isBoardFull(this) || isBoardEmpty(this)) return MethodResult.FAIL;
 		for (let i = this.realHeight - 3; i > 0; i--) {
-			const row = this.board[i];
+			const row = this.grid[i];
 			const stateRow = this.stateLine(i);
 			const stateRowBelow = this.stateLine(i + 1);
 			if (
@@ -266,7 +265,7 @@ export class Board implements IBoard {
 			) {
 				same = false;
 				for (let j = 1; j < this.realWidth - 1; j++) {
-					(this.board[i + 1] as CellType[])[j] = row[j] as CellType;
+					(this.grid[i + 1] as CellType[])[j] = row[j] as CellType;
 					row[j] = CellType.EMPTY;
 				}
 			}
@@ -283,8 +282,8 @@ export class Board implements IBoard {
 		if (indexColumn <= 0 || indexColumn >= this.realWidth - 1) return -1;
 
 		for (let index = 0; index < this.realHeight - 1; index++) {
-			if (this.board[index] === undefined) return -1;
-			else if ((this.board[index] as CellType[])[indexColumn] === CellType.PIECE) return index;
+			if (this.grid[index] === undefined) return -1;
+			else if ((this.grid[index] as CellType[])[indexColumn] === CellType.PIECE) return index;
 		}
 		return this.realHeight - 1;
 	}

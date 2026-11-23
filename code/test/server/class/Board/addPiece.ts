@@ -18,7 +18,7 @@ function validPlacement(pos: Position) {
 
 	if (SHOW_LOGS) {
 		console.log(`=== AVANT addPiece (O en x:${pos.x} y:${pos.y}) ===`);
-		showBoard(board.board, 'ASCII');
+		showBoard(board.grid, 'ASCII');
 	}
 
 	// Act
@@ -26,12 +26,12 @@ function validPlacement(pos: Position) {
 
 	if (SHOW_LOGS) {
 		console.log(`=== APRES addPiece (O en x:${pos.x} y:${pos.y}) ===`);
-		showBoard(board.board, 'ASCII');
+		showBoard(board.grid, 'ASCII');
 	}
 
 	// Assert
-	const row1 = board.board[pos.x];
-	const row2 = board.board[pos.x + 1];
+	const row1 = board.grid[pos.x];
+	const row2 = board.grid[pos.x + 1];
 	if (row1 === undefined || row2 === undefined) throw new Error('position hors board');
 
 	expect(result).toBe(MethodResult.SUCCESS);
@@ -52,19 +52,19 @@ function overwritePreviousPiece() {
 	board.addPiece(piece, { x: 2, y: 2 });
 	if (SHOW_LOGS) {
 		console.log('=== APRES 1er addPiece (O en x:2 y:2) ===');
-		showBoard(board.board, 'ASCII');
+		showBoard(board.grid, 'ASCII');
 	}
 
 	// Act — doit réussir sans throw même si des cellules sont déjà PIECE
 	const result = board.addPiece(piece, { x: 2, y: 3 });
 	if (SHOW_LOGS) {
 		console.log('=== APRES 2eme addPiece (O en x:2 y:3) ===');
-		showBoard(board.board, 'ASCII');
+		showBoard(board.grid, 'ASCII');
 	}
 
 	// Assert — les 6 cellules uniques des deux pièces sont toutes PIECE
-	const row2 = board.board[2];
-	const row3 = board.board[3];
+	const row2 = board.grid[2];
+	const row3 = board.grid[3];
 	if (row2 === undefined || row3 === undefined) throw new Error('position hors board');
 
 	expect(result).toBe(MethodResult.SUCCESS);
@@ -96,16 +96,16 @@ function imbriquer() {
 	// Act
 	expect(board.addPiece(piece1, piece1.position)).toBe(MethodResult.SUCCESS);
 	if (SHOW_LOGS) {
-		showBoard(board.board, 'ASCII');
+		showBoard(board.grid, 'ASCII');
 	}
 	expect(board.addPiece(piece2, piece2.position)).toBe(MethodResult.SUCCESS);
 	if (SHOW_LOGS) {
-		showBoard(board.board, 'ASCII');
+		showBoard(board.grid, 'ASCII');
 	}
 
 	expect(board.addPiece(piece3, piece3.position)).toBe(MethodResult.SUCCESS);
 	if (SHOW_LOGS) {
-		showBoard(board.board, 'ASCII');
+		showBoard(board.grid, 'ASCII');
 	}
 }
 

@@ -18,7 +18,7 @@ function test_lineCellFall_Empty_or_Full() {
 	for (let i = 1; i < board.realHeight - 1; i++) {
 		board.addPiece(new Piece('.', { x: 0, y: 0 }), { x: i, y: 1 });
 	}
-	// if (SHOW_BOARD) showBoard(board.board, "ASCII");
+	// if (SHOW_BOARD) showBoard(board.grid, "ASCII");
 	expect(MethodResult.FAIL).toBe(board.lineCellFall());
 }
 
@@ -35,12 +35,12 @@ function basic_lineCellFall() {
 			board.addPiece(piece, { x: i, y: j });
 		}
 	}
-	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	while (loop) {
 		loop--;
 		const res = board.lineCellFall();
 		expect(MethodResult.SUCCESS).toBe(res);
-		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	}
 	expect(MethodResult.FAIL).toBe(board.lineCellFall());
 }

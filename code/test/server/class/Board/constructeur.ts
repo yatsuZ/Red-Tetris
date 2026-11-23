@@ -25,9 +25,9 @@ function defaut() {
 		realHeight: DEFAULT_HEIGHT_BOARD + 4,
 		realWidth: DEFAULT_WIDTH_BOARD + 2,
 		highestPoint: DEFAULT_HEIGHT_BOARD,
-		board: [...EXAMPLE_BOARD_MATRIX],
+		grid: [...EXAMPLE_BOARD_MATRIX],
 	};
-	expect(terrain.get()).toEqual(ref);
+	expect(terrain.toData()).toEqual(ref);
 }
 
 function init(width: number, height: number) {
@@ -38,9 +38,9 @@ function init(width: number, height: number) {
 		realHeight: height + 4,
 		realWidth: width + 2,
 		highestPoint: height,
-		board: [...terrain.getMatrix()],
+		grid: [...terrain.getMatrix()],
 	};
-	expect(terrain.get()).toEqual(ref);
+	expect(terrain.toData()).toEqual(ref);
 }
 
 export function test_Constructeur(): void {

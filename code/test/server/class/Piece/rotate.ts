@@ -30,7 +30,7 @@ function defaut({
 		orientation: resultat,
 		position,
 	};
-	expect(piece.get()).toEqual(ref);
+	expect(piece.toData()).toEqual(ref);
 }
 
 export function test_rotation(): void {

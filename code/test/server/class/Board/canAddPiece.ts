@@ -19,15 +19,15 @@ function validPosition() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) ===`);
-		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	}
 
 	// Act
-	const { matrix, res } = board.canAddPiece(piece, pos);
+	const { matrix, result } = board.canAddPiece(piece, pos);
 	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert
-	expect(res).toBe(MethodResult.SUCCESS);
+	expect(result).toBe(MethodResult.SUCCESS);
 	expect(matrix).toEqual([
 		[CollisionState.NO_COLLISION, CollisionState.NO_COLLISION],
 		[CollisionState.NO_COLLISION, CollisionState.NO_COLLISION],
@@ -42,15 +42,15 @@ function outOfBounds() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) ===`);
-		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	}
 
 	// Act
-	const { matrix, res } = board.canAddPiece(piece, pos);
+	const { matrix, result } = board.canAddPiece(piece, pos);
 	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert
-	expect(res).toBe(MethodResult.ERROR);
+	expect(result).toBe(MethodResult.ERROR);
 	expect(matrix).toEqual([
 		[CollisionState.OUT_BOARD, CollisionState.OUT_BOARD],
 		[CollisionState.OUT_BOARD, CollisionState.OUT_BOARD],
@@ -65,15 +65,15 @@ function sideWallCollision() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) ===`);
-		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	}
 
 	// Act
-	const { matrix, res } = board.canAddPiece(piece, pos);
+	const { matrix, result } = board.canAddPiece(piece, pos);
 	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert — col 0 = SIDE, col 1 = NO_COLLISION
-	expect(res).toBe(MethodResult.FAIL);
+	expect(result).toBe(MethodResult.FAIL);
 	expect(matrix).toEqual([
 		[CollisionState.SIDE_COLLISION, CollisionState.NO_COLLISION],
 		[CollisionState.SIDE_COLLISION, CollisionState.NO_COLLISION],
@@ -88,15 +88,15 @@ function groundCollision() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) ===`);
-		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	}
 
 	// Act
-	const { matrix, res } = board.canAddPiece(piece, pos);
+	const { matrix, result } = board.canAddPiece(piece, pos);
 	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert — ligne 22 = NO_COLLISION, ligne 23 = sol
-	expect(res).toBe(MethodResult.FAIL);
+	expect(result).toBe(MethodResult.FAIL);
 	expect(matrix).toEqual([
 		[CollisionState.NO_COLLISION, CollisionState.NO_COLLISION],
 		[CollisionState.GROUND_COLLISION, CollisionState.GROUND_COLLISION],
@@ -112,15 +112,15 @@ function existingPieceCollision() {
 	board.addPiece(piece, pos);
 	if (SHOW_LOGS) {
 		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) apres addPiece ===`);
-		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	}
 
 	// Act
-	const { matrix, res } = board.canAddPiece(piece, pos);
+	const { matrix, result } = board.canAddPiece(piece, pos);
 	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert
-	expect(res).toBe(MethodResult.FAIL);
+	expect(result).toBe(MethodResult.FAIL);
 	expect(matrix).toEqual([
 		[CollisionState.PIECE_COLLISION, CollisionState.PIECE_COLLISION],
 		[CollisionState.PIECE_COLLISION, CollisionState.PIECE_COLLISION],
@@ -135,29 +135,29 @@ function imbriquer() {
 	const piece3 = new Piece('Z', { x: 21, y: 3 });
 
 	// Act
-	expect(board.canAddPiece(piece1, piece1.position).res).toBe(MethodResult.SUCCESS);
+	expect(board.canAddPiece(piece1, piece1.position).result).toBe(MethodResult.SUCCESS);
 	expect(board.addPiece(piece1, piece1.position)).toBe(MethodResult.SUCCESS);
 	if (SHOW_LOGS) {
-		showBoard(board.board, 'ASCII');
+		showBoard(board.grid, 'ASCII');
 	}
-	expect(board.canAddPiece(piece2, piece2.position).res).toBe(MethodResult.SUCCESS);
+	expect(board.canAddPiece(piece2, piece2.position).result).toBe(MethodResult.SUCCESS);
 	expect(board.addPiece(piece2, piece2.position)).toBe(MethodResult.SUCCESS);
 	if (SHOW_LOGS) {
-		showBoard(board.board, 'ASCII');
+		showBoard(board.grid, 'ASCII');
 	}
 
-	expect(board.canAddPiece(piece3, piece3.position).res).toBe(MethodResult.SUCCESS);
+	expect(board.canAddPiece(piece3, piece3.position).result).toBe(MethodResult.SUCCESS);
 	expect(board.addPiece(piece3, piece3.position)).toBe(MethodResult.SUCCESS);
 	if (SHOW_LOGS) {
-		showBoard(board.board, 'ASCII');
+		showBoard(board.grid, 'ASCII');
 	}
 }
 
 export function test_canAddPiece(): void {
-	it('Position valide : res SUCCESS, matrix tout NO_COLLISION', validPosition);
-	it('Position valide : res SUCCESS, imbriqué', imbriquer);
-	it('Hors mémoire   : res ERROR,   matrix tout OUT_BOARD', outOfBounds);
-	it('Mur latéral    : res FAIL,    SIDE_COLLISION col 0', sideWallCollision);
-	it('Sol            : res FAIL,    GROUND_COLLISION ligne 23', groundCollision);
-	it('Pièce existante: res FAIL,    PIECE_COLLISION sur toutes les cases', existingPieceCollision);
+	it('Position valide : result SUCCESS, matrix tout NO_COLLISION', validPosition);
+	it('Position valide : result SUCCESS, imbriqué', imbriquer);
+	it('Hors mémoire   : result ERROR,   matrix tout OUT_BOARD', outOfBounds);
+	it('Mur latéral    : result FAIL,    SIDE_COLLISION col 0', sideWallCollision);
+	it('Sol            : result FAIL,    GROUND_COLLISION ligne 23', groundCollision);
+	it('Pièce existante: result FAIL,    PIECE_COLLISION sur toutes les cases', existingPieceCollision);
 }

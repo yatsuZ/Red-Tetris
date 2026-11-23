@@ -4,16 +4,16 @@
 
 Logique serveur de Red-Tetris, dans `code/src/server/` :
 
-| Fichier | Contenu |
-|---|---|
-| `class/Piece.ts` | Classe `Piece` |
-| `class/Board.ts` | Classe `Board` (terrain) |
-| `interface/IPiece.ts` | `IPiece`, `PieceData`, `PieceShape`, `Matrix`, `MatrixBin`, `Rotations`, `Position` |
-| `interface/IBoard.ts` | `IBoard`, `BoardData`, `CellMatrix` |
-| `constant/Shapes.ts` | `SHAPES` (7 formes + `.`, 4 rotations chacune), `ALL_SHAPES`, `ORIENTATION_SYMBOLS` |
-| `constant/Board.ts` | `CellType`, `LineState`, `CollisionState`, `MethodResult`, `BoardInitError`, dimensions par défaut |
-| `utils/boardState.ts` | `allLinesAre`, `isBoardEmpty`, `isBoardFull` |
-| `utils/showBoard.ts`, `utils/showCollision.ts` | Affichage debug en console |
+| Fichier                                        | Contenu                                                                                            |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `class/Piece.ts`                               | Classe `Piece`                                                                                     |
+| `class/Board.ts`                               | Classe `Board` (terrain)                                                                           |
+| `interface/IPiece.ts`                          | `IPiece`, `PieceData`, `PieceShape`, `Matrix`, `MatrixBin`, `Rotations`, `Position`                |
+| `interface/IBoard.ts`                          | `IBoard`, `BoardData`, `CellMatrix`                                                                |
+| `constant/Shapes.ts`                           | `SHAPES` (7 formes + `.`, 4 rotations chacune), `ALL_SHAPES`, `ORIENTATION_SYMBOLS`                |
+| `constant/Board.ts`                            | `CellType`, `LineState`, `CollisionState`, `MethodResult`, `BoardInitError`, dimensions par défaut |
+| `utils/boardState.ts`                          | `allLinesAre`, `isBoardEmpty`, `isBoardFull`                                                       |
+| `utils/showBoard.ts`, `utils/showCollision.ts` | Affichage debug en console                                                                         |
 
 Tests dans `code/test/`, couverture à 100 %.
 
@@ -35,13 +35,15 @@ Tests dans `code/test/`, couverture à 100 %.
 ## État actuel
 
 ### `Piece`
-- `get()`, `clone()`, `getMatrix()`, `getWidth()`, `getHeight()`
+
+- `toData()`, `clone()`, `getMatrix()`, `getWidth()`, `getHeight()`
 - `rotate()` : cycle 0 → 1 → 2 → 3 → 0, **sans vérification de collision**
 
 ### `Board`
-- Création / accès : `create`, `fromData`, `initBoard`, `clone`, `get`, `getMatrix`
+
+- Création / accès : `create`, `fromData`, `initGrid`, `clone`, `toData`, `getMatrix`
 - Pièces : `canSpawnPiece`, `canAddPiece` (renvoie aussi une matrice de `CollisionState`), `addPiece`
-- Lignes : `delLine(s)`, `stateLine(s)`, `createPartialLine`, `lineCellRise` (ligne de pénalité), `lineCellFall` (gravité des lignes)
+- Lignes : `clearLine(s)`, `stateLine(s)`, `createPartialLine`, `lineCellRise` (ligne de pénalité), `lineCellFall` (gravité des lignes)
 - Colonnes : `highestPointColumn`, `highestPointsColumns`
 
 ---

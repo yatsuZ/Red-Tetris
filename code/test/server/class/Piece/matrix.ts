@@ -15,7 +15,7 @@ function defaut({ shape, position, tour }: { shape: IPiece['shape']; position: P
 		orientation: tour,
 		position,
 	};
-	expect(piece.get()).toEqual(ref);
+	expect(piece.toData()).toEqual(ref);
 	expect(piece.getMatrix()).toEqual(SHAPES[shape][tour]);
 }
 

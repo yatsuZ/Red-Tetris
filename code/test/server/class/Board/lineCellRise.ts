@@ -17,7 +17,7 @@ function filledWithlineCellRiseEmpty() {
 		const res = board.lineCellRise();
 		if (i >= board.realHeight - 2) expect(res).toBe(MethodResult.FAIL);
 		else {
-			if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+			if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 			expect(res).toBe(MethodResult.SUCCESS);
 		}
 	}
@@ -35,7 +35,7 @@ function filledWithlineCellRise() {
 		const res = board.lineCellRise();
 		if (i >= board.realHeight - 4) expect(res).toBe(MethodResult.FAIL);
 		else {
-			if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+			if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 			expect(res).toBe(MethodResult.SUCCESS);
 		}
 	}
@@ -50,7 +50,7 @@ function failFilledWithlineCellRise() {
 	board.addPiece(piece, { x: 1, y: 1 });
 	const res = board.lineCellRise();
 	expect(res).toBe(MethodResult.FAIL);
-	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 }
 
 export function test_lineCellRise(): void {

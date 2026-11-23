@@ -22,7 +22,7 @@ function filledWithPartialLines() {
 		else expect(res).toBe(MethodResult.SUCCESS);
 	}
 
-	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	expect(allLinesAre(board, LineState.PARTIAL)).toBe(true);
 }
 
@@ -47,7 +47,7 @@ function failCreatePartialLine() {
 		else expect(res).toBe(MethodResult.FAIL);
 	}
 
-	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 }
 
 function filledWithPartialLinesChosen() {
@@ -64,12 +64,12 @@ function filledWithPartialLinesChosen() {
 			expect(res).toBe(MethodResult.SUCCESS);
 			for (let j = 1; j < board.realWidth - 1; j++) {
 				// Vérification
-				if (indexEmptyColumn === j) expect((board.board[i] as CellType[])[j]).toBe(CellType.EMPTY);
-				else expect((board.board[i] as CellType[])[j]).toBe(CellType.PIECE);
+				if (indexEmptyColumn === j) expect((board.grid[i] as CellType[])[j]).toBe(CellType.EMPTY);
+				else expect((board.grid[i] as CellType[])[j]).toBe(CellType.PIECE);
 			}
 		}
 	}
-	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	expect(allLinesAre(board, LineState.PARTIAL)).toBe(true);
 }
 
@@ -85,7 +85,7 @@ function failCreatePartialLineChosen() {
 		expect(res).toBe(MethodResult.ERROR);
 	}
 
-	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 }
 
 export function test_createPartialLine(): void {

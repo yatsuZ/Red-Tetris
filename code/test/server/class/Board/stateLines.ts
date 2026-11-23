@@ -41,7 +41,7 @@ function stateLines() {
 	// Act
 	placePiece(board);
 
-	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 
 	// Vérification
 	const results = board.stateLines(Lines_Verif);

@@ -7,7 +7,7 @@ import { showBoard } from '../../../../src/server/utils/showBoard.js';
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;
 
-function delLine_valide() {
+function clearLineValid() {
 	// Arrange
 	const board = Board.create();
 	const indexLine = 5;
@@ -16,30 +16,30 @@ function delLine_valide() {
 	board.addPiece(piece, piece.position);
 	// ligne 5 : colonnes 4 et 5 sont maintenant PIECE
 
-	if (SHOW_LOGS) console.log(`=== AVANT delLine(${indexLine}) ===`);
-	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+	if (SHOW_LOGS) console.log(`=== AVANT clearLine(${indexLine}) ===`);
+	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	if (SHOW_LOGS) {
-		console.log(`board[${indexLine}][4] = ${board.board[indexLine]?.[4]} (attendu: ${CellType.PIECE})`);
-		console.log(`board[${indexLine}][5] = ${board.board[indexLine]?.[5]} (attendu: ${CellType.PIECE})`);
+		console.log(`board[${indexLine}][4] = ${board.grid[indexLine]?.[4]} (attendu: ${CellType.PIECE})`);
+		console.log(`board[${indexLine}][5] = ${board.grid[indexLine]?.[5]} (attendu: ${CellType.PIECE})`);
 	}
 
-	const rowBefore = board.board[indexLine]!;
+	const rowBefore = board.grid[indexLine]!;
 	expect(rowBefore[4]).toBe(CellType.PIECE);
 	expect(rowBefore[5]).toBe(CellType.PIECE);
 
 	// Act
-	const res = board.delLine(indexLine);
+	const res = board.clearLine(indexLine);
 
-	if (SHOW_LOGS) console.log(`=== APRES delLine(${indexLine}) ===`);
-	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+	if (SHOW_LOGS) console.log(`=== APRES clearLine(${indexLine}) ===`);
+	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
 	if (SHOW_LOGS) {
 		console.log(`res = ${res} (attendu: ${MethodResult.SUCCESS})`);
-		console.log(`board[${indexLine}][4] = ${board.board[indexLine]?.[4]} (attendu: ${CellType.EMPTY})`);
-		console.log(`board[${indexLine}][5] = ${board.board[indexLine]?.[5]} (attendu: ${CellType.EMPTY})`);
+		console.log(`board[${indexLine}][4] = ${board.grid[indexLine]?.[4]} (attendu: ${CellType.EMPTY})`);
+		console.log(`board[${indexLine}][5] = ${board.grid[indexLine]?.[5]} (attendu: ${CellType.EMPTY})`);
 	}
 
 	// Assert
-	const rowAfter = board.board[indexLine]!;
+	const rowAfter = board.grid[indexLine]!;
 	expect(res).toBe(MethodResult.SUCCESS);
 	// cellules interieures videes
 	expect(rowAfter[4]).toBe(CellType.EMPTY);
@@ -49,23 +49,23 @@ function delLine_valide() {
 	expect(rowAfter[board.realWidth - 1]).toBe(CellType.WALL);
 }
 
-function delLine_invalide() {
+function clearLineInvalid() {
 	// Arrange
 	const board = Board.create();
 	const overflowMax = board.realHeight - 1; // = 23, mur du bas
 	const overflowMin = 0; // = 0,  mur du haut
 
 	if (SHOW_LOGS) {
-		console.log(`=== delLine invalide ===`);
+		console.log(`=== clearLine invalide ===`);
 		console.log(`overflowMax = ${overflowMax} (attendu: ERROR)`);
 		console.log(`overflowMin = ${overflowMin} (attendu: ERROR)`);
 	}
 
 	// Act
-	const res_MAX = board.delLine(overflowMax);
-	const res_MIN = board.delLine(overflowMin);
-	const res_MAX_WithOutVerif = board.delLine(5000, false);
-	const res_MIN_WithOutVerif = board.delLine(-1, false);
+	const res_MAX = board.clearLine(overflowMax);
+	const res_MIN = board.clearLine(overflowMin);
+	const res_MAX_WithOutVerif = board.clearLine(5000, false);
+	const res_MIN_WithOutVerif = board.clearLine(-1, false);
 
 	if (SHOW_LOGS) {
 		console.log(`res_MAX = ${res_MAX} (attendu: ${MethodResult.ERROR})`);
@@ -79,7 +79,7 @@ function delLine_invalide() {
 	expect(res_MIN_WithOutVerif).toBe(MethodResult.ERROR);
 }
 
-export function test_delLine(): void {
-	it('delLine valide   : res SUCCESS', delLine_valide);
-	it('delLine invalide : res ERROR', delLine_invalide);
+export function test_clearLine(): void {
+	it('clearLine valide   : result SUCCESS', clearLineValid);
+	it('clearLine invalide : result ERROR', clearLineInvalid);
 }

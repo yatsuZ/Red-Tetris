@@ -9,7 +9,7 @@ function sameData() {
 	// Act
 	const clone = original.clone();
 	// Assert
-	expect(clone.get()).toEqual(original.get());
+	expect(clone.toData()).toEqual(original.toData());
 }
 
 function differentInstance() {
@@ -26,9 +26,9 @@ function matrixIsolation() {
 	const original = Board.create();
 	const clone = original.clone();
 	// Act — modifier une cellule intérieure (vide) du clone
-	clone.board[1]![1] = CellType.WALL;
+	clone.grid[1]![1] = CellType.WALL;
 	// Assert — l'original ne doit pas être affecté
-	expect(original.board[1]![1]).toBe(CellType.EMPTY);
+	expect(original.grid[1]![1]).toBe(CellType.EMPTY);
 }
 
 function cloneCustomSize(w: number, h: number) {
@@ -37,7 +37,7 @@ function cloneCustomSize(w: number, h: number) {
 	// Act
 	const clone = original.clone();
 	// Assert
-	expect(clone.get()).toEqual(original.get());
+	expect(clone.toData()).toEqual(original.toData());
 }
 
 export function test_clone(): void {

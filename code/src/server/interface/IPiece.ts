@@ -19,7 +19,7 @@ export interface IPiece extends PieceData {
 	// Création / accès
 	// =====================================================
 
-	get(): PieceData;
+	toData(): PieceData;
 	getWidth(): number;
 	getHeight(): number;
 	clone(): IPiece;
