@@ -1,16 +1,16 @@
 import { expect, it } from 'vitest';
 import { Piece } from '../../../../src/server/class/Piece.js';
-import { type I_Piece, type PieceData, type Position } from '../../../../src/server/interface/I_Piece.js';
+import { type IPiece, type PieceData, type Position } from '../../../../src/server/interface/IPiece.js';
 import { getRandomInt } from '../../../../src/server/utils/rng.js';
 import { Board } from '../../../../src/server/class/Board.js';
-import type { BoardData, MatrixCellule } from '../../../../src/server/interface/I_Board.js';
+import type { BoardData, CellMatrix } from '../../../../src/server/interface/IBoard.js';
 import {
-	CELLULE_EMOJI,
-	CelluleType,
+	CELL_EMOJI,
+	CellType,
 	DEFAULT_HEIGHT_BOARD,
 	DEFAULT_WIDTH_BOARD,
-	ErrorInitMsgBoard,
-	EXEMPLE_DEFAULT_BOARD_MATRIX,
+	BoardInitError,
+	EXAMPLE_BOARD_MATRIX,
 } from '../../../../src/server/constant/Board.js';
 
 function defaut() {
@@ -25,7 +25,7 @@ function defaut() {
 		realHeight: DEFAULT_HEIGHT_BOARD + 4,
 		realWidth: DEFAULT_WIDTH_BOARD + 2,
 		highestPoint: DEFAULT_HEIGHT_BOARD,
-		board: [...EXEMPLE_DEFAULT_BOARD_MATRIX],
+		board: [...EXAMPLE_BOARD_MATRIX],
 	};
 	expect(terrain.get()).toEqual(ref);
 }
@@ -60,12 +60,12 @@ export function test_Constructeur(): void {
 	});
 
 	it.each([
-		[heightTooSmall, 10, ErrorInitMsgBoard.HEIGHT_LOW], // [height, width, specificError]
-		[heightTooHigh, 10, ErrorInitMsgBoard.HEIGHT_HIGH],
-		[20, widthTooSmall, ErrorInitMsgBoard.WIDTH_LOW],
-		[20, widthTooHigh, ErrorInitMsgBoard.WIDTH_HIGH],
-		[20, 40, ErrorInitMsgBoard.WIDTH_HEIGHT], // height < width
+		[heightTooSmall, 10, BoardInitError.HEIGHT_LOW], // [height, width, specificError]
+		[heightTooHigh, 10, BoardInitError.HEIGHT_HIGH],
+		[20, widthTooSmall, BoardInitError.WIDTH_LOW],
+		[20, widthTooHigh, BoardInitError.WIDTH_HIGH],
+		[20, 40, BoardInitError.WIDTH_HEIGHT], // height < width
 	])('Doit throw la bonne erreur pour h:%i, w:%i', (h, w, specificError) => {
-		expect(() => Board.create(h, w)).toThrow(ErrorInitMsgBoard.DEFAULT + specificError);
+		expect(() => Board.create(h, w)).toThrow(BoardInitError.DEFAULT + specificError);
 	});
 }

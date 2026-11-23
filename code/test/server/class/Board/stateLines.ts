@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
-import { StateLine } from '../../../../src/server/constant/Board.js';
+import { LineState } from '../../../../src/server/constant/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
 import { showBoard } from '../../../../src/server/utils/showBoard.js';
 
@@ -49,10 +49,10 @@ function stateLines() {
 	// Assert
 	// boucle for each results
 	for (const lineResult of results) {
-		if (FULL.includes(lineResult.indexLine)) expect(lineResult.state).toBe(StateLine.FULL);
-		else if (PARTIAL.includes(lineResult.indexLine)) expect(lineResult.state).toBe(StateLine.PARTIAL);
-		else if (EMPTY.includes(lineResult.indexLine)) expect(lineResult.state).toBe(StateLine.EMPTY);
-		else if (ERROR.includes(lineResult.indexLine)) expect(lineResult.state).toBe(StateLine.ERROR);
+		if (FULL.includes(lineResult.indexLine)) expect(lineResult.state).toBe(LineState.FULL);
+		else if (PARTIAL.includes(lineResult.indexLine)) expect(lineResult.state).toBe(LineState.PARTIAL);
+		else if (EMPTY.includes(lineResult.indexLine)) expect(lineResult.state).toBe(LineState.EMPTY);
+		else if (ERROR.includes(lineResult.indexLine)) expect(lineResult.state).toBe(LineState.ERROR);
 	}
 }
 

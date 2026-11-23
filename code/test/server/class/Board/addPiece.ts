@@ -1,10 +1,10 @@
 import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
-import { CelluleType, ResultMethod } from '../../../../src/server/constant/Board.js';
+import { CellType, MethodResult } from '../../../../src/server/constant/Board.js';
 import { showBoard } from '../../../../src/server/utils/showBoard.js';
 import { getRandomInt } from '../../../../src/server/utils/rng.js';
-import type { Position } from '../../../../src/server/interface/I_Piece.js';
+import type { Position } from '../../../../src/server/interface/IPiece.js';
 
 const SHOW_LOGS = false;
 
@@ -34,11 +34,11 @@ function validPlacement(pos: Position) {
 	const row2 = board.board[pos.x + 1];
 	if (row1 === undefined || row2 === undefined) throw new Error('position hors board');
 
-	expect(result).toBe(ResultMethod.SUCCESS);
-	expect(row1[pos.y]).toBe(CelluleType.PIECE);
-	expect(row1[pos.y + 1]).toBe(CelluleType.PIECE);
-	expect(row2[pos.y]).toBe(CelluleType.PIECE);
-	expect(row2[pos.y + 1]).toBe(CelluleType.PIECE);
+	expect(result).toBe(MethodResult.SUCCESS);
+	expect(row1[pos.y]).toBe(CellType.PIECE);
+	expect(row1[pos.y + 1]).toBe(CellType.PIECE);
+	expect(row2[pos.y]).toBe(CellType.PIECE);
+	expect(row2[pos.y + 1]).toBe(CellType.PIECE);
 	expect(piece.position).toEqual(pos);
 }
 
@@ -67,13 +67,13 @@ function overwritePreviousPiece() {
 	const row3 = board.board[3];
 	if (row2 === undefined || row3 === undefined) throw new Error('position hors board');
 
-	expect(result).toBe(ResultMethod.SUCCESS);
-	expect(row2[2]).toBe(CelluleType.PIECE);
-	expect(row2[3]).toBe(CelluleType.PIECE);
-	expect(row2[4]).toBe(CelluleType.PIECE);
-	expect(row3[2]).toBe(CelluleType.PIECE);
-	expect(row3[3]).toBe(CelluleType.PIECE);
-	expect(row3[4]).toBe(CelluleType.PIECE);
+	expect(result).toBe(MethodResult.SUCCESS);
+	expect(row2[2]).toBe(CellType.PIECE);
+	expect(row2[3]).toBe(CellType.PIECE);
+	expect(row2[4]).toBe(CellType.PIECE);
+	expect(row3[2]).toBe(CellType.PIECE);
+	expect(row3[3]).toBe(CellType.PIECE);
+	expect(row3[4]).toBe(CellType.PIECE);
 }
 
 function outOfBounds() {
@@ -94,16 +94,16 @@ function imbriquer() {
 	const piece3 = new Piece('Z', { x: 21, y: 3 });
 
 	// Act
-	expect(board.addPiece(piece1, piece1.position)).toBe(ResultMethod.SUCCESS);
+	expect(board.addPiece(piece1, piece1.position)).toBe(MethodResult.SUCCESS);
 	if (SHOW_LOGS) {
 		showBoard(board.board, 'ASCII');
 	}
-	expect(board.addPiece(piece2, piece2.position)).toBe(ResultMethod.SUCCESS);
+	expect(board.addPiece(piece2, piece2.position)).toBe(MethodResult.SUCCESS);
 	if (SHOW_LOGS) {
 		showBoard(board.board, 'ASCII');
 	}
 
-	expect(board.addPiece(piece3, piece3.position)).toBe(ResultMethod.SUCCESS);
+	expect(board.addPiece(piece3, piece3.position)).toBe(MethodResult.SUCCESS);
 	if (SHOW_LOGS) {
 		showBoard(board.board, 'ASCII');
 	}

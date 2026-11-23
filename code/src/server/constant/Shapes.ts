@@ -1,8 +1,8 @@
-import type { PieceShape, Rotations } from '../interface/I_Piece.js';
+import type { PieceShape, Rotations } from '../interface/IPiece.js';
 
 export const ALL_SHAPES: PieceShape[] = ['I', 'J', 'L', 'O', 'S', 'T', 'Z', '.'];
 
-export const Shapes: Record<PieceShape, Rotations> = {
+export const SHAPES: Record<PieceShape, Rotations> = {
 	I: [[[1, 1, 1, 1]], [[1], [1], [1], [1]], [[1, 1, 1, 1]], [[1], [1], [1], [1]]],
 	J: [
 		[
@@ -125,4 +125,4 @@ export const Shapes: Record<PieceShape, Rotations> = {
 	'.': [[[1]], [[1]], [[1]], [[1]]],
 };
 
-export const PieceOrientationAffichage = ['→', '↓', '←', '↑'] as const;
+export const ORIENTATION_SYMBOLS = ['→', '↓', '←', '↑'] as const;

@@ -1,15 +1,15 @@
 import { expect, it } from 'vitest';
 import { Piece } from '../../../../src/server/class/Piece.js';
-import { type I_Piece, type PieceData, type Position } from '../../../../src/server/interface/I_Piece.js';
+import { type IPiece, type PieceData, type Position } from '../../../../src/server/interface/IPiece.js';
 import { getRandomInt } from '../../../../src/server/utils/rng.js';
-import { ALL_SHAPES, PieceOrientationAffichage } from '../../../../src/server/constant/Shapes.js';
+import { ALL_SHAPES, ORIENTATION_SYMBOLS } from '../../../../src/server/constant/Shapes.js';
 
 function defaut({
 	shape,
 	position,
 	rotation,
 }: {
-	shape: I_Piece['shape'];
+	shape: IPiece['shape'];
 	position: Position;
 	rotation: 0 | 1 | 2 | 3;
 }) {
@@ -31,12 +31,12 @@ export function test_Constructeur(): void {
 
 	const randomPos: Position = { x: getRandomInt(-100, 100), y: getRandomInt(-100, 100) };
 
-	const allParams: { shape: I_Piece['shape']; position: Position; rotation: 0 | 1 | 2 | 3; initialArrow: string }[] =
+	const allParams: { shape: IPiece['shape']; position: Position; rotation: 0 | 1 | 2 | 3; initialArrow: string }[] =
 		ALL_SHAPES.map((shape) => ({
 			shape,
 			position: randomPos,
 			rotation: randomRotation,
-			initialArrow: PieceOrientationAffichage[randomRotation],
+			initialArrow: ORIENTATION_SYMBOLS[randomRotation],
 		}));
 
 	it.each(allParams)('Shape $shape en ($position.x, $position.y) — orientation de départ $initialArrow', defaut);

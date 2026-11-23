@@ -1,8 +1,8 @@
 import { expect, it } from 'vitest';
 import { Piece } from '../../../../src/server/class/Piece.js';
-import { type I_Piece, type PieceData, type Position } from '../../../../src/server/interface/I_Piece.js';
+import { type IPiece, type PieceData, type Position } from '../../../../src/server/interface/IPiece.js';
 import { getRandomInt } from '../../../../src/server/utils/rng.js';
-import { ALL_SHAPES, PieceOrientationAffichage } from '../../../../src/server/constant/Shapes.js';
+import { ALL_SHAPES, ORIENTATION_SYMBOLS } from '../../../../src/server/constant/Shapes.js';
 
 function defaut({
 	shape,
@@ -11,7 +11,7 @@ function defaut({
 	rotation,
 	resultat,
 }: {
-	shape: I_Piece['shape'];
+	shape: IPiece['shape'];
 	position: Position;
 	turnCount: number;
 	rotation: 0 | 1 | 2 | 3;
@@ -40,7 +40,7 @@ export function test_rotation(): void {
 	const resultat: 0 | 1 | 2 | 3 = ((randomRotation + turnCount) % 4) as 0 | 1 | 2 | 3;
 
 	const allParams: {
-		shape: I_Piece['shape'];
+		shape: IPiece['shape'];
 		position: Position;
 		turnCount: number;
 		rotation: 0 | 1 | 2 | 3;
@@ -52,9 +52,9 @@ export function test_rotation(): void {
 		position: randomPos,
 		turnCount,
 		rotation: randomRotation,
-		initialArrow: PieceOrientationAffichage[randomRotation],
+		initialArrow: ORIENTATION_SYMBOLS[randomRotation],
 		resultat,
-		resultArrow: PieceOrientationAffichage[resultat],
+		resultArrow: ORIENTATION_SYMBOLS[resultat],
 	}));
 	it.each(allParams)(
 		'Shape $shape — départ $initialArrow donc $rotation - tourne $turnCount fois → orientation $resultArrow donc $resultat',

@@ -2,7 +2,7 @@ import { describe, it, expect, vi, afterEach } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
 import { showBoard } from '../../../../src/server/utils/showBoard.js';
-import { ResultMethod } from '../../../../src/server/constant/Board.js';
+import { MethodResult } from '../../../../src/server/constant/Board.js';
 
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;
@@ -21,7 +21,7 @@ function validSpawn() {
 	const res = board.canSpawnPiece(piece);
 
 	// Assert
-	expect(res).toBe(ResultMethod.SUCCESS);
+	expect(res).toBe(MethodResult.SUCCESS);
 }
 
 function invalidSpawn() {
@@ -40,7 +40,7 @@ function invalidSpawn() {
 	const res = board.canSpawnPiece(piece);
 
 	// Assert
-	expect(res).toBe(ResultMethod.FAIL);
+	expect(res).toBe(MethodResult.FAIL);
 }
 
 function errorGetWidth() {
@@ -66,7 +66,7 @@ function errorGetWidth() {
 			const res = board.canSpawnPiece(piece);
 
 			// Assert
-			expect(res).toBe(ResultMethod.ERROR);
+			expect(res).toBe(MethodResult.ERROR);
 		});
 	});
 }

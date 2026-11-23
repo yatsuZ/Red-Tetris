@@ -1,18 +1,18 @@
 import { describe } from 'vitest';
 import { Board } from '../../src/server/class/Board.js';
 import { expect, it } from 'vitest';
-import { StateLine } from '../../src/server/constant/Board.js';
+import { LineState } from '../../src/server/constant/Board.js';
 import { allLinesAre, isBoardEmpty, isBoardFull } from '../../src/server/utils/boardState.js';
 import { Piece } from '../../src/server/class/Piece.js';
 
 function test_allLinesAre() {
 	const board = Board.create();
 	it('true', () => {
-		expect(allLinesAre(board, StateLine.EMPTY)).toBeTruthy();
+		expect(allLinesAre(board, LineState.EMPTY)).toBeTruthy();
 	});
 
 	it('false', () => {
-		expect(allLinesAre(board, StateLine.FULL)).toBeFalsy();
+		expect(allLinesAre(board, LineState.FULL)).toBeFalsy();
 	});
 }
 function test_isBoardEmpty() {

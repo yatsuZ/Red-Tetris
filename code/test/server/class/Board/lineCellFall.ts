@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
-import { CelluleType, ResultMethod, StateLine } from '../../../../src/server/constant/Board.js';
+import { CellType, MethodResult, LineState } from '../../../../src/server/constant/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
 import { showBoard } from '../../../../src/server/utils/showBoard.js';
 import { getRandomInt } from '../../../../src/server/utils/rng.js';
@@ -13,13 +13,13 @@ function test_lineCellFall_Empty_or_Full() {
 	// create
 	const board = Board.create();
 
-	expect(ResultMethod.FAIL).toBe(board.lineCellFall());
+	expect(MethodResult.FAIL).toBe(board.lineCellFall());
 
 	for (let i = 1; i < board.realHeight - 1; i++) {
 		board.addPiece(new Piece('.', { x: 0, y: 0 }), { x: i, y: 1 });
 	}
 	// if (SHOW_BOARD) showBoard(board.board, "ASCII");
-	expect(ResultMethod.FAIL).toBe(board.lineCellFall());
+	expect(MethodResult.FAIL).toBe(board.lineCellFall());
 }
 
 function basic_lineCellFall() {
@@ -27,7 +27,7 @@ function basic_lineCellFall() {
 	const board = Board.create();
 	const piece = new Piece('.', { x: 0, y: 0 });
 
-	expect(ResultMethod.FAIL).toBe(board.lineCellFall());
+	expect(MethodResult.FAIL).toBe(board.lineCellFall());
 	let loop = 0;
 	for (let i = 1; i < board.realHeight - 1; i = i + 2) {
 		loop++;
@@ -39,10 +39,10 @@ function basic_lineCellFall() {
 	while (loop) {
 		loop--;
 		const res = board.lineCellFall();
-		expect(ResultMethod.SUCCESS).toBe(res);
+		expect(MethodResult.SUCCESS).toBe(res);
 		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	}
-	expect(ResultMethod.FAIL).toBe(board.lineCellFall());
+	expect(MethodResult.FAIL).toBe(board.lineCellFall());
 }
 
 export function test_lineCellFall(): void {

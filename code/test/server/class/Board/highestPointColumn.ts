@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
-import { CelluleType, StateLine } from '../../../../src/server/constant/Board.js';
+import { CellType, LineState } from '../../../../src/server/constant/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
 import { showBoard } from '../../../../src/server/utils/showBoard.js';
 

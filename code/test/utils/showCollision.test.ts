@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { logCollisionMatrix } from '../../src/server/utils/showCollision.js';
-import { StatePieceCollision } from '../../src/server/constant/Board.js';
+import { CollisionState } from '../../src/server/constant/Board.js';
 
-const mini = [[StatePieceCollision.PIECE_COLLISION, StatePieceCollision.NO_COLLISION]];
+const mini = [[CollisionState.PIECE_COLLISION, CollisionState.NO_COLLISION]];
 
 describe('logCollisionMatrix', () => {
 	afterEach(() => {

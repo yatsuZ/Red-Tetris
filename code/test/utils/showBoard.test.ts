@@ -1,10 +1,10 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { showBoard } from '../../src/server/utils/showBoard.js';
-import { CelluleType } from '../../src/server/constant/Board.js';
+import { CellType } from '../../src/server/constant/Board.js';
 
 const mini = [
-	[CelluleType.WALL, CelluleType.PIECE],
-	[CelluleType.EMPTY, CelluleType.SPAWN],
+	[CellType.WALL, CellType.PIECE],
+	[CellType.EMPTY, CellType.SPAWN],
 ];
 
 describe('showBoard', () => {

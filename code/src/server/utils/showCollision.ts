@@ -1,20 +1,20 @@
-import { StatePieceCollision } from '../constant/Board.js';
+import { CollisionState } from '../constant/Board.js';
 
-const COLLISION_SYMBOL: Record<StatePieceCollision, string> = {
-	[StatePieceCollision.OUT_BOARD]: 'OUT',
-	[StatePieceCollision.NO_COLLISION]: ' . ',
-	[StatePieceCollision.PIECE_COLLISION]: 'PIE',
-	[StatePieceCollision.SIDE_COLLISION]: 'SID',
-	[StatePieceCollision.GROUND_COLLISION]: 'GRD',
+const COLLISION_SYMBOLS: Record<CollisionState, string> = {
+	[CollisionState.OUT_BOARD]: 'OUT',
+	[CollisionState.NO_COLLISION]: ' . ',
+	[CollisionState.PIECE_COLLISION]: 'PIE',
+	[CollisionState.SIDE_COLLISION]: 'SID',
+	[CollisionState.GROUND_COLLISION]: 'GRD',
 };
 
-export function logCollisionMatrix(matrix: StatePieceCollision[][], label?: string, enabled: true | false = true) {
+export function logCollisionMatrix(matrix: CollisionState[][], label?: string, enabled: true | false = true) {
 	if (!enabled) return;
 	if (label) console.log(label);
 	const sep = '+' + (matrix[0] ? matrix[0].map(() => '-----').join('+') : '') + '+';
 	console.log(sep);
 	for (const row of matrix) {
-		console.log('|' + row.map((cell) => ' ' + COLLISION_SYMBOL[cell] + ' ').join('|') + '|');
+		console.log('|' + row.map((cell) => ' ' + COLLISION_SYMBOLS[cell] + ' ').join('|') + '|');
 		console.log(sep);
 	}
 }

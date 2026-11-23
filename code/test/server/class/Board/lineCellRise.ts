@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
-import { CelluleType, ResultMethod, StateLine } from '../../../../src/server/constant/Board.js';
+import { CellType, MethodResult, LineState } from '../../../../src/server/constant/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
 import { showBoard } from '../../../../src/server/utils/showBoard.js';
 import { getRandomInt } from '../../../../src/server/utils/rng.js';
@@ -15,13 +15,13 @@ function filledWithlineCellRiseEmpty() {
 
 	for (let i = 0; i < board.realHeight; i++) {
 		const res = board.lineCellRise();
-		if (i >= board.realHeight - 2) expect(res).toBe(ResultMethod.FAIL);
+		if (i >= board.realHeight - 2) expect(res).toBe(MethodResult.FAIL);
 		else {
 			if (SHOW_BOARD) showBoard(board.board, 'ASCII');
-			expect(res).toBe(ResultMethod.SUCCESS);
+			expect(res).toBe(MethodResult.SUCCESS);
 		}
 	}
-	expect(allLinesAre(board, StateLine.PARTIAL)).toBe(true);
+	expect(allLinesAre(board, LineState.PARTIAL)).toBe(true);
 }
 
 function filledWithlineCellRise() {
@@ -33,13 +33,13 @@ function filledWithlineCellRise() {
 
 	for (let i = 0; i < board.realHeight; i++) {
 		const res = board.lineCellRise();
-		if (i >= board.realHeight - 4) expect(res).toBe(ResultMethod.FAIL);
+		if (i >= board.realHeight - 4) expect(res).toBe(MethodResult.FAIL);
 		else {
 			if (SHOW_BOARD) showBoard(board.board, 'ASCII');
-			expect(res).toBe(ResultMethod.SUCCESS);
+			expect(res).toBe(MethodResult.SUCCESS);
 		}
 	}
-	expect(allLinesAre(board, StateLine.PARTIAL)).toBe(true);
+	expect(allLinesAre(board, LineState.PARTIAL)).toBe(true);
 }
 
 function failFilledWithlineCellRise() {
@@ -49,7 +49,7 @@ function failFilledWithlineCellRise() {
 
 	board.addPiece(piece, { x: 1, y: 1 });
 	const res = board.lineCellRise();
-	expect(res).toBe(ResultMethod.FAIL);
+	expect(res).toBe(MethodResult.FAIL);
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 }
 

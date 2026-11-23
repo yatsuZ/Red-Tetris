@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
-import { CelluleType, ResultMethod, StateLine } from '../../../../src/server/constant/Board.js';
+import { CellType, MethodResult, LineState } from '../../../../src/server/constant/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
 import { showBoard } from '../../../../src/server/utils/showBoard.js';
 import { getRandomInt } from '../../../../src/server/utils/rng.js';
@@ -18,12 +18,12 @@ function filledWithPartialLines() {
 		const res = board.createPartialLine(i);
 
 		// Vérification
-		if (i <= 0 || i >= board.realHeight - 1) expect(res).toBe(ResultMethod.ERROR);
-		else expect(res).toBe(ResultMethod.SUCCESS);
+		if (i <= 0 || i >= board.realHeight - 1) expect(res).toBe(MethodResult.ERROR);
+		else expect(res).toBe(MethodResult.SUCCESS);
 	}
 
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
-	expect(allLinesAre(board, StateLine.PARTIAL)).toBe(true);
+	expect(allLinesAre(board, LineState.PARTIAL)).toBe(true);
 }
 
 function failCreatePartialLine() {
@@ -43,8 +43,8 @@ function failCreatePartialLine() {
 		// Act
 		const res = board.createPartialLine(i);
 		// Vérification
-		if (i <= 0 || i >= board.realHeight - 1) expect(res).toBe(ResultMethod.ERROR);
-		else expect(res).toBe(ResultMethod.FAIL);
+		if (i <= 0 || i >= board.realHeight - 1) expect(res).toBe(MethodResult.ERROR);
+		else expect(res).toBe(MethodResult.FAIL);
 	}
 
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
@@ -59,18 +59,18 @@ function filledWithPartialLinesChosen() {
 		// Act
 		const res = board.createPartialLine(i, indexEmptyColumn);
 		// Vérification
-		if (i <= 0 || i >= board.realHeight - 1) expect(res).toBe(ResultMethod.ERROR);
+		if (i <= 0 || i >= board.realHeight - 1) expect(res).toBe(MethodResult.ERROR);
 		else {
-			expect(res).toBe(ResultMethod.SUCCESS);
+			expect(res).toBe(MethodResult.SUCCESS);
 			for (let j = 1; j < board.realWidth - 1; j++) {
 				// Vérification
-				if (indexEmptyColumn === j) expect((board.board[i] as CelluleType[])[j]).toBe(CelluleType.EMPTY);
-				else expect((board.board[i] as CelluleType[])[j]).toBe(CelluleType.PIECE);
+				if (indexEmptyColumn === j) expect((board.board[i] as CellType[])[j]).toBe(CellType.EMPTY);
+				else expect((board.board[i] as CellType[])[j]).toBe(CellType.PIECE);
 			}
 		}
 	}
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
-	expect(allLinesAre(board, StateLine.PARTIAL)).toBe(true);
+	expect(allLinesAre(board, LineState.PARTIAL)).toBe(true);
 }
 
 function failCreatePartialLineChosen() {
@@ -82,7 +82,7 @@ function failCreatePartialLineChosen() {
 		// Act
 		const res = board.createPartialLine(i, indexEmptyColumn);
 		// Vérification
-		expect(res).toBe(ResultMethod.ERROR);
+		expect(res).toBe(MethodResult.ERROR);
 	}
 
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');

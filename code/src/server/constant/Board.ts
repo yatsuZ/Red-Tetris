@@ -1,6 +1,6 @@
-import type { Matrix } from '../interface/I_Piece.js';
+import type { Matrix } from '../interface/IPiece.js';
 
-export enum ErrorInitMsgBoard {
+export enum BoardInitError {
 	DEFAULT = 'Invalid input for Board.create. ',
 	HEIGHT_LOW = 'Cause: height too low.',
 	HEIGHT_HIGH = 'Cause: height too high.',
@@ -13,20 +13,20 @@ export const DEFAULT_HEIGHT_BOARD: number = 20;
 export const DEFAULT_WIDTH_BOARD: number = 10;
 
 // Enums
-export enum ResultMethod {
+export enum MethodResult {
 	ERROR = -1,
 	SUCCESS = 0,
 	FAIL = 1,
 }
 
-export enum CelluleType {
+export enum CellType {
 	EMPTY = 0,
 	PIECE = 1,
 	WALL = 2,
 	SPAWN = 3,
 }
 
-export enum StatePieceCollision {
+export enum CollisionState {
 	OUT_BOARD = -1,
 	NO_COLLISION = 0,
 	PIECE_COLLISION = 1,
@@ -34,7 +34,7 @@ export enum StatePieceCollision {
 	GROUND_COLLISION = 3,
 }
 
-export enum StateLine {
+export enum LineState {
 	ERROR = -1,
 	EMPTY = 0,
 	PARTIAL = 1,
@@ -42,21 +42,21 @@ export enum StateLine {
 }
 // Tableaux
 
-// Symboles d'affichage associés à chaque valeur de CelluleType (dans l'ordre de l'enum)
-export const CELLULE_SYMBOLS: Record<CelluleType, string> = {
-	[CelluleType.EMPTY]: ' ',
-	[CelluleType.PIECE]: 'O',
-	[CelluleType.WALL]: '|',
-	[CelluleType.SPAWN]: 'X',
+// Symboles d'affichage associés à chaque valeur de CellType (dans l'ordre de l'enum)
+export const CELL_SYMBOLS: Record<CellType, string> = {
+	[CellType.EMPTY]: ' ',
+	[CellType.PIECE]: 'O',
+	[CellType.WALL]: '|',
+	[CellType.SPAWN]: 'X',
 };
-export const CELLULE_EMOJI: Record<CelluleType, string> = {
-	[CelluleType.EMPTY]: '⬜',
-	[CelluleType.PIECE]: '⬛',
-	[CelluleType.WALL]: '🧱',
-	[CelluleType.SPAWN]: '❌',
+export const CELL_EMOJI: Record<CellType, string> = {
+	[CellType.EMPTY]: '⬜',
+	[CellType.PIECE]: '⬛',
+	[CellType.WALL]: '🧱',
+	[CellType.SPAWN]: '❌',
 };
 // Grille par défaut : 10 colonnes jouables, murs (2) sur les bords, le plafond et le sol
-export const EXEMPLE_DEFAULT_BOARD_MATRIX: Matrix = [
+export const EXAMPLE_BOARD_MATRIX: Matrix = [
 	[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], //  -3
 	[2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2], //  -2
 	[2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2], //  -1

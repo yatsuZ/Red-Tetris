@@ -14,7 +14,7 @@ export type PieceData = {
 	position: Position;
 };
 
-export interface I_Piece extends PieceData {
+export interface IPiece extends PieceData {
 	// =====================================================
 	// Création / accès
 	// =====================================================
@@ -22,7 +22,7 @@ export interface I_Piece extends PieceData {
 	get(): PieceData;
 	getWidth(): number;
 	getHeight(): number;
-	clone(): I_Piece;
+	clone(): IPiece;
 	getMatrix(): MatrixBin;
 
 	// =====================================================

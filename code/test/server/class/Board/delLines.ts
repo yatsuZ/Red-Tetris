@@ -1,7 +1,7 @@
 import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
-import { CelluleType, ResultMethod } from '../../../../src/server/constant/Board.js';
+import { CellType, MethodResult } from '../../../../src/server/constant/Board.js';
 import { showBoard } from '../../../../src/server/utils/showBoard.js';
 
 const SHOW_LOGS = false;
@@ -34,19 +34,19 @@ function delLines_valide() {
 		console.log(`=== APRES delLines(${indexLines}) ===`);
 		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 		results.forEach(({ indexLine, res }) => {
-			console.log(`delLine(${indexLine}) = ${res} (attendu: ${ResultMethod.SUCCESS})`);
+			console.log(`delLine(${indexLine}) = ${res} (attendu: ${MethodResult.SUCCESS})`);
 		});
 	}
 
 	// Assert — chaque ligne retourne SUCCESS et est videe
 	results.forEach(({ indexLine, res }) => {
-		expect(res).toBe(ResultMethod.SUCCESS);
+		expect(res).toBe(MethodResult.SUCCESS);
 		const row = board.board[indexLine]!;
-		expect(row[4]).toBe(CelluleType.EMPTY);
-		expect(row[5]).toBe(CelluleType.EMPTY);
+		expect(row[4]).toBe(CellType.EMPTY);
+		expect(row[5]).toBe(CellType.EMPTY);
 		// murs preserves
-		expect(row[0]).toBe(CelluleType.WALL);
-		expect(row[board.realWidth - 1]).toBe(CelluleType.WALL);
+		expect(row[0]).toBe(CellType.WALL);
+		expect(row[board.realWidth - 1]).toBe(CellType.WALL);
 	});
 }
 
@@ -64,13 +64,13 @@ function delLines_invalide() {
 
 	if (SHOW_LOGS) {
 		results.forEach(({ indexLine, res }) => {
-			console.log(`delLine(${indexLine}) = ${res} (attendu: ${ResultMethod.ERROR})`);
+			console.log(`delLine(${indexLine}) = ${res} (attendu: ${MethodResult.ERROR})`);
 		});
 	}
 
 	// Assert
 	results.forEach(({ indexLine: _, res }) => {
-		expect(res).toBe(ResultMethod.ERROR);
+		expect(res).toBe(MethodResult.ERROR);
 	});
 }
 
@@ -97,9 +97,9 @@ function delLines_mixte() {
 	}
 
 	// Assert
-	expect(results[0]?.res).toBe(ResultMethod.ERROR); // index 0  -> ERROR
-	expect(results[1]?.res).toBe(ResultMethod.SUCCESS); // index 6  -> SUCCESS
-	expect(results[2]?.res).toBe(ResultMethod.ERROR); // index 23 -> ERROR
+	expect(results[0]?.res).toBe(MethodResult.ERROR); // index 0  -> ERROR
+	expect(results[1]?.res).toBe(MethodResult.SUCCESS); // index 6  -> SUCCESS
+	expect(results[2]?.res).toBe(MethodResult.ERROR); // index 23 -> ERROR
 }
 
 export function test_delLines(): void {

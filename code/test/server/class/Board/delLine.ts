@@ -1,7 +1,7 @@
 import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
-import { CelluleType, ResultMethod } from '../../../../src/server/constant/Board.js';
+import { CellType, MethodResult } from '../../../../src/server/constant/Board.js';
 import { showBoard } from '../../../../src/server/utils/showBoard.js';
 
 const SHOW_LOGS = false;
@@ -19,13 +19,13 @@ function delLine_valide() {
 	if (SHOW_LOGS) console.log(`=== AVANT delLine(${indexLine}) ===`);
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	if (SHOW_LOGS) {
-		console.log(`board[${indexLine}][4] = ${board.board[indexLine]?.[4]} (attendu: ${CelluleType.PIECE})`);
-		console.log(`board[${indexLine}][5] = ${board.board[indexLine]?.[5]} (attendu: ${CelluleType.PIECE})`);
+		console.log(`board[${indexLine}][4] = ${board.board[indexLine]?.[4]} (attendu: ${CellType.PIECE})`);
+		console.log(`board[${indexLine}][5] = ${board.board[indexLine]?.[5]} (attendu: ${CellType.PIECE})`);
 	}
 
 	const rowBefore = board.board[indexLine]!;
-	expect(rowBefore[4]).toBe(CelluleType.PIECE);
-	expect(rowBefore[5]).toBe(CelluleType.PIECE);
+	expect(rowBefore[4]).toBe(CellType.PIECE);
+	expect(rowBefore[5]).toBe(CellType.PIECE);
 
 	// Act
 	const res = board.delLine(indexLine);
@@ -33,20 +33,20 @@ function delLine_valide() {
 	if (SHOW_LOGS) console.log(`=== APRES delLine(${indexLine}) ===`);
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	if (SHOW_LOGS) {
-		console.log(`res = ${res} (attendu: ${ResultMethod.SUCCESS})`);
-		console.log(`board[${indexLine}][4] = ${board.board[indexLine]?.[4]} (attendu: ${CelluleType.EMPTY})`);
-		console.log(`board[${indexLine}][5] = ${board.board[indexLine]?.[5]} (attendu: ${CelluleType.EMPTY})`);
+		console.log(`res = ${res} (attendu: ${MethodResult.SUCCESS})`);
+		console.log(`board[${indexLine}][4] = ${board.board[indexLine]?.[4]} (attendu: ${CellType.EMPTY})`);
+		console.log(`board[${indexLine}][5] = ${board.board[indexLine]?.[5]} (attendu: ${CellType.EMPTY})`);
 	}
 
 	// Assert
 	const rowAfter = board.board[indexLine]!;
-	expect(res).toBe(ResultMethod.SUCCESS);
+	expect(res).toBe(MethodResult.SUCCESS);
 	// cellules interieures videes
-	expect(rowAfter[4]).toBe(CelluleType.EMPTY);
-	expect(rowAfter[5]).toBe(CelluleType.EMPTY);
+	expect(rowAfter[4]).toBe(CellType.EMPTY);
+	expect(rowAfter[5]).toBe(CellType.EMPTY);
 	// murs preserves
-	expect(rowAfter[0]).toBe(CelluleType.WALL);
-	expect(rowAfter[board.realWidth - 1]).toBe(CelluleType.WALL);
+	expect(rowAfter[0]).toBe(CellType.WALL);
+	expect(rowAfter[board.realWidth - 1]).toBe(CellType.WALL);
 }
 
 function delLine_invalide() {
@@ -68,15 +68,15 @@ function delLine_invalide() {
 	const res_MIN_WithOutVerif = board.delLine(-1, false);
 
 	if (SHOW_LOGS) {
-		console.log(`res_MAX = ${res_MAX} (attendu: ${ResultMethod.ERROR})`);
-		console.log(`res_MIN = ${res_MIN} (attendu: ${ResultMethod.ERROR})`);
+		console.log(`res_MAX = ${res_MAX} (attendu: ${MethodResult.ERROR})`);
+		console.log(`res_MIN = ${res_MIN} (attendu: ${MethodResult.ERROR})`);
 	}
 
 	// Assert
-	expect(res_MAX).toBe(ResultMethod.ERROR);
-	expect(res_MIN).toBe(ResultMethod.ERROR);
-	expect(res_MAX_WithOutVerif).toBe(ResultMethod.ERROR);
-	expect(res_MIN_WithOutVerif).toBe(ResultMethod.ERROR);
+	expect(res_MAX).toBe(MethodResult.ERROR);
+	expect(res_MIN).toBe(MethodResult.ERROR);
+	expect(res_MAX_WithOutVerif).toBe(MethodResult.ERROR);
+	expect(res_MIN_WithOutVerif).toBe(MethodResult.ERROR);
 }
 
 export function test_delLine(): void {

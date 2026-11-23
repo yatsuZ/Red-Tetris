@@ -1,7 +1,7 @@
 import { expect, it } from 'vitest';
 import { getRandomInt } from '../../../../src/server/utils/rng.js';
 import { Board } from '../../../../src/server/class/Board.js';
-import { CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD } from '../../../../src/server/constant/Board.js';
+import { CellType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD } from '../../../../src/server/constant/Board.js';
 
 function sameData() {
 	// Arrange
@@ -26,9 +26,9 @@ function matrixIsolation() {
 	const original = Board.create();
 	const clone = original.clone();
 	// Act — modifier une cellule intérieure (vide) du clone
-	clone.board[1]![1] = CelluleType.WALL;
+	clone.board[1]![1] = CellType.WALL;
 	// Assert — l'original ne doit pas être affecté
-	expect(original.board[1]![1]).toBe(CelluleType.EMPTY);
+	expect(original.board[1]![1]).toBe(CellType.EMPTY);
 }
 
 function cloneCustomSize(w: number, h: number) {

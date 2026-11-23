@@ -1,9 +1,9 @@
 import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
-import { ResultMethod, StatePieceCollision } from '../../../../src/server/constant/Board.js';
+import { MethodResult, CollisionState } from '../../../../src/server/constant/Board.js';
 import { showBoard } from '../../../../src/server/utils/showBoard.js';
-import type { Position } from '../../../../src/server/interface/I_Piece.js';
+import type { Position } from '../../../../src/server/interface/IPiece.js';
 import { logCollisionMatrix } from '../../../../src/server/utils/showCollision.js';
 
 const SHOW_LOGS = false;
@@ -27,10 +27,10 @@ function validPosition() {
 	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert
-	expect(res).toBe(ResultMethod.SUCCESS);
+	expect(res).toBe(MethodResult.SUCCESS);
 	expect(matrix).toEqual([
-		[StatePieceCollision.NO_COLLISION, StatePieceCollision.NO_COLLISION],
-		[StatePieceCollision.NO_COLLISION, StatePieceCollision.NO_COLLISION],
+		[CollisionState.NO_COLLISION, CollisionState.NO_COLLISION],
+		[CollisionState.NO_COLLISION, CollisionState.NO_COLLISION],
 	]);
 }
 
@@ -50,10 +50,10 @@ function outOfBounds() {
 	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert
-	expect(res).toBe(ResultMethod.ERROR);
+	expect(res).toBe(MethodResult.ERROR);
 	expect(matrix).toEqual([
-		[StatePieceCollision.OUT_BOARD, StatePieceCollision.OUT_BOARD],
-		[StatePieceCollision.OUT_BOARD, StatePieceCollision.OUT_BOARD],
+		[CollisionState.OUT_BOARD, CollisionState.OUT_BOARD],
+		[CollisionState.OUT_BOARD, CollisionState.OUT_BOARD],
 	]);
 }
 
@@ -73,10 +73,10 @@ function sideWallCollision() {
 	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert — col 0 = SIDE, col 1 = NO_COLLISION
-	expect(res).toBe(ResultMethod.FAIL);
+	expect(res).toBe(MethodResult.FAIL);
 	expect(matrix).toEqual([
-		[StatePieceCollision.SIDE_COLLISION, StatePieceCollision.NO_COLLISION],
-		[StatePieceCollision.SIDE_COLLISION, StatePieceCollision.NO_COLLISION],
+		[CollisionState.SIDE_COLLISION, CollisionState.NO_COLLISION],
+		[CollisionState.SIDE_COLLISION, CollisionState.NO_COLLISION],
 	]);
 }
 
@@ -96,10 +96,10 @@ function groundCollision() {
 	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert — ligne 22 = NO_COLLISION, ligne 23 = sol
-	expect(res).toBe(ResultMethod.FAIL);
+	expect(res).toBe(MethodResult.FAIL);
 	expect(matrix).toEqual([
-		[StatePieceCollision.NO_COLLISION, StatePieceCollision.NO_COLLISION],
-		[StatePieceCollision.GROUND_COLLISION, StatePieceCollision.GROUND_COLLISION],
+		[CollisionState.NO_COLLISION, CollisionState.NO_COLLISION],
+		[CollisionState.GROUND_COLLISION, CollisionState.GROUND_COLLISION],
 	]);
 }
 
@@ -120,10 +120,10 @@ function existingPieceCollision() {
 	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert
-	expect(res).toBe(ResultMethod.FAIL);
+	expect(res).toBe(MethodResult.FAIL);
 	expect(matrix).toEqual([
-		[StatePieceCollision.PIECE_COLLISION, StatePieceCollision.PIECE_COLLISION],
-		[StatePieceCollision.PIECE_COLLISION, StatePieceCollision.PIECE_COLLISION],
+		[CollisionState.PIECE_COLLISION, CollisionState.PIECE_COLLISION],
+		[CollisionState.PIECE_COLLISION, CollisionState.PIECE_COLLISION],
 	]);
 }
 
@@ -135,19 +135,19 @@ function imbriquer() {
 	const piece3 = new Piece('Z', { x: 21, y: 3 });
 
 	// Act
-	expect(board.canAddPiece(piece1, piece1.position).res).toBe(ResultMethod.SUCCESS);
-	expect(board.addPiece(piece1, piece1.position)).toBe(ResultMethod.SUCCESS);
+	expect(board.canAddPiece(piece1, piece1.position).res).toBe(MethodResult.SUCCESS);
+	expect(board.addPiece(piece1, piece1.position)).toBe(MethodResult.SUCCESS);
 	if (SHOW_LOGS) {
 		showBoard(board.board, 'ASCII');
 	}
-	expect(board.canAddPiece(piece2, piece2.position).res).toBe(ResultMethod.SUCCESS);
-	expect(board.addPiece(piece2, piece2.position)).toBe(ResultMethod.SUCCESS);
+	expect(board.canAddPiece(piece2, piece2.position).res).toBe(MethodResult.SUCCESS);
+	expect(board.addPiece(piece2, piece2.position)).toBe(MethodResult.SUCCESS);
 	if (SHOW_LOGS) {
 		showBoard(board.board, 'ASCII');
 	}
 
-	expect(board.canAddPiece(piece3, piece3.position).res).toBe(ResultMethod.SUCCESS);
-	expect(board.addPiece(piece3, piece3.position)).toBe(ResultMethod.SUCCESS);
+	expect(board.canAddPiece(piece3, piece3.position).res).toBe(MethodResult.SUCCESS);
+	expect(board.addPiece(piece3, piece3.position)).toBe(MethodResult.SUCCESS);
 	if (SHOW_LOGS) {
 		showBoard(board.board, 'ASCII');
 	}

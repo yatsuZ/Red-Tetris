@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
-import { StateLine } from '../../../../src/server/constant/Board.js';
+import { LineState } from '../../../../src/server/constant/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
 import { showBoard } from '../../../../src/server/utils/showBoard.js';
 
@@ -17,7 +17,7 @@ function stateLine_error() {
 	const results = board.stateLine(-1);
 
 	// Assert
-	expect(results).toBe(StateLine.ERROR);
+	expect(results).toBe(LineState.ERROR);
 }
 
 function stateLine_empty() {
@@ -28,7 +28,7 @@ function stateLine_empty() {
 	const results = board.stateLine(LINE_SELECT);
 
 	// Assert
-	expect(results).toBe(StateLine.EMPTY);
+	expect(results).toBe(LineState.EMPTY);
 }
 
 // la dernier colonne est vide
@@ -50,7 +50,7 @@ function stateLine_partial() {
 
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	// Assert
-	expect(results).toBe(StateLine.PARTIAL);
+	expect(results).toBe(LineState.PARTIAL);
 }
 
 function stateLine_full() {
@@ -69,12 +69,12 @@ function stateLine_full() {
 
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	// Assert
-	expect(results).toBe(StateLine.FULL);
+	expect(results).toBe(LineState.FULL);
 }
 
 export function test_stateLine(): void {
-	it('StateLine ERROR   : Error ligne non existante', stateLine_error);
-	it('StateLine EMPTY   : La ligne est vide', stateLine_empty);
-	it('StateLine PARTIAL : La ligne est partiellement remplie', stateLine_partial);
-	it('StateLine FULL    : La ligne est remplie', stateLine_full);
+	it('LineState ERROR   : Error ligne non existante', stateLine_error);
+	it('LineState EMPTY   : La ligne est vide', stateLine_empty);
+	it('LineState PARTIAL : La ligne est partiellement remplie', stateLine_partial);
+	it('LineState FULL    : La ligne est remplie', stateLine_full);
 }

@@ -1,6 +1,6 @@
 import { Piece } from '../../../../src/server/class/Piece.js';
-import { ALL_SHAPES, PieceOrientationAffichage } from '../../../../src/server/constant/Shapes.js';
-import type { I_Piece, Position } from '../../../../src/server/interface/I_Piece.js';
+import { ALL_SHAPES, ORIENTATION_SYMBOLS } from '../../../../src/server/constant/Shapes.js';
+import type { IPiece, Position } from '../../../../src/server/interface/IPiece.js';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 
 function errorGetWidth() {
@@ -26,7 +26,7 @@ function defaut({
 	ref_Height,
 	ref_Width,
 }: {
-	shape: I_Piece['shape'];
+	shape: IPiece['shape'];
 	orientation: 0 | 1 | 2 | 3;
 	ref_Height: number;
 	ref_Width: number;
@@ -59,7 +59,7 @@ export function test_getWidthHeight(): void {
 			return {
 				shape,
 				orientation,
-				arrow: PieceOrientationAffichage[orientation],
+				arrow: ORIENTATION_SYMBOLS[orientation],
 				ref_Height: cible.h,
 				ref_Width: cible.w,
 			};

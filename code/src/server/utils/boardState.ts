@@ -1,19 +1,19 @@
 import type { Board } from '../class/Board.js';
-import { StateLine } from '../constant/Board.js';
+import { LineState } from '../constant/Board.js';
 
-export function allLinesAre(board: Board, state: StateLine): boolean {
+export function allLinesAre(board: Board, state: LineState): boolean {
 	const linesToCheck = Array.from({ length: board.realHeight - 3 }, (_, i) => i + 1);
 	const states = board.stateLines(linesToCheck);
 	return states.every((element) => element.state === state);
 }
 
 export function isBoardEmpty(board: Board): boolean {
-	return allLinesAre(board, StateLine.EMPTY);
+	return allLinesAre(board, LineState.EMPTY);
 }
 
 // Plein si aucune ligne n'est vide (lignes pleines ou partielles)
 export function isBoardFull(board: Board): boolean {
 	const linesToCheck = Array.from({ length: board.realHeight - 3 }, (_, i) => i + 1);
 	const states = board.stateLines(linesToCheck);
-	return states.every((element) => element.state === StateLine.FULL || element.state === StateLine.PARTIAL);
+	return states.every((element) => element.state === LineState.FULL || element.state === LineState.PARTIAL);
 }

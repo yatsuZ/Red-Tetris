@@ -1,20 +1,20 @@
-import type { I_Piece, MatrixBin, PieceData, Position } from '../interface/I_Piece.js';
-import { Shapes } from '../constant/Shapes.js';
+import type { IPiece, MatrixBin, PieceData, Position } from '../interface/IPiece.js';
+import { SHAPES } from '../constant/Shapes.js';
 
-export class Piece implements I_Piece {
+export class Piece implements IPiece {
 	// =====================================================
 	// Attributs
 	// =====================================================
 
-	readonly shape: I_Piece['shape'];
-	orientation: I_Piece['orientation'];
+	readonly shape: IPiece['shape'];
+	orientation: IPiece['orientation'];
 	position: Position;
 
 	// =====================================================
 	// Création / accès
 	// =====================================================
 
-	constructor(shape: I_Piece['shape'], position: Position, orientation: 0 | 1 | 2 | 3 = 0) {
+	constructor(shape: IPiece['shape'], position: Position, orientation: 0 | 1 | 2 | 3 = 0) {
 		this.shape = shape;
 		this.orientation = orientation;
 		this.position = { ...position };
@@ -43,7 +43,7 @@ export class Piece implements I_Piece {
 	}
 
 	getMatrix(): MatrixBin {
-		return Shapes[this.shape][this.orientation];
+		return SHAPES[this.shape][this.orientation];
 	}
 
 	// =====================================================
