@@ -1,5 +1,5 @@
-import { CELL_EMOJI, CELL_SYMBOLS } from '../constant/Board.js';
-import type { CellMatrix } from '../interface/IBoard.js';
+import { CELL_EMOJI, CELL_SYMBOLS } from '../constants/board.js';
+import type { CellMatrix } from '../types/IBoard.js';
 
 export function showBoard(board: CellMatrix, type: 'EMOJI' | 'ASCII' = 'EMOJI') {
 	board.forEach((element, i) => {

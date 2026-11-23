@@ -6,12 +6,12 @@ Logique serveur de Red-Tetris, dans `code/src/server/` :
 
 | Fichier                                        | Contenu                                                                                            |
 | ---------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `class/Piece.ts`                               | Classe `Piece`                                                                                     |
-| `class/Board.ts`                               | Classe `Board` (terrain)                                                                           |
-| `interface/IPiece.ts`                          | `IPiece`, `PieceData`, `PieceShape`, `Matrix`, `MatrixBin`, `Rotations`, `Position`                |
-| `interface/IBoard.ts`                          | `IBoard`, `BoardData`, `CellMatrix`                                                                |
-| `constant/Shapes.ts`                           | `SHAPES` (7 formes + `.`, 4 rotations chacune), `ALL_SHAPES`, `ORIENTATION_SYMBOLS`                |
-| `constant/Board.ts`                            | `CellType`, `LineState`, `CollisionState`, `MethodResult`, `BoardInitError`, dimensions par défaut |
+| `models/Piece.ts`                              | Classe `Piece`                                                                                     |
+| `models/Board.ts`                              | Classe `Board` (terrain)                                                                           |
+| `types/IPiece.ts`                              | `IPiece`, `PieceData`, `PieceShape`, `Matrix`, `MatrixBin`, `Rotations`, `Position`                |
+| `types/IBoard.ts`                              | `IBoard`, `BoardData`, `CellMatrix`                                                                |
+| `constants/shapes.ts`                          | `SHAPES` (7 formes + `.`, 4 rotations chacune), `ALL_SHAPES`, `ORIENTATION_SYMBOLS`                |
+| `constants/board.ts`                           | `CellType`, `LineState`, `CollisionState`, `MethodResult`, `BoardInitError`, dimensions par défaut |
 | `utils/boardState.ts`                          | `allLinesAre`, `isBoardEmpty`, `isBoardFull`                                                       |
 | `utils/showBoard.ts`, `utils/showCollision.ts` | Affichage debug en console                                                                         |
 
@@ -28,7 +28,7 @@ Tests dans `code/test/`, couverture à 100 %.
 - **Board avec bordures** : `realHeight = height + 4` (zone tampon au-dessus), `realWidth = width + 2` (murs). Défaut 20 × 10.
 - **Board créé via `Board.create(height, width)`** (constructeur privé), ou `Board.fromData(data)` pour reconstruire / cloner.
 - **Les méthodes renvoient un `MethodResult`** (`SUCCESS`, `FAIL`, `ERROR`) plutôt que de lever des erreurs, sauf `Board.create` et `addPiece` hors grille.
-- **Plan : faire une version CLI** (`src/CLI/`) avant la version web pour valider la logique de jeu indépendamment du rendu.
+- **Plan : faire une version CLI** (`src/cli/`) avant la version web pour valider la logique de jeu indépendamment du rendu.
 
 ---
 
@@ -51,5 +51,5 @@ Tests dans `code/test/`, couverture à 100 %.
 ## Ce qu'il reste à faire
 
 1. **Déplacements de la pièce** (`shift` gauche / droite, `fall`, rotation sûre) : ils ont besoin du Board pour éviter les sorties de terrain et les collisions. À placer côté Board ou dans une future classe `Game`, en testant sur un clone avant d'appliquer.
-2. **Version CLI jouable** dans `src/CLI/`.
+2. **Version CLI jouable** dans `src/cli/`.
 3. Classes `Game`, `Player` et service `GameManager` (fichiers vides pour l'instant).

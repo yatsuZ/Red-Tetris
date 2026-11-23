@@ -1,4 +1,4 @@
-import { CollisionState } from '../constant/Board.js';
+import { CollisionState } from '../constants/board.js';
 
 const COLLISION_SYMBOLS: Record<CollisionState, string> = {
 	[CollisionState.OUT_BOARD]: 'OUT',

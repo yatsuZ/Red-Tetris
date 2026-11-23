@@ -1,0 +1,32 @@
+import { describe } from 'vitest';
+import { testConstructeur } from './Board/constructor.js';
+import { testClone } from './Board/clone.js';
+import { testAddPiece } from './Board/addPiece.js';
+import { testCanAddPiece } from './Board/canAddPiece.js';
+import { testCanSpawnPiece } from './Board/canSpawnPiece.js';
+import { testClearLine } from './Board/clearLine.js';
+import { testClearLines } from './Board/clearLines.js';
+import { testStateLine } from './Board/stateLine.js';
+import { testStateLines } from './Board/stateLines.js';
+import { testCreatePartialLine } from './Board/createPartialLine.js';
+import { testLineCellRise } from './Board/lineCellRise.js';
+import { testHighestPointColumn } from './Board/highestPointColumn.js';
+import { testHighestPointsColumns } from './Board/highestPointsColumns.js';
+import { testLineCellFall } from './Board/lineCellFall.js';
+
+describe('Board', () => {
+	describe('constructor', testConstructeur);
+	describe('clone', testClone);
+	describe('addPiece', testAddPiece);
+	describe('canAddPiece', testCanAddPiece);
+	describe('canSpawnPiece', testCanSpawnPiece);
+	describe('clearLine', testClearLine);
+	describe('clearLines', testClearLines);
+	describe('stateLine', testStateLine);
+	describe('stateLines', testStateLines);
+	describe('createPartialLine', testCreatePartialLine);
+	describe('lineCellRise', testLineCellRise);
+	describe('highestPointColumn', testHighestPointColumn);
+	describe('highestPointsColumns', testHighestPointsColumns);
+	describe('lineCellFall', testLineCellFall);
+});

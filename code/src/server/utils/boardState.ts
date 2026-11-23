@@ -1,5 +1,5 @@
-import type { Board } from '../class/Board.js';
-import { LineState } from '../constant/Board.js';
+import type { Board } from '../models/Board.js';
+import { LineState } from '../constants/board.js';
 
 export function allLinesAre(board: Board, state: LineState): boolean {
 	const linesToCheck = Array.from({ length: board.realHeight - 3 }, (_, i) => i + 1);
