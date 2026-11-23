@@ -42,7 +42,7 @@ function test_all_Log() {
 
 describe('logger', () => {
 	it('are we in prod ?  ', () => {
-		if (process.env.NODE_ENV !== 'production') expect(showLog()).toBeTruthy();
+		if (process.env.NODE_ENV === 'dev') expect(showLog()).toBeTruthy();
 		else expect(showLog()).toBeFalsy();
 	});
 	describe('test All Logger (dev)', test_all_Log);

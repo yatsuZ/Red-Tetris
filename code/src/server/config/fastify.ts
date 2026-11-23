@@ -3,9 +3,16 @@ import Fastify, { type FastifyInstance } from 'fastify';
 import { setupRoutes } from '../routes/index.js';
 import { Server } from 'socket.io';
 
-export async function buildFastify(): Promise<FastifyInstance> {
+export async function buildFastify(log: boolean = showLog()): Promise<FastifyInstance> {
+	const prettyLogger = {
+		transport: {
+			target: 'pino-pretty',
+			options: { translateTime: 'HH:MM:ss', ignore: 'pid,hostname' },
+		},
+	};
+
 	const fastify = Fastify({
-		logger: showLog(),
+		logger: log ? prettyLogger : false,
 	});
 
 	const chemin_client_requet_socket: string = process.env.CORS_ORIGIN + ':' + process.env.CORS_PORT;

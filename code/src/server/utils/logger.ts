@@ -42,5 +42,5 @@ export const Logger = {
 };
 
 export function showLog() {
-	return process.env.NODE_ENV !== 'production';
+	return process.env.NODE_ENV === 'dev';
 }
