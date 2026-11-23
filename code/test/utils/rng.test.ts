@@ -9,12 +9,12 @@ it('getRandomInt', () => {
 		expect(Number.isInteger(n)).toBe(true);
 	}
 	vi.spyOn(Math, 'random').mockReturnValue(0);
-	const min_res = getRandomInt(0, 10);
-	expect(min_res).toBe(0); // min
+	const minRes = getRandomInt(0, 10);
+	expect(minRes).toBe(0); // min
 
 	vi.spyOn(Math, 'random').mockReturnValue(0.9999);
-	const max_res = getRandomInt(0, 10);
-	expect(max_res).toBe(10); // max
+	const maxRes = getRandomInt(0, 10);
+	expect(maxRes).toBe(10); // max
 
 	vi.restoreAllMocks();
 });

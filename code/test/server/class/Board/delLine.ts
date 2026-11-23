@@ -23,9 +23,9 @@ function delLine_valide() {
 		console.log(`board[${indexLine}][5] = ${board.board[indexLine]?.[5]} (attendu: ${CelluleType.PIECE})`);
 	}
 
-	const row_avant = board.board[indexLine]!;
-	expect(row_avant[4]).toBe(CelluleType.PIECE);
-	expect(row_avant[5]).toBe(CelluleType.PIECE);
+	const rowBefore = board.board[indexLine]!;
+	expect(rowBefore[4]).toBe(CelluleType.PIECE);
+	expect(rowBefore[5]).toBe(CelluleType.PIECE);
 
 	// Act
 	const res = board.delLine(indexLine);
@@ -39,31 +39,31 @@ function delLine_valide() {
 	}
 
 	// Assert
-	const row_apres = board.board[indexLine]!;
+	const rowAfter = board.board[indexLine]!;
 	expect(res).toBe(ResultMethod.SUCCESS);
 	// cellules interieures videes
-	expect(row_apres[4]).toBe(CelluleType.EMPTY);
-	expect(row_apres[5]).toBe(CelluleType.EMPTY);
+	expect(rowAfter[4]).toBe(CelluleType.EMPTY);
+	expect(rowAfter[5]).toBe(CelluleType.EMPTY);
 	// murs preserves
-	expect(row_apres[0]).toBe(CelluleType.WALL);
-	expect(row_apres[board.realWidth - 1]).toBe(CelluleType.WALL);
+	expect(rowAfter[0]).toBe(CelluleType.WALL);
+	expect(rowAfter[board.realWidth - 1]).toBe(CelluleType.WALL);
 }
 
 function delLine_invalide() {
 	// Arrange
 	const board = Board.create();
-	const overflow_max = board.realHeight - 1; // = 23, mur du bas
-	const overflow_min = 0; // = 0,  mur du haut
+	const overflowMax = board.realHeight - 1; // = 23, mur du bas
+	const overflowMin = 0; // = 0,  mur du haut
 
 	if (SHOW_LOGS) {
 		console.log(`=== delLine invalide ===`);
-		console.log(`overflow_max = ${overflow_max} (attendu: ERROR)`);
-		console.log(`overflow_min = ${overflow_min} (attendu: ERROR)`);
+		console.log(`overflowMax = ${overflowMax} (attendu: ERROR)`);
+		console.log(`overflowMin = ${overflowMin} (attendu: ERROR)`);
 	}
 
 	// Act
-	const res_MAX = board.delLine(overflow_max);
-	const res_MIN = board.delLine(overflow_min);
+	const res_MAX = board.delLine(overflowMax);
+	const res_MIN = board.delLine(overflowMin);
 	const res_MAX_WithOutVerif = board.delLine(5000, false);
 	const res_MIN_WithOutVerif = board.delLine(-1, false);
 

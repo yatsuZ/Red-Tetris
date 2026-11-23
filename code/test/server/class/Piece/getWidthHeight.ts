@@ -3,7 +3,7 @@ import { ALL_SHAPES, PieceOrientationAffichage } from '../../../../src/server/co
 import type { I_Piece, Position } from '../../../../src/server/interface/I_Piece.js';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 
-function error_get_largeur() {
+function errorGetWidth() {
 	describe('Échec de getWidth', () => {
 		afterEach(() => {
 			vi.restoreAllMocks(); // remet les vraies méthodes après chaque test
@@ -52,7 +52,7 @@ export function test_getWidthHeight(): void {
 		{ shape: '.' as const, pair: { h: 1, w: 1 }, impair: { h: 1, w: 1 } },
 	];
 
-	const all_param = valeursSaisies.flatMap(({ shape, pair, impair }) => {
+	const allParams = valeursSaisies.flatMap(({ shape, pair, impair }) => {
 		return ([0, 1, 2, 3] as const).map((orientation) => {
 			const cible = orientation % 2 === 0 ? pair : impair;
 
@@ -66,7 +66,7 @@ export function test_getWidthHeight(): void {
 		});
 	});
 
-	it.each(all_param)('Shape $shape — rotation $arrow pour {Height: $ref_Height\t, Width: $ref_Width}', defaut);
+	it.each(allParams)('Shape $shape — rotation $arrow pour {Height: $ref_Height\t, Width: $ref_Width}', defaut);
 
-	error_get_largeur();
+	errorGetWidth();
 }

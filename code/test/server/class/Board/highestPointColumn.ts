@@ -34,8 +34,8 @@ function highestPointColumn_test() {
 		const x = board.realHeight - 1 - i;
 		board.addPiece(piece, { x: x, y: i });
 	}
-	const index_x = board.realHeight - board.realWidth + 1;
-	board.addPiece(piece, { x: index_x, y: board.realWidth - 2 });
+	const indexX = board.realHeight - board.realWidth + 1;
+	board.addPiece(piece, { x: indexX, y: board.realWidth - 2 });
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 
 	// Vérification

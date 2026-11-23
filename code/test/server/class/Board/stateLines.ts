@@ -13,7 +13,7 @@ const EMPTY = [2, 5, 6, 12, 13, 14, 15];
 const ERROR = [-1, 0, 23, 24, 25];
 
 // Place les pièces sur le terrain
-function place_piece(board: Board) {
+function placePiece(board: Board) {
 	const piece = new Piece('.', { x: 1, y: 1 });
 
 	for (let i = 1; i < board.realWidth - 1; i++) {
@@ -39,7 +39,7 @@ function stateLines() {
 	];
 
 	// Act
-	place_piece(board);
+	placePiece(board);
 
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 
@@ -48,11 +48,11 @@ function stateLines() {
 
 	// Assert
 	// boucle for each results
-	for (const result_line of results) {
-		if (FULL.includes(result_line.indexLine)) expect(result_line.state).toBe(StateLine.FULL);
-		else if (PARTIAL.includes(result_line.indexLine)) expect(result_line.state).toBe(StateLine.PARTIAL);
-		else if (EMPTY.includes(result_line.indexLine)) expect(result_line.state).toBe(StateLine.EMPTY);
-		else if (ERROR.includes(result_line.indexLine)) expect(result_line.state).toBe(StateLine.ERROR);
+	for (const lineResult of results) {
+		if (FULL.includes(lineResult.indexLine)) expect(lineResult.state).toBe(StateLine.FULL);
+		else if (PARTIAL.includes(lineResult.indexLine)) expect(lineResult.state).toBe(StateLine.PARTIAL);
+		else if (EMPTY.includes(lineResult.indexLine)) expect(lineResult.state).toBe(StateLine.EMPTY);
+		else if (ERROR.includes(lineResult.indexLine)) expect(lineResult.state).toBe(StateLine.ERROR);
 	}
 }
 

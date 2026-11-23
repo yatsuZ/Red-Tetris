@@ -27,17 +27,17 @@ function defaut({
 }
 
 export function test_Constructeur(): void {
-	const rng_rotation: 0 | 1 | 2 | 3 = (getRandomInt(0, 3) % 4) as 0 | 1 | 2 | 3;
+	const randomRotation: 0 | 1 | 2 | 3 = (getRandomInt(0, 3) % 4) as 0 | 1 | 2 | 3;
 
-	const rng_pos: Position = { x: getRandomInt(-100, 100), y: getRandomInt(-100, 100) };
+	const randomPos: Position = { x: getRandomInt(-100, 100), y: getRandomInt(-100, 100) };
 
-	const all_param: { shape: I_Piece['shape']; position: Position; rotation: 0 | 1 | 2 | 3; arrow_init: string }[] =
+	const allParams: { shape: I_Piece['shape']; position: Position; rotation: 0 | 1 | 2 | 3; initialArrow: string }[] =
 		ALL_SHAPES.map((shape) => ({
 			shape,
-			position: rng_pos,
-			rotation: rng_rotation,
-			arrow_init: PieceOrientationAffichage[rng_rotation],
+			position: randomPos,
+			rotation: randomRotation,
+			initialArrow: PieceOrientationAffichage[randomRotation],
 		}));
 
-	it.each(all_param)('Shape $shape en ($position.x, $position.y) — orientation de départ $arrow_init', defaut);
+	it.each(allParams)('Shape $shape en ($position.x, $position.y) — orientation de départ $initialArrow', defaut);
 }

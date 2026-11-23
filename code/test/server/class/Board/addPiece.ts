@@ -11,7 +11,7 @@ const SHOW_LOGS = false;
 // Piece 'O' = [[1,1],[1,1]] — 2x2, simple a verifier
 // Board defaut : realHeight=24, realWidth=12
 // Positions valides pour 'O' : x dans [1,21], y dans [1,9]
-function place_valide(pos: Position) {
+function validPlacement(pos: Position) {
 	// Arrange
 	const board = Board.create();
 	const piece = new Piece('O', { x: 0, y: 0 });
@@ -42,7 +42,7 @@ function place_valide(pos: Position) {
 	expect(piece.position).toEqual(pos);
 }
 
-function ecrase_piece_precedente() {
+function overwritePreviousPiece() {
 	// Arrange — deux pièces O qui se chevauchent sur une colonne
 	// O1 en (2,2) occupe : (2,2)(2,3)(3,2)(3,3)
 	// O2 en (2,3) occupe : (2,3)(2,4)(3,3)(3,4)  ← (2,3) et (3,3) déjà PIECE
@@ -76,7 +76,7 @@ function ecrase_piece_precedente() {
 	expect(row3[4]).toBe(CelluleType.PIECE);
 }
 
-function hors_memoire() {
+function outOfBounds() {
 	// Arrange
 	const board = Board.create();
 	const piece = new Piece('O', { x: 0, y: 0 });
@@ -89,29 +89,29 @@ function hors_memoire() {
 function imbriquer() {
 	// Arrange
 	const board = Board.create();
-	const piece_1 = new Piece('I', { x: 18, y: 1 }, 1);
-	const piece_2 = new Piece('T', { x: 21, y: 1 }, 2);
-	const piece_3 = new Piece('Z', { x: 21, y: 3 });
+	const piece1 = new Piece('I', { x: 18, y: 1 }, 1);
+	const piece2 = new Piece('T', { x: 21, y: 1 }, 2);
+	const piece3 = new Piece('Z', { x: 21, y: 3 });
 
 	// Act
-	expect(board.addPiece(piece_1, piece_1.position)).toBe(ResultMethod.SUCCESS);
+	expect(board.addPiece(piece1, piece1.position)).toBe(ResultMethod.SUCCESS);
 	if (SHOW_LOGS) {
 		showBoard(board.board, 'ASCII');
 	}
-	expect(board.addPiece(piece_2, piece_2.position)).toBe(ResultMethod.SUCCESS);
+	expect(board.addPiece(piece2, piece2.position)).toBe(ResultMethod.SUCCESS);
 	if (SHOW_LOGS) {
 		showBoard(board.board, 'ASCII');
 	}
 
-	expect(board.addPiece(piece_3, piece_3.position)).toBe(ResultMethod.SUCCESS);
+	expect(board.addPiece(piece3, piece3.position)).toBe(ResultMethod.SUCCESS);
 	if (SHOW_LOGS) {
 		showBoard(board.board, 'ASCII');
 	}
 }
 
 export function test_addPiece(): void {
-	const rand_x = getRandomInt(1, 21);
-	const rand_y = getRandomInt(1, 9);
+	const randX = getRandomInt(1, 21);
+	const randY = getRandomInt(1, 9);
 
 	it.each([
 		{ x: 0, y: 0 }, // sur les murs (haut-gauche)
@@ -119,10 +119,10 @@ export function test_addPiece(): void {
 		{ x: 1, y: 9 }, // coin haut-droite interieur
 		{ x: 21, y: 1 }, // coin bas-gauche interieur
 		{ x: 21, y: 9 }, // coin bas-droite interieur
-		{ x: rand_x, y: rand_y }, // position aleatoire
-	])('Place une piece O en (x:$x, y:$y)', (pos) => place_valide(pos));
+		{ x: randX, y: randY }, // position aleatoire
+	])('Place une piece O en (x:$x, y:$y)', (pos) => validPlacement(pos));
 
-	it('Ecrase les cellules PIECE existantes sans throw', ecrase_piece_precedente);
-	it('Throw si la position dépasse les limites du tableau', hors_memoire);
+	it('Ecrase les cellules PIECE existantes sans throw', overwritePreviousPiece);
+	it('Throw si la position dépasse les limites du tableau', outOfBounds);
 	it('Imbriqué', imbriquer);
 }

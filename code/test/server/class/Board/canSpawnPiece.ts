@@ -7,7 +7,7 @@ import { ResultMethod } from '../../../../src/server/constant/Board.js';
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;
 
-function spawn_valide() {
+function validSpawn() {
 	// Arrange
 	const board = Board.create();
 	const piece = new Piece('O', { x: 0, y: 0 });
@@ -24,7 +24,7 @@ function spawn_valide() {
 	expect(res).toBe(ResultMethod.SUCCESS);
 }
 
-function spawn_invalide() {
+function invalidSpawn() {
 	// Arrange
 	const board = Board.create();
 	const piece = new Piece('O', { x: 1, y: 4 });
@@ -43,7 +43,7 @@ function spawn_invalide() {
 	expect(res).toBe(ResultMethod.FAIL);
 }
 
-function error_get_largeur() {
+function errorGetWidth() {
 	describe('Échec de getWidth sur la pièce', () => {
 		afterEach(() => {
 			vi.restoreAllMocks(); // remet les vraies méthodes après chaque test
@@ -72,7 +72,7 @@ function error_get_largeur() {
 }
 
 export function test_canSpawnPiece(): void {
-	it('Spawn valide   : res SUCCESS', spawn_valide);
-	it('Spawn invalide : res FAIL', spawn_invalide);
-	error_get_largeur();
+	it('Spawn valide   : res SUCCESS', validSpawn);
+	it('Spawn invalide : res FAIL', invalidSpawn);
+	errorGetWidth();
 }

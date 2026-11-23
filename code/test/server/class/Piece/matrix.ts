@@ -20,17 +20,17 @@ function defaut({ shape, position, tour }: { shape: I_Piece['shape']; position: 
 }
 
 export function test_matrix(): void {
-	const nbr_turn: (0 | 1 | 2 | 3)[] = [0, 1, 2, 3] as const;
-	const rng_pos: Position = { x: getRandomInt(-100, 100), y: getRandomInt(-100, 100) };
+	const turnCount: (0 | 1 | 2 | 3)[] = [0, 1, 2, 3] as const;
+	const randomPos: Position = { x: getRandomInt(-100, 100), y: getRandomInt(-100, 100) };
 
-	const all_param: { shape: I_Piece['shape']; position: Position; tour: 0 | 1 | 2 | 3; arrow: string }[] =
-		nbr_turn.flatMap((tour) =>
+	const allParams: { shape: I_Piece['shape']; position: Position; tour: 0 | 1 | 2 | 3; arrow: string }[] =
+		turnCount.flatMap((tour) =>
 			ALL_SHAPES.map((shape) => ({
 				shape,
-				position: rng_pos,
+				position: randomPos,
 				tour,
 				arrow: PieceOrientationAffichage[tour],
 			})),
 		);
-	it.each(all_param)('Shape $shape — rotation $arrow', defaut);
+	it.each(allParams)('Shape $shape — rotation $arrow', defaut);
 }

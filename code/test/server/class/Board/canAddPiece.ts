@@ -11,7 +11,7 @@ const SHOW_BOARD = false;
 // Piece 'O' = [[1,1],[1,1]] — 2x2
 // Board par défaut : realHeight=24 (sol=ligne 23), realWidth=12 (murs col 0 et 11)
 
-function position_valide() {
+function validPosition() {
 	// Arrange
 	const board = Board.create();
 	const piece = new Piece('O', { x: 0, y: 0 });
@@ -34,7 +34,7 @@ function position_valide() {
 	]);
 }
 
-function hors_memoire() {
+function outOfBounds() {
 	// Arrange
 	const board = Board.create();
 	const piece = new Piece('O', { x: 0, y: 0 });
@@ -57,7 +57,7 @@ function hors_memoire() {
 	]);
 }
 
-function collision_mur_lateral() {
+function sideWallCollision() {
 	// Arrange — O en (5,0) : col 0 = mur gauche
 	const board = Board.create();
 	const piece = new Piece('O', { x: 0, y: 0 });
@@ -80,7 +80,7 @@ function collision_mur_lateral() {
 	]);
 }
 
-function collision_sol() {
+function groundCollision() {
 	// Arrange — O en (22,5) : ligne 23 = sol (realHeight-1)
 	const board = Board.create();
 	const piece = new Piece('O', { x: 0, y: 0 });
@@ -103,7 +103,7 @@ function collision_sol() {
 	]);
 }
 
-function collision_piece_existante() {
+function existingPieceCollision() {
 	// Arrange — on place d'abord une pièce, puis on vérifie la même position
 	const board = Board.create();
 	const piece = new Piece('O', { x: 0, y: 0 });
@@ -130,34 +130,34 @@ function collision_piece_existante() {
 function imbriquer() {
 	// Arrange
 	const board = Board.create();
-	const piece_1 = new Piece('I', { x: 18, y: 1 }, 1);
-	const piece_2 = new Piece('T', { x: 21, y: 1 }, 2);
-	const piece_3 = new Piece('Z', { x: 21, y: 3 });
+	const piece1 = new Piece('I', { x: 18, y: 1 }, 1);
+	const piece2 = new Piece('T', { x: 21, y: 1 }, 2);
+	const piece3 = new Piece('Z', { x: 21, y: 3 });
 
 	// Act
-	expect(board.canAddPiece(piece_1, piece_1.position).res).toBe(ResultMethod.SUCCESS);
-	expect(board.addPiece(piece_1, piece_1.position)).toBe(ResultMethod.SUCCESS);
+	expect(board.canAddPiece(piece1, piece1.position).res).toBe(ResultMethod.SUCCESS);
+	expect(board.addPiece(piece1, piece1.position)).toBe(ResultMethod.SUCCESS);
 	if (SHOW_LOGS) {
 		showBoard(board.board, 'ASCII');
 	}
-	expect(board.canAddPiece(piece_2, piece_2.position).res).toBe(ResultMethod.SUCCESS);
-	expect(board.addPiece(piece_2, piece_2.position)).toBe(ResultMethod.SUCCESS);
+	expect(board.canAddPiece(piece2, piece2.position).res).toBe(ResultMethod.SUCCESS);
+	expect(board.addPiece(piece2, piece2.position)).toBe(ResultMethod.SUCCESS);
 	if (SHOW_LOGS) {
 		showBoard(board.board, 'ASCII');
 	}
 
-	expect(board.canAddPiece(piece_3, piece_3.position).res).toBe(ResultMethod.SUCCESS);
-	expect(board.addPiece(piece_3, piece_3.position)).toBe(ResultMethod.SUCCESS);
+	expect(board.canAddPiece(piece3, piece3.position).res).toBe(ResultMethod.SUCCESS);
+	expect(board.addPiece(piece3, piece3.position)).toBe(ResultMethod.SUCCESS);
 	if (SHOW_LOGS) {
 		showBoard(board.board, 'ASCII');
 	}
 }
 
 export function test_canAddPiece(): void {
-	it('Position valide : res SUCCESS, matrix tout NO_COLLISION', position_valide);
+	it('Position valide : res SUCCESS, matrix tout NO_COLLISION', validPosition);
 	it('Position valide : res SUCCESS, imbriqué', imbriquer);
-	it('Hors mémoire   : res ERROR,   matrix tout OUT_BOARD', hors_memoire);
-	it('Mur latéral    : res FAIL,    SIDE_COLLISION col 0', collision_mur_lateral);
-	it('Sol            : res FAIL,    GROUND_COLLISION ligne 23', collision_sol);
-	it('Pièce existante: res FAIL,    PIECE_COLLISION sur toutes les cases', collision_piece_existante);
+	it('Hors mémoire   : res ERROR,   matrix tout OUT_BOARD', outOfBounds);
+	it('Mur latéral    : res FAIL,    SIDE_COLLISION col 0', sideWallCollision);
+	it('Sol            : res FAIL,    GROUND_COLLISION ligne 23', groundCollision);
+	it('Pièce existante: res FAIL,    PIECE_COLLISION sur toutes les cases', existingPieceCollision);
 }

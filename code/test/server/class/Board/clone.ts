@@ -3,7 +3,7 @@ import { getRandomInt } from '../../../../src/server/utils/rng.js';
 import { Board } from '../../../../src/server/class/Board.js';
 import { CelluleType, DEFAULT_HEIGHT_BOARD, DEFAULT_WIDTH_BOARD } from '../../../../src/server/constant/Board.js';
 
-function same_data() {
+function sameData() {
 	// Arrange
 	const original = Board.create();
 	// Act
@@ -12,7 +12,7 @@ function same_data() {
 	expect(clone.get()).toEqual(original.get());
 }
 
-function different_instance() {
+function differentInstance() {
 	// Arrange
 	const original = Board.create();
 	// Act
@@ -21,7 +21,7 @@ function different_instance() {
 	expect(clone).not.toBe(original);
 }
 
-function matrix_isolation() {
+function matrixIsolation() {
 	// Arrange
 	const original = Board.create();
 	const clone = original.clone();
@@ -31,7 +31,7 @@ function matrix_isolation() {
 	expect(original.board[1]![1]).toBe(CelluleType.EMPTY);
 }
 
-function clone_custom_size(w: number, h: number) {
+function cloneCustomSize(w: number, h: number) {
 	// Arrange
 	const original = Board.create(h, w);
 	// Act
@@ -44,14 +44,14 @@ export function test_clone(): void {
 	const w = getRandomInt(4, 40);
 	const h = w * 2;
 
-	it.each([{ affichage_h: DEFAULT_HEIGHT_BOARD, affichage_w: DEFAULT_WIDTH_BOARD }])(
-		"Clone a les mêmes données que l'original (h: $affichage_h, w: $affichage_w)",
-		same_data,
+	it.each([{ displayH: DEFAULT_HEIGHT_BOARD, displayW: DEFAULT_WIDTH_BOARD }])(
+		"Clone a les mêmes données que l'original (h: $displayH, w: $displayW)",
+		sameData,
 	);
 
-	it('Clone retourne une instance differente', different_instance);
+	it('Clone retourne une instance differente', differentInstance);
 
-	it("Clone est une copie profonde (modifier le clone ne touche pas l'original)", matrix_isolation);
+	it("Clone est une copie profonde (modifier le clone ne touche pas l'original)", matrixIsolation);
 
-	it.each([{ h, w }])('Clone fonctionne avec dimensions custom (h: $h, w: $w)', () => clone_custom_size(w, h));
+	it.each([{ h, w }])('Clone fonctionne avec dimensions custom (h: $h, w: $w)', () => cloneCustomSize(w, h));
 }

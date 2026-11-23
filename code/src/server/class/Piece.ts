@@ -38,8 +38,8 @@ export class Piece implements I_Piece {
 	}
 
 	clone(): Piece {
-		const self_data: PieceData = this.get();
-		return new Piece(self_data.shape, { ...self_data.position }, self_data.orientation);
+		const selfData: PieceData = this.get();
+		return new Piece(selfData.shape, { ...selfData.position }, selfData.orientation);
 	}
 
 	getMatrix(): MatrixBin {

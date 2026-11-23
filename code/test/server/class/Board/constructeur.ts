@@ -44,15 +44,15 @@ function init(width: number, height: number) {
 }
 
 export function test_Constructeur(): void {
-	const height_too_small: number = getRandomInt(-100, 3);
-	const height_too_high: number = getRandomInt(81, 100);
-	const width_too_small: number = getRandomInt(-100, 3);
-	const width_too_high: number = getRandomInt(41, 100);
+	const heightTooSmall: number = getRandomInt(-100, 3);
+	const heightTooHigh: number = getRandomInt(81, 100);
+	const widthTooSmall: number = getRandomInt(-100, 3);
+	const widthTooHigh: number = getRandomInt(41, 100);
 	const w = getRandomInt(4, 40);
 	const h = w * 2;
 
-	it.each([{ affichage_h: DEFAULT_HEIGHT_BOARD, affichage_w: DEFAULT_WIDTH_BOARD }])(
-		'Génération Board par défaut (h: $affichage_h, w: $affichage_w)',
+	it.each([{ displayH: DEFAULT_HEIGHT_BOARD, displayW: DEFAULT_WIDTH_BOARD }])(
+		'Génération Board par défaut (h: $displayH, w: $displayW)',
 		defaut,
 	);
 	it.each([{ h: h, w: w }])('Génération Board par défaut (h: $h, w: $w)', () => {
@@ -60,10 +60,10 @@ export function test_Constructeur(): void {
 	});
 
 	it.each([
-		[height_too_small, 10, ErrorInitMsgBoard.HEIGHT_LOW], // [height, width, specific_error]
-		[height_too_high, 10, ErrorInitMsgBoard.HEIGHT_HIGH],
-		[20, width_too_small, ErrorInitMsgBoard.WIDTH_LOW],
-		[20, width_too_high, ErrorInitMsgBoard.WIDTH_HIGH],
+		[heightTooSmall, 10, ErrorInitMsgBoard.HEIGHT_LOW], // [height, width, specificError]
+		[heightTooHigh, 10, ErrorInitMsgBoard.HEIGHT_HIGH],
+		[20, widthTooSmall, ErrorInitMsgBoard.WIDTH_LOW],
+		[20, widthTooHigh, ErrorInitMsgBoard.WIDTH_HIGH],
 		[20, 40, ErrorInitMsgBoard.WIDTH_HEIGHT], // height < width
 	])('Doit throw la bonne erreur pour h:%i, w:%i', (h, w, specificError) => {
 		expect(() => Board.create(h, w)).toThrow(ErrorInitMsgBoard.DEFAULT + specificError);
