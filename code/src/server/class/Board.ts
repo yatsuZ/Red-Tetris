@@ -9,7 +9,7 @@ import {
 } from '../constant/Board.js';
 import type { BoardData, I_Board, MatrixCellule } from '../interface/I_Board.js';
 import type { I_Piece, Matrix, Position } from '../interface/I_Piece.js';
-import { BoardIsEmpty, BoardIsFull } from '../utils/allLineAre.js';
+import { isBoardEmpty, isBoardFull } from '../utils/allLineAre.js';
 import { getRandomInt } from '../utils/rng.js';
 
 export class Board implements I_Board {
@@ -260,7 +260,7 @@ export class Board implements I_Board {
 
 	lineCellFall(): ResultMethod {
 		let same = true;
-		if (BoardIsFull(this) || BoardIsEmpty(this)) return ResultMethod.FAIL;
+		if (isBoardFull(this) || isBoardEmpty(this)) return ResultMethod.FAIL;
 		for (let i = this.real_height - 3; i > 0; i--) {
 			const row = this.board[i];
 			const stateRow = this.stateLine(i);

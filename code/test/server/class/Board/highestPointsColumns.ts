@@ -2,7 +2,7 @@ import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
 import { StateLine } from '../../../../src/server/constant/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
-import { show_board } from '../../../../src/server/utils/showBoard.js';
+import { showBoard } from '../../../../src/server/utils/showBoard.js';
 
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;
@@ -28,7 +28,7 @@ function highestPointColumns_test() {
 
 	// Act
 	for (let i = 1; i < board.real_width - 2; i++) {
-		if (SHOW_BOARD) show_board(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 
 		const x = board.real_height - 1 - i;
 		board.addPiece(piece, { x: x, y: i });
@@ -37,7 +37,7 @@ function highestPointColumns_test() {
 	const index_x = board.real_height - board.real_width + 1;
 	board.addPiece(piece, { x: index_x, y: board.real_width - 2 });
 
-	if (SHOW_BOARD) show_board(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 
 	// Verif
 	const results = board.highestPointsColumns(columns);

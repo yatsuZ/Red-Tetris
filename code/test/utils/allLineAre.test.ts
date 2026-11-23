@@ -2,33 +2,33 @@ import { describe } from 'vitest';
 import { Board } from '../../src/server/class/Board.js';
 import { expect, it } from 'vitest';
 import { StateLine } from '../../src/server/constant/Board.js';
-import { AllLineAre, BoardIsEmpty, BoardIsFull } from '../../src/server/utils/allLineAre.js';
+import { allLinesAre, isBoardEmpty, isBoardFull } from '../../src/server/utils/allLineAre.js';
 import { Piece } from '../../src/server/class/Piece.js';
 
-function AllLineAre_test() {
+function test_allLinesAre() {
 	const board = Board.create();
 	it('true', () => {
-		expect(AllLineAre(board, StateLine.EMPTY)).toBeTruthy();
+		expect(allLinesAre(board, StateLine.EMPTY)).toBeTruthy();
 	});
 
 	it('false', () => {
-		expect(AllLineAre(board, StateLine.FULL)).toBeFalsy();
+		expect(allLinesAre(board, StateLine.FULL)).toBeFalsy();
 	});
 }
-function BoardIsEmpty_test() {
+function test_isBoardEmpty() {
 	const board = Board.create();
 	it('true', () => {
-		expect(BoardIsEmpty(board)).toBeTruthy();
+		expect(isBoardEmpty(board)).toBeTruthy();
 	});
 	it('false', () => {
 		board.addPiece(new Piece('O', { x: 1, y: 1 }), { x: 1, y: 1 });
-		expect(BoardIsEmpty(board)).toBeFalsy();
+		expect(isBoardEmpty(board)).toBeFalsy();
 	});
 }
-function BoardIsFull_test() {
+function test_isBoardFull() {
 	const board = Board.create();
 	it('false', () => {
-		expect(BoardIsFull(board)).toBeFalsy();
+		expect(isBoardFull(board)).toBeFalsy();
 	});
 
 	it('true', () => {
@@ -37,12 +37,12 @@ function BoardIsFull_test() {
 				board.addPiece(new Piece('.', { x: 1, y: 1 }), { x: i, y: j });
 			}
 		}
-		expect(BoardIsFull(board)).toBeTruthy();
+		expect(isBoardFull(board)).toBeTruthy();
 	});
 }
 
 describe('allLineAre', () => {
-	describe('AllLineAre ', AllLineAre_test);
-	describe('BoardIsEmpty ', BoardIsEmpty_test);
-	describe('BoardIsFull ', BoardIsFull_test);
+	describe('allLinesAre ', test_allLinesAre);
+	describe('isBoardEmpty ', test_isBoardEmpty);
+	describe('isBoardFull ', test_isBoardFull);
 });

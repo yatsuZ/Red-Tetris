@@ -2,7 +2,7 @@ import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
 import { StateLine } from '../../../../src/server/constant/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
-import { show_board } from '../../../../src/server/utils/showBoard.js';
+import { showBoard } from '../../../../src/server/utils/showBoard.js';
 
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;
@@ -41,7 +41,7 @@ function stateLines() {
 	// Act
 	place_piece(board);
 
-	if (SHOW_BOARD) show_board(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 
 	// Verif
 	const results = board.stateLines(Lines_Verif);

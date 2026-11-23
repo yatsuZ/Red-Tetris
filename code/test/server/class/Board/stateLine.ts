@@ -2,7 +2,7 @@ import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
 import { StateLine } from '../../../../src/server/constant/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
-import { show_board } from '../../../../src/server/utils/showBoard.js';
+import { showBoard } from '../../../../src/server/utils/showBoard.js';
 
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;
@@ -48,7 +48,7 @@ function stateLine_partial() {
 	// Verif
 	const results = board.stateLine(LINE_SELECT);
 
-	if (SHOW_BOARD) show_board(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	// Assert
 	expect(results).toBe(StateLine.PARTIAL);
 }
@@ -67,7 +67,7 @@ function stateLine_full() {
 	// Verif
 	const results = board.stateLine(LINE_SELECT);
 
-	if (SHOW_BOARD) show_board(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	// Assert
 	expect(results).toBe(StateLine.FULL);
 }

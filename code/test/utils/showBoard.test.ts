@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { show_board } from '../../src/server/utils/showBoard.js';
+import { showBoard } from '../../src/server/utils/showBoard.js';
 import { CelluleType } from '../../src/server/constant/Board.js';
 
 const mini = [
@@ -7,14 +7,14 @@ const mini = [
 	[CelluleType.EMPTY, CelluleType.SPAWN],
 ];
 
-describe('show_board', () => {
+describe('showBoard', () => {
 	afterEach(() => {
 		vi.restoreAllMocks();
 	});
 
 	it('ASCII', () => {
 		const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
-		show_board(mini, 'ASCII');
+		showBoard(mini, 'ASCII');
 
 		expect(spy).toHaveBeenCalledTimes(3);
 		expect(spy).toHaveBeenNthCalledWith(1, 'Ligne 0:\t | O ');
@@ -24,7 +24,7 @@ describe('show_board', () => {
 
 	it('EMOJI par défaut', () => {
 		const spy = vi.spyOn(console, 'log').mockImplementation(() => {});
-		show_board(mini);
+		showBoard(mini);
 
 		expect(spy).toHaveBeenNthCalledWith(1, 'Ligne 0:\t 🧱 ⬛ ');
 		expect(spy).toHaveBeenNthCalledWith(2, 'Ligne 1:\t ⬜ ❌ ');

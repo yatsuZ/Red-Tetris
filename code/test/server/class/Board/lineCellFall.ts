@@ -2,9 +2,9 @@ import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
 import { CelluleType, ResultMethod, StateLine } from '../../../../src/server/constant/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
-import { show_board } from '../../../../src/server/utils/showBoard.js';
+import { showBoard } from '../../../../src/server/utils/showBoard.js';
 import { getRandomInt } from '../../../../src/server/utils/rng.js';
-import { AllLineAre, BoardIsEmpty, BoardIsFull } from '../../../../src/server/utils/allLineAre.js';
+import { allLinesAre, isBoardEmpty, isBoardFull } from '../../../../src/server/utils/allLineAre.js';
 
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;
@@ -18,7 +18,7 @@ function test_lineCellFall_Empty_or_Full() {
 	for (let i = 1; i < board.real_height - 1; i++) {
 		board.addPiece(new Piece('.', { x: 0, y: 0 }), { x: i, y: 1 });
 	}
-	// if (SHOW_BOARD) show_board(board.board, "ASCII");
+	// if (SHOW_BOARD) showBoard(board.board, "ASCII");
 	expect(ResultMethod.FAIL).toBe(board.lineCellFall());
 }
 
@@ -35,12 +35,12 @@ function basic_lineCellFall() {
 			board.addPiece(piece, { x: i, y: j });
 		}
 	}
-	if (SHOW_BOARD) show_board(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	while (loop) {
 		loop--;
 		const res = board.lineCellFall();
 		expect(ResultMethod.SUCCESS).toBe(res);
-		if (SHOW_BOARD) show_board(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	}
 	expect(ResultMethod.FAIL).toBe(board.lineCellFall());
 }

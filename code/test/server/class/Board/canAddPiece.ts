@@ -2,9 +2,9 @@ import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
 import { ResultMethod, StatePieceCollision } from '../../../../src/server/constant/Board.js';
-import { show_board } from '../../../../src/server/utils/showBoard.js';
+import { showBoard } from '../../../../src/server/utils/showBoard.js';
 import type { Position } from '../../../../src/server/interface/I_Piece.js';
-import { log_collision_matrix } from '../../../../src/server/utils/showStateColision.js';
+import { logCollisionMatrix } from '../../../../src/server/utils/showStateColision.js';
 
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;
@@ -19,12 +19,12 @@ function position_valide() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) ===`);
-		if (SHOW_BOARD) show_board(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	}
 
 	// Act
 	const { matrix, res } = board.canAddPiece(piece, pos);
-	log_collision_matrix(matrix, '  collision matrix:', SHOW_LOGS);
+	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert
 	expect(res).toBe(ResultMethod.SUCCESS);
@@ -42,12 +42,12 @@ function hors_memoire() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) ===`);
-		if (SHOW_BOARD) show_board(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	}
 
 	// Act
 	const { matrix, res } = board.canAddPiece(piece, pos);
-	log_collision_matrix(matrix, '  collision matrix:', SHOW_LOGS);
+	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert
 	expect(res).toBe(ResultMethod.ERROR);
@@ -65,12 +65,12 @@ function collision_mur_lateral() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) ===`);
-		if (SHOW_BOARD) show_board(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	}
 
 	// Act
 	const { matrix, res } = board.canAddPiece(piece, pos);
-	log_collision_matrix(matrix, '  collision matrix:', SHOW_LOGS);
+	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert — col 0 = SIDE, col 1 = NO_COLLISION
 	expect(res).toBe(ResultMethod.FAIL);
@@ -88,12 +88,12 @@ function collision_sol() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) ===`);
-		if (SHOW_BOARD) show_board(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	}
 
 	// Act
 	const { matrix, res } = board.canAddPiece(piece, pos);
-	log_collision_matrix(matrix, '  collision matrix:', SHOW_LOGS);
+	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert — ligne 22 = NO_COLLISION, ligne 23 = sol
 	expect(res).toBe(ResultMethod.FAIL);
@@ -112,12 +112,12 @@ function collision_piece_existante() {
 	board.addPiece(piece, pos);
 	if (SHOW_LOGS) {
 		console.log(`=== canAddPiece O en (x:${pos.x} y:${pos.y}) apres addPiece ===`);
-		if (SHOW_BOARD) show_board(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	}
 
 	// Act
 	const { matrix, res } = board.canAddPiece(piece, pos);
-	log_collision_matrix(matrix, '  collision matrix:', SHOW_LOGS);
+	logCollisionMatrix(matrix, '  collision matrix:', SHOW_LOGS);
 
 	// Assert
 	expect(res).toBe(ResultMethod.FAIL);
@@ -138,18 +138,18 @@ function imbriquer() {
 	expect(board.canAddPiece(piece_1, piece_1.position).res).toBe(ResultMethod.SUCCESS);
 	expect(board.addPiece(piece_1, piece_1.position)).toBe(ResultMethod.SUCCESS);
 	if (SHOW_LOGS) {
-		show_board(board.board, 'ASCII');
+		showBoard(board.board, 'ASCII');
 	}
 	expect(board.canAddPiece(piece_2, piece_2.position).res).toBe(ResultMethod.SUCCESS);
 	expect(board.addPiece(piece_2, piece_2.position)).toBe(ResultMethod.SUCCESS);
 	if (SHOW_LOGS) {
-		show_board(board.board, 'ASCII');
+		showBoard(board.board, 'ASCII');
 	}
 
 	expect(board.canAddPiece(piece_3, piece_3.position).res).toBe(ResultMethod.SUCCESS);
 	expect(board.addPiece(piece_3, piece_3.position)).toBe(ResultMethod.SUCCESS);
 	if (SHOW_LOGS) {
-		show_board(board.board, 'ASCII');
+		showBoard(board.board, 'ASCII');
 	}
 }
 

@@ -2,7 +2,7 @@ import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
 import { CelluleType, ResultMethod } from '../../../../src/server/constant/Board.js';
-import { show_board } from '../../../../src/server/utils/showBoard.js';
+import { showBoard } from '../../../../src/server/utils/showBoard.js';
 
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;
@@ -24,7 +24,7 @@ function delLines_valide() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== AVANT delLines(${indexLines}) ===`);
-		if (SHOW_BOARD) show_board(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	}
 
 	// Act
@@ -32,7 +32,7 @@ function delLines_valide() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== APRES delLines(${indexLines}) ===`);
-		if (SHOW_BOARD) show_board(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 		results.forEach(({ indexLine, res }) => {
 			console.log(`delLine(${indexLine}) = ${res} (attendu: ${ResultMethod.SUCCESS})`);
 		});
@@ -84,7 +84,7 @@ function delLines_mixte() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== AVANT delLines mixte (${indexLines}) ===`);
-		if (SHOW_BOARD) show_board(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	}
 
 	// Act
@@ -92,7 +92,7 @@ function delLines_mixte() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== APRES delLines mixte (${indexLines}) ===`);
-		if (SHOW_BOARD) show_board(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 		results.forEach(({ indexLine, res }) => console.log(`delLine(${indexLine}) = ${res}`));
 	}
 

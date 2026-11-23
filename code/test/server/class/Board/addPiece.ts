@@ -2,7 +2,7 @@ import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
 import { CelluleType, ResultMethod } from '../../../../src/server/constant/Board.js';
-import { show_board } from '../../../../src/server/utils/showBoard.js';
+import { showBoard } from '../../../../src/server/utils/showBoard.js';
 import { getRandomInt } from '../../../../src/server/utils/rng.js';
 import type { Position } from '../../../../src/server/interface/I_Piece.js';
 
@@ -18,7 +18,7 @@ function place_valide(pos: Position) {
 
 	if (SHOW_LOGS) {
 		console.log(`=== AVANT addPiece (O en x:${pos.x} y:${pos.y}) ===`);
-		show_board(board.board, 'ASCII');
+		showBoard(board.board, 'ASCII');
 	}
 
 	// Act
@@ -26,7 +26,7 @@ function place_valide(pos: Position) {
 
 	if (SHOW_LOGS) {
 		console.log(`=== APRES addPiece (O en x:${pos.x} y:${pos.y}) ===`);
-		show_board(board.board, 'ASCII');
+		showBoard(board.board, 'ASCII');
 	}
 
 	// Assert
@@ -52,14 +52,14 @@ function ecrase_piece_precedente() {
 	board.addPiece(piece, { x: 2, y: 2 });
 	if (SHOW_LOGS) {
 		console.log('=== APRES 1er addPiece (O en x:2 y:2) ===');
-		show_board(board.board, 'ASCII');
+		showBoard(board.board, 'ASCII');
 	}
 
 	// Act — doit réussir sans throw même si des cellules sont déjà PIECE
 	const result = board.addPiece(piece, { x: 2, y: 3 });
 	if (SHOW_LOGS) {
 		console.log('=== APRES 2eme addPiece (O en x:2 y:3) ===');
-		show_board(board.board, 'ASCII');
+		showBoard(board.board, 'ASCII');
 	}
 
 	// Assert — les 6 cellules uniques des deux pièces sont toutes PIECE
@@ -96,16 +96,16 @@ function imbriquer() {
 	// Act
 	expect(board.addPiece(piece_1, piece_1.position)).toBe(ResultMethod.SUCCESS);
 	if (SHOW_LOGS) {
-		show_board(board.board, 'ASCII');
+		showBoard(board.board, 'ASCII');
 	}
 	expect(board.addPiece(piece_2, piece_2.position)).toBe(ResultMethod.SUCCESS);
 	if (SHOW_LOGS) {
-		show_board(board.board, 'ASCII');
+		showBoard(board.board, 'ASCII');
 	}
 
 	expect(board.addPiece(piece_3, piece_3.position)).toBe(ResultMethod.SUCCESS);
 	if (SHOW_LOGS) {
-		show_board(board.board, 'ASCII');
+		showBoard(board.board, 'ASCII');
 	}
 }
 

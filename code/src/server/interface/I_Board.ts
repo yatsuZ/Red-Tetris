@@ -51,7 +51,7 @@ export interface I_Board extends BoardData {
 	stateLine(indexLine: number): StateLine;
 	// Idem pour plusieurs lignes
 	stateLines(indexLines: number[]): { indexLine: number; state: StateLine }[];
-	// Cree une ligne avec une celule vide
+	// Crée une ligne avec une cellule vide
 	createPartialLine(indexLine: number, indexEmptyColumn?: number): ResultMethod;
 	// Fait monter une nouvelle ligne depuis le bas, avec une colonne vide aléatoire
 	lineCellRise(): ResultMethod;

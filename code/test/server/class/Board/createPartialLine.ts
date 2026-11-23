@@ -2,9 +2,9 @@ import { expect, it } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
 import { CelluleType, ResultMethod, StateLine } from '../../../../src/server/constant/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
-import { show_board } from '../../../../src/server/utils/showBoard.js';
+import { showBoard } from '../../../../src/server/utils/showBoard.js';
 import { getRandomInt } from '../../../../src/server/utils/rng.js';
-import { AllLineAre } from '../../../../src/server/utils/allLineAre.js';
+import { allLinesAre } from '../../../../src/server/utils/allLineAre.js';
 
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;
@@ -22,8 +22,8 @@ function filledWithPartialLines() {
 		else expect(res).toBe(ResultMethod.SUCCESS);
 	}
 
-	if (SHOW_BOARD) show_board(board.board, 'ASCII');
-	expect(AllLineAre(board, StateLine.PARTIAL)).toBe(true);
+	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+	expect(allLinesAre(board, StateLine.PARTIAL)).toBe(true);
 }
 
 function failCreatePartialLine() {
@@ -47,7 +47,7 @@ function failCreatePartialLine() {
 		else expect(res).toBe(ResultMethod.FAIL);
 	}
 
-	if (SHOW_BOARD) show_board(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 }
 
 function filledWithPartialLinesChosen() {
@@ -69,8 +69,8 @@ function filledWithPartialLinesChosen() {
 			}
 		}
 	}
-	if (SHOW_BOARD) show_board(board.board, 'ASCII');
-	expect(AllLineAre(board, StateLine.PARTIAL)).toBe(true);
+	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
+	expect(allLinesAre(board, StateLine.PARTIAL)).toBe(true);
 }
 
 function failCreatePartialLineChosen() {
@@ -85,7 +85,7 @@ function failCreatePartialLineChosen() {
 		expect(res).toBe(ResultMethod.ERROR);
 	}
 
-	if (SHOW_BOARD) show_board(board.board, 'ASCII');
+	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 }
 
 export function test_createPartialLine(): void {

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { Board } from '../../../../src/server/class/Board.js';
 import { Piece } from '../../../../src/server/class/Piece.js';
-import { show_board } from '../../../../src/server/utils/showBoard.js';
+import { showBoard } from '../../../../src/server/utils/showBoard.js';
 import { ResultMethod } from '../../../../src/server/constant/Board.js';
 
 const SHOW_LOGS = false;
@@ -14,7 +14,7 @@ function spawn_valide() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== canSpawnPiece O ===`);
-		if (SHOW_BOARD) show_board(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	}
 
 	// Act
@@ -33,7 +33,7 @@ function spawn_invalide() {
 
 	if (SHOW_LOGS) {
 		console.log(`=== canSpawnPiece O ===`);
-		if (SHOW_BOARD) show_board(board.board, 'ASCII');
+		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 	}
 
 	// Act
@@ -56,7 +56,7 @@ function error_get_largeur() {
 
 			if (SHOW_LOGS) {
 				console.log(`=== canSpawnPiece O ===`);
-				if (SHOW_BOARD) show_board(board.board, 'ASCII');
+				if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 			}
 
 			// À partir d'ici, piece.getWidth() renvoie -1
