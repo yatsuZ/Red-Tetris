@@ -11,7 +11,7 @@ export function isBoardEmpty(board: Board): boolean {
 	return allLinesAre(board, StateLine.EMPTY);
 }
 
-// Full si different de vide
+// Plein si aucune ligne n'est vide (lignes pleines ou partielles)
 export function isBoardFull(board: Board): boolean {
 	const linesToCheck = Array.from({ length: board.real_height - 3 }, (_, i) => i + 1);
 	const states = board.stateLines(linesToCheck);

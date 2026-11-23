@@ -4,7 +4,7 @@ import type { I_Piece, Matrix, Position } from './I_Piece.js';
 export type MatrixCellule = Matrix<CelluleType>;
 
 // =====================================================
-// Attribut
+// Attributs
 // =====================================================
 
 export type BoardData = {
@@ -18,7 +18,7 @@ export type BoardData = {
 
 export interface I_Board extends BoardData {
 	// =====================================================
-	// Creation / acces
+	// Création / accès
 	// =====================================================
 
 	initBoard(): MatrixCellule;
@@ -29,23 +29,23 @@ export interface I_Board extends BoardData {
 	get(): BoardData;
 
 	// =====================================================
-	// Pieces
+	// Pièces
 	// =====================================================
 
-	// Vérifie si une pièce peut aparaitre. Retourne le résultat
+	// Vérifie si une pièce peut apparaître. Retourne le résultat
 	canSpawnPiece(piece: I_Piece): ResultMethod;
 	// Vérifie si une pièce peut être placée. Retourne une matrice d'états (StatePieceCollision) et le résultat global
 	canAddPiece(piece: I_Piece, pos: Position): { matrix: Matrix<StatePieceCollision>; res: ResultMethod };
-	// Ajoute une pièce dans la grille. Retourne SUCCESS ou FAIL
+	// Ajoute une pièce dans la grille. Retourne SUCCESS, lève une erreur si hors de la grille
 	addPiece(piece: I_Piece, pos: Position): ResultMethod;
 
 	// =====================================================
-	// Line
+	// Lignes
 	// =====================================================
 
-	// Supprime la ligne à l'index donné. Retourne SUCCESS ou FAIL
+	// Vide la ligne à l'index donné. Retourne SUCCESS ou ERROR
 	delLine(indexLine: number, verif?: boolean): ResultMethod;
-	// Supprime plusieurs lignes. Retourne le résultat pour chaque index
+	// Vide plusieurs lignes. Retourne le résultat pour chaque index
 	delLines(indexLines: number[]): { indexLine: number; res: ResultMethod }[];
 	// Retourne l'état d'une ligne : EMPTY, PARTIAL ou FULL
 	stateLine(indexLine: number): StateLine;
@@ -59,7 +59,7 @@ export interface I_Board extends BoardData {
 	lineCellFall(): ResultMethod;
 
 	// =====================================================
-	// Column
+	// Colonnes
 	// =====================================================
 
 	// Retourne l'indice de la cellule la plus haute dans une colonne

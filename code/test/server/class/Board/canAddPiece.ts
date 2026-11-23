@@ -9,7 +9,7 @@ import { logCollisionMatrix } from '../../../../src/server/utils/showCollision.j
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;
 // Piece 'O' = [[1,1],[1,1]] — 2x2
-// Board defaut : real_height=24 (sol=ligne 23), real_width=12 (murs col 0 et 11)
+// Board par défaut : real_height=24 (sol=ligne 23), real_width=12 (murs col 0 et 11)
 
 function position_valide() {
 	// Arrange
@@ -155,9 +155,9 @@ function imbriquer() {
 
 export function test_canAddPiece(): void {
 	it('Position valide : res SUCCESS, matrix tout NO_COLLISION', position_valide);
-	it('Position valide : res SUCCESS, Imbriquer', imbriquer);
-	it('Hors memoire   : res ERROR,   matrix tout OUT_BOARD', hors_memoire);
-	it('Mur lateral    : res FAIL,    SIDE_COLLISION col 0', collision_mur_lateral);
+	it('Position valide : res SUCCESS, imbriqué', imbriquer);
+	it('Hors mémoire   : res ERROR,   matrix tout OUT_BOARD', hors_memoire);
+	it('Mur latéral    : res FAIL,    SIDE_COLLISION col 0', collision_mur_lateral);
 	it('Sol            : res FAIL,    GROUND_COLLISION ligne 23', collision_sol);
-	it('Piece existante: res FAIL,    PIECE_COLLISION sur toutes les cases', collision_piece_existante);
+	it('Pièce existante: res FAIL,    PIECE_COLLISION sur toutes les cases', collision_piece_existante);
 }

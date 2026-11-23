@@ -46,6 +46,6 @@ function basic_lineCellFall() {
 }
 
 export function test_lineCellFall(): void {
-	it('lineCellFall    : Board Vide ou rempli', test_lineCellFall_Empty_or_Full);
-	it('lineCellFall    : Cree une ligne sour 2 et tout dois tomber', basic_lineCellFall);
+	it('lineCellFall    : Board vide ou rempli', test_lineCellFall_Empty_or_Full);
+	it('lineCellFall    : Crée une ligne sous 2 et tout doit tomber', basic_lineCellFall);
 }

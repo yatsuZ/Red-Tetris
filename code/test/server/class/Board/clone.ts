@@ -45,7 +45,7 @@ export function test_clone(): void {
 	const h = w * 2;
 
 	it.each([{ affichage_h: DEFAULT_HEIGHT_BOARD, affichage_w: DEFAULT_WIDTH_BOARD }])(
-		"Clone a les memes donnees que l'original (h: $affichage_h, w: $affichage_w)",
+		"Clone a les mêmes données que l'original (h: $affichage_h, w: $affichage_w)",
 		same_data,
 	);
 

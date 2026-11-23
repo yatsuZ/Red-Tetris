@@ -4,7 +4,7 @@ import type { I_Piece, Position } from '../../../../src/server/interface/I_Piece
 import { describe, it, expect, vi, afterEach } from 'vitest';
 
 function error_get_largeur() {
-	describe('Fail get largeur', () => {
+	describe('Échec de getWidth', () => {
 		afterEach(() => {
 			vi.restoreAllMocks(); // remet les vraies méthodes après chaque test
 		});
@@ -66,7 +66,7 @@ export function test_getWidthHeight(): void {
 		});
 	});
 
-	it.each(all_param)('Shape $shape — rotation $arrow Pour {Height: $ref_Height\t, Width: $ref_Width}', defaut);
+	it.each(all_param)('Shape $shape — rotation $arrow pour {Height: $ref_Height\t, Width: $ref_Width}', defaut);
 
 	error_get_largeur();
 }

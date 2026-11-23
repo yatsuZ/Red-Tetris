@@ -12,7 +12,7 @@ const PARTIAL = [3, 7, 11, 16, 18, 21];
 const EMPTY = [2, 5, 6, 12, 13, 14, 15];
 const ERROR = [-1, 0, 23, 24, 25];
 
-// fonction qui place les piece sur le terrain
+// Place les pièces sur le terrain
 function place_piece(board: Board) {
 	const piece = new Piece('.', { x: 1, y: 1 });
 
@@ -27,10 +27,10 @@ function place_piece(board: Board) {
 }
 
 // results attendue
-// Ligne que je remplie a fond : 1 4 8 9 10 17 19 20 22
-// Ligne que je remplie partiellement : 3 7 11 16 18 21
-// Ligne que je laisse vide : 2 5 6 12 13 14 15
-// Ligne en Que je laisse invalide : -1 0 23 24 25
+// Lignes remplies entièrement : 1 4 8 9 10 17 19 20 22
+// Lignes remplies partiellement : 3 7 11 16 18 21
+// Lignes laissées vides : 2 5 6 12 13 14 15
+// Lignes invalides : -1 0 23 24 25
 function stateLines() {
 	// create
 	const board = Board.create();
@@ -43,7 +43,7 @@ function stateLines() {
 
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 
-	// Verif
+	// Vérification
 	const results = board.stateLines(Lines_Verif);
 
 	// Assert
@@ -57,5 +57,5 @@ function stateLines() {
 }
 
 export function test_stateLines(): void {
-	it('StateLines    : Verifie plusieur lignes a la fois', stateLines);
+	it('StateLines    : Vérifie plusieurs lignes à la fois', stateLines);
 }

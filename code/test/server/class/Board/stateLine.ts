@@ -13,7 +13,7 @@ function stateLine_error() {
 	// create
 	const board = Board.create();
 
-	// Verif
+	// Vérification
 	const results = board.stateLine(-1);
 
 	// Assert
@@ -24,7 +24,7 @@ function stateLine_empty() {
 	// create
 	const board = Board.create();
 
-	// Verif
+	// Vérification
 	const results = board.stateLine(LINE_SELECT);
 
 	// Assert
@@ -45,7 +45,7 @@ function stateLine_partial() {
 	piece.position.y -= 1;
 	board.addPiece(piece, piece.position);
 
-	// Verif
+	// Vérification
 	const results = board.stateLine(LINE_SELECT);
 
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
@@ -64,7 +64,7 @@ function stateLine_full() {
 		piece.position.y += 2;
 	}
 
-	// Verif
+	// Vérification
 	const results = board.stateLine(LINE_SELECT);
 
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
@@ -75,6 +75,6 @@ function stateLine_full() {
 export function test_stateLine(): void {
 	it('StateLine ERROR   : Error ligne non existante', stateLine_error);
 	it('StateLine EMPTY   : La ligne est vide', stateLine_empty);
-	it('StateLine PARTIAL : La ligne est partielement remplie', stateLine_partial);
+	it('StateLine PARTIAL : La ligne est partiellement remplie', stateLine_partial);
 	it('StateLine FULL    : La ligne est remplie', stateLine_full);
 }

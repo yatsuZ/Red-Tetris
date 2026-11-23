@@ -5,7 +5,7 @@ export type Rotations = [MatrixBin, MatrixBin, MatrixBin, MatrixBin];
 export type Position = { x: number; y: number };
 
 // =====================================================
-// Attribut
+// Attributs
 // =====================================================
 
 export type PieceData = {
@@ -16,7 +16,7 @@ export type PieceData = {
 
 export interface I_Piece extends PieceData {
 	// =====================================================
-	// Creation / acces
+	// Création / accès
 	// =====================================================
 
 	get(): PieceData;
@@ -33,6 +33,6 @@ export interface I_Piece extends PieceData {
 
 	// TODO:
 	// shift(direction: 'L' | 'R'): void;
-	// Problème a besoin de son environnement pour eviter les sortie de terrain ou collision
-	// fall(): void; // Problème a besoin de son environnement pour eviter les sortie de terrain ou collision
+	// Problème : a besoin de son environnement pour éviter les sorties de terrain et les collisions
+	// fall(): void; // Problème : a besoin de son environnement pour éviter les sorties de terrain et les collisions
 }

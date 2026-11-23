@@ -11,7 +11,7 @@ function highestPointColumns_error() {
 	// create
 	const board = Board.create();
 	const columns = [-1, 0, board.real_width - 1, board.real_width];
-	// Verif
+	// Vérification
 	const results = board.highestPointsColumns(columns);
 
 	// Assert
@@ -39,7 +39,7 @@ function highestPointColumns_test() {
 
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 
-	// Verif
+	// Vérification
 	const results = board.highestPointsColumns(columns);
 	results.map((res, i) => {
 		expect(res.highestPoint).toBe(board.real_height - (i + 2));
@@ -51,7 +51,7 @@ function highestPointColumn_nothing() {
 	// create
 	const board = Board.create();
 	const columns = Array.from({ length: board.real_width - 2 }, (_, i) => i + 1);
-	// Verif
+	// Vérification
 	const results = board.highestPointsColumns(columns);
 
 	results.map((index) => {

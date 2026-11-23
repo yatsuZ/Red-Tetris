@@ -17,7 +17,7 @@ function filledWithPartialLines() {
 		// Act
 		const res = board.createPartialLine(i);
 
-		// Verif
+		// Vérification
 		if (i <= 0 || i >= board.real_height - 1) expect(res).toBe(ResultMethod.ERROR);
 		else expect(res).toBe(ResultMethod.SUCCESS);
 	}
@@ -42,7 +42,7 @@ function failCreatePartialLine() {
 	for (let i = -1; i < board.real_height + 1; i++) {
 		// Act
 		const res = board.createPartialLine(i);
-		// Verif
+		// Vérification
 		if (i <= 0 || i >= board.real_height - 1) expect(res).toBe(ResultMethod.ERROR);
 		else expect(res).toBe(ResultMethod.FAIL);
 	}
@@ -58,12 +58,12 @@ function filledWithPartialLinesChosen() {
 	for (let i = -1; i < board.real_height + 1; i++) {
 		// Act
 		const res = board.createPartialLine(i, indexEmptyColumn);
-		// Verif
+		// Vérification
 		if (i <= 0 || i >= board.real_height - 1) expect(res).toBe(ResultMethod.ERROR);
 		else {
 			expect(res).toBe(ResultMethod.SUCCESS);
 			for (let j = 1; j < board.real_width - 1; j++) {
-				// Verif
+				// Vérification
 				if (indexEmptyColumn === j) expect((board.board[i] as CelluleType[])[j]).toBe(CelluleType.EMPTY);
 				else expect((board.board[i] as CelluleType[])[j]).toBe(CelluleType.PIECE);
 			}
@@ -81,7 +81,7 @@ function failCreatePartialLineChosen() {
 	for (let i = -1; i < board.real_height + 1; i++) {
 		// Act
 		const res = board.createPartialLine(i, indexEmptyColumn);
-		// Verif
+		// Vérification
 		expect(res).toBe(ResultMethod.ERROR);
 	}
 
@@ -89,8 +89,8 @@ function failCreatePartialLineChosen() {
 }
 
 export function test_createPartialLine(): void {
-	it('createPartialLine    : Cree une ligne avec un troue sur chaque ligne du tableau', filledWithPartialLines);
+	it('createPartialLine    : Crée une ligne avec un trou sur chaque ligne du tableau', filledWithPartialLines);
 	it('createPartialLine    : Ne peut pas crée de ligne car ligne occupe', failCreatePartialLine);
 	it('createPartialLine    : Choisie ou sera le troue', filledWithPartialLinesChosen);
-	it('createPartialLine    : Echoue pour la selection du troue', failCreatePartialLineChosen);
+	it('createPartialLine    : Échoue pour la sélection du trou', failCreatePartialLineChosen);
 }

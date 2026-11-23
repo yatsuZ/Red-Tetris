@@ -44,7 +44,7 @@ function spawn_invalide() {
 }
 
 function error_get_largeur() {
-	describe('Fail get largeur Piece', () => {
+	describe('Échec de getWidth sur la pièce', () => {
 		afterEach(() => {
 			vi.restoreAllMocks(); // remet les vraies méthodes après chaque test
 		});

@@ -123,6 +123,6 @@ export function test_addPiece(): void {
 	])('Place une piece O en (x:$x, y:$y)', (pos) => place_valide(pos));
 
 	it('Ecrase les cellules PIECE existantes sans throw', ecrase_piece_precedente);
-	it('Throw si la position depasse les limites du tableau', hors_memoire);
-	it('Imbriquer', imbriquer);
+	it('Throw si la position dépasse les limites du tableau', hors_memoire);
+	it('Imbriqué', imbriquer);
 }

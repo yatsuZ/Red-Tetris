@@ -56,5 +56,5 @@ function failFilledWithlineCellRise() {
 export function test_lineCellRise(): void {
 	it('lineCellRise    : les ligne monte jusqua n en plus pouvoir', filledWithlineCellRiseEmpty);
 	it('lineCellRise    : les ligne font monter avec des ligne pres existante', filledWithlineCellRise);
-	it('lineCellRise    : Ellement deja aux sommet', failFilledWithlineCellRise);
+	it('lineCellRise    : Élément déjà au sommet', failFilledWithlineCellRise);
 }

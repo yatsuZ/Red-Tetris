@@ -3,7 +3,7 @@ import { Shapes } from '../constant/Shapes.js';
 
 export class Piece implements I_Piece {
 	// =====================================================
-	// Attribut
+	// Attributs
 	// =====================================================
 
 	readonly shape: I_Piece['shape'];
@@ -11,7 +11,7 @@ export class Piece implements I_Piece {
 	position: Position;
 
 	// =====================================================
-	// Creation / acces
+	// Création / accès
 	// =====================================================
 
 	constructor(shape: I_Piece['shape'], position: Position, orientation: 0 | 1 | 2 | 3 = 0) {

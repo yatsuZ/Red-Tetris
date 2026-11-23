@@ -12,7 +12,7 @@ export enum ErrorInitMsgBoard {
 export const DEFAULT_HEIGHT_BOARD: number = 20;
 export const DEFAULT_WIDTH_BOARD: number = 10;
 
-// ENUM
+// Enums
 export enum ResultMethod {
 	ERROR = -1,
 	SUCCESS = 0,
@@ -40,7 +40,7 @@ export enum StateLine {
 	PARTIAL = 1,
 	FULL = 2,
 }
-// ARRAY
+// Tableaux
 
 // Symboles d'affichage associés à chaque valeur de CelluleType (dans l'ordre de l'enum)
 export const CELLULE_SYMBOLS: Record<CelluleType, string> = {
@@ -55,7 +55,7 @@ export const CELLULE_EMOJI: Record<CelluleType, string> = {
 	[CelluleType.WALL]: '🧱',
 	[CelluleType.SPAWN]: '❌',
 };
-// Grille par défaut : 10 colonnes jouables, bordures (2=mur), plafond (3), sol (2)
+// Grille par défaut : 10 colonnes jouables, murs (2) sur les bords, le plafond et le sol
 export const EXEMPLE_DEFAULT_BOARD_MATRIX: Matrix = [
 	[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], //  -3
 	[2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2], //  -2

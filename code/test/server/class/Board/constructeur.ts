@@ -52,10 +52,10 @@ export function test_Constructeur(): void {
 	const h = w * 2;
 
 	it.each([{ affichage_h: DEFAULT_HEIGHT_BOARD, affichage_w: DEFAULT_WIDTH_BOARD }])(
-		'Generation Board par defaut (h: $affichage_h, w: $affichage_w)',
+		'Génération Board par défaut (h: $affichage_h, w: $affichage_w)',
 		defaut,
 	);
-	it.each([{ h: h, w: w }])('Generation Board par defaut (h: $h, w: $w)', () => {
+	it.each([{ h: h, w: w }])('Génération Board par défaut (h: $h, w: $w)', () => {
 		init(w, h);
 	});
 

@@ -14,7 +14,7 @@ import { getRandomInt } from '../utils/rng.js';
 
 export class Board implements I_Board {
 	// =====================================================
-	// Attribut
+	// Attributs
 	// =====================================================
 
 	readonly real_height: number;
@@ -25,7 +25,7 @@ export class Board implements I_Board {
 	board: MatrixCellule;
 
 	// =====================================================
-	// Creation / acces
+	// Création / accès
 	// =====================================================
 
 	private constructor(data: BoardData) {
@@ -92,7 +92,7 @@ export class Board implements I_Board {
 	}
 
 	// =====================================================
-	// Pieces
+	// Pièces
 	// =====================================================
 
 	canSpawnPiece(piece: I_Piece): ResultMethod {
@@ -166,7 +166,7 @@ export class Board implements I_Board {
 	}
 
 	// =====================================================
-	// Line
+	// Lignes
 	// =====================================================
 
 	delLine(indexLine: number, verif: boolean = true): ResultMethod {
@@ -195,7 +195,7 @@ export class Board implements I_Board {
 	stateLine(indexLine: number): StateLine {
 		const row = this.board[indexLine];
 
-		// Ne peut pas verifier les murs
+		// Impossible de vérifier les murs
 		if (indexLine <= 0 || indexLine >= this.real_height - 1 || row === undefined || row[1] == undefined)
 			return StateLine.ERROR;
 
@@ -254,7 +254,7 @@ export class Board implements I_Board {
 				}
 			}
 		}
-		// faire aparaitre une nouvelle ligne avec un colone vide
+		// Fait apparaître une nouvelle ligne avec une colonne vide
 		return this.createPartialLine(this.real_height - 2);
 	}
 
@@ -282,7 +282,7 @@ export class Board implements I_Board {
 	}
 
 	// =====================================================
-	// Column
+	// Colonnes
 	// =====================================================
 
 	highestPointColumn(indexColumn: number): number {
