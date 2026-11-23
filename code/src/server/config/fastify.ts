@@ -15,17 +15,17 @@ export async function buildFastify(log: boolean = showLog()): Promise<FastifyIns
 		logger: log ? prettyLogger : false,
 	});
 
-	const chemin_client_requet_socket: string = process.env.CORS_ORIGIN + ':' + process.env.CORS_PORT;
+	const corsOrigin: string = process.env.CORS_ORIGIN + ':' + process.env.CORS_PORT;
 
 	const io = new Server(fastify.server, {
-		cors: { origin: chemin_client_requet_socket },
+		cors: { origin: corsOrigin },
 	});
 
 	io.on('connection', (socket) => {
 		console.log('client connecté :', socket.id);
 	});
 
-	// // Setup des routes
+	// Mise en place des routes
 	await setupRoutes(fastify);
 
 	return fastify;

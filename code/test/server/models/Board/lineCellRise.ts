@@ -1,0 +1,60 @@
+import { expect, it } from 'vitest';
+import { Board } from '../../../../src/server/models/Board.js';
+import { CellType, MethodResult, LineState } from '../../../../src/server/constants/board.js';
+import { Piece } from '../../../../src/server/models/Piece.js';
+import { showBoard } from '../../../../src/server/utils/showBoard.js';
+import { getRandomInt } from '../../../../src/server/utils/rng.js';
+import { allLinesAre } from '../../../../src/server/utils/boardState.js';
+
+const SHOW_LOGS = false;
+const SHOW_BOARD = false;
+
+function filledWithlineCellRiseEmpty() {
+	// create
+	const board = Board.create();
+
+	for (let i = 0; i < board.realHeight; i++) {
+		const res = board.lineCellRise();
+		if (i >= board.realHeight - 2) expect(res).toBe(MethodResult.FAIL);
+		else {
+			if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
+			expect(res).toBe(MethodResult.SUCCESS);
+		}
+	}
+	expect(allLinesAre(board, LineState.PARTIAL)).toBe(true);
+}
+
+function filledWithlineCellRise() {
+	// create
+	const board = Board.create();
+	const piece = new Piece('O', { row: 0, col: 0 });
+
+	board.addPiece(piece, { row: 21, col: 1 });
+
+	for (let i = 0; i < board.realHeight; i++) {
+		const res = board.lineCellRise();
+		if (i >= board.realHeight - 4) expect(res).toBe(MethodResult.FAIL);
+		else {
+			if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
+			expect(res).toBe(MethodResult.SUCCESS);
+		}
+	}
+	expect(allLinesAre(board, LineState.PARTIAL)).toBe(true);
+}
+
+function failFilledWithlineCellRise() {
+	// create
+	const board = Board.create();
+	const piece = new Piece('O', { row: 0, col: 0 });
+
+	board.addPiece(piece, { row: 1, col: 1 });
+	const res = board.lineCellRise();
+	expect(res).toBe(MethodResult.FAIL);
+	if (SHOW_BOARD) showBoard(board.grid, 'ASCII');
+}
+
+export function testLineCellRise(): void {
+	it('lineCellRise    : les ligne monte jusqua n en plus pouvoir', filledWithlineCellRiseEmpty);
+	it('lineCellRise    : les ligne font monter avec des ligne pres existante', filledWithlineCellRise);
+	it('lineCellRise    : Élément déjà au sommet', failFilledWithlineCellRise);
+}

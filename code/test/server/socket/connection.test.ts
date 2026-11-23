@@ -18,7 +18,7 @@ describe('socket.io', () => {
 
 	afterEach(async () => {
 		client?.disconnect(); // d'abord le client…
-		await app.close();    // …puis le serveur
+		await app.close(); // …puis le serveur
 		vi.restoreAllMocks();
 	});
 

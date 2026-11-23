@@ -11,7 +11,7 @@ export async function setupRoutes(fastify: FastifyInstance) {
 	// 	return reply.view('index.ejs');
 	// });
 
-	// 404 handler
+	// Gestion des 404
 	fastify.setNotFoundHandler(async (request, reply) => {
 		if (request.url.startsWith('/api/')) {
 			return reply.code(StatusCodes.NOT_FOUND).send({ error: 'API endpoint not found' });

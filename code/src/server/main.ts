@@ -30,7 +30,7 @@ const start = async () => {
 
 start();
 
-// Rapelle
+// Rappel
 /*
   main.ts — Incohérence
 
@@ -40,7 +40,7 @@ start();
   ---
   fastify.ts — Risque env vars
 
-  const chemin_client_requet_socket = process.env.CORS_ORIGIN + ":" + process.env.CORS_PORT;
+  const corsOrigin = process.env.CORS_ORIGIN + ":" + process.env.CORS_PORT;
 
   Si CORS_ORIGIN ou CORS_PORT ne sont pas définis, tu obtiens "undefined:undefined" sans aucune erreur. Même problème dans client/socket.ts. À surveiller quand tu intègreras le vrai environnement.
   */

@@ -12,22 +12,25 @@ Pas de persistance de données. Tout vit en mémoire côté serveur.
 ## Contraintes techniques — LES PLUS IMPORTANTES
 
 ### Ce qui est INTERDIT
-| Interdit | Pourquoi / Note |
-|----------|-----------------|
-| `this` côté **client** | Programmation fonctionnelle obligatoire côté client |
-| `<TABLE>` en HTML | Utiliser grid ou flexbox |
-| jQuery ou toute lib de manipulation DOM | Pas de manipulation DOM directe |
-| Canvas | Interdit explicitement |
-| SVG | Interdit explicitement |
-| Credentials/API keys dans le repo | Utiliser `.env` + `.gitignore` → sinon **projet invalidé** |
+
+| Interdit                                | Pourquoi / Note                                            |
+| --------------------------------------- | ---------------------------------------------------------- |
+| `this` côté **client**                  | Programmation fonctionnelle obligatoire côté client        |
+| `<TABLE>` en HTML                       | Utiliser grid ou flexbox                                   |
+| jQuery ou toute lib de manipulation DOM | Pas de manipulation DOM directe                            |
+| Canvas                                  | Interdit explicitement                                     |
+| SVG                                     | Interdit explicitement                                     |
+| Credentials/API keys dans le repo       | Utiliser `.env` + `.gitignore` → sinon **projet invalidé** |
 
 ### Ce qui est OBLIGATOIRE côté client
+
 - **Aucun usage du mot-clé `this`** — tout doit être fonctionnel (fonctions pures, closures, arrow functions)
 - Exception unique : `this` autorisé pour créer des sous-classes de `Error`
 - Layouts en **CSS Grid ou Flexbox** uniquement
 - SPA (Single Page Application) — aucun rechargement de page
 
 ### Ce qui est OBLIGATOIRE côté serveur
+
 - Code **orienté objet avec prototypes** (ou classes ES6)
 - Minimum 3 classes définies : **`Player`**, **`Piece`**, **`Game`**
 - Tourne sur **Node.js**
@@ -37,17 +40,17 @@ Pas de persistance de données. Tout vit en mémoire côté serveur.
 
 ## Stack technologique
 
-| Couche | Technologie |
-|--------|-------------|
-| Backend | **Node.js** |
-| Temps réel | **Socket.io** (bidirectionnel) |
-| Frontend | **React** recommandé (ou Vue) |
-| State management | **Redux** recommandé |
-| Async Redux | `redux-thunk` ou `redux-promise` |
-| Utilitaires fonctionnels | `lodash`, `ramda` (optionnels) |
-| Immutabilité | `Immutable.js` ou ES spread (optionnel) |
-| Bundler | Fourni par le boilerplate |
-| Tests | Fourni par le boilerplate |
+| Couche                   | Technologie                             |
+| ------------------------ | --------------------------------------- |
+| Backend                  | **Node.js**                             |
+| Temps réel               | **Socket.io** (bidirectionnel)          |
+| Frontend                 | **React** recommandé (ou Vue)           |
+| State management         | **Redux** recommandé                    |
+| Async Redux              | `redux-thunk` ou `redux-promise`        |
+| Utilitaires fonctionnels | `lodash`, `ramda` (optionnels)          |
+| Immutabilité             | `Immutable.js` ou ES spread (optionnel) |
+| Bundler                  | Fourni par le boilerplate               |
+| Tests                    | Fourni par le boilerplate               |
 
 > **TypeScript autorisé** — c'est un superset strict de JS qui compile en JS standard.
 > **pnpm** : non mentionné dans le sujet, vérifie que le boilerplate l'accepte.
@@ -74,6 +77,7 @@ Node.js Server
 ## URL / Routing
 
 Format d'URL :
+
 ```
 http://<server_ip>:<port>/<room>/<player_name>
 ```
@@ -89,32 +93,38 @@ http://<server_ip>:<port>/<room>/<player_name>
 ## Gameplay — Règles exactes
 
 ### La grille
+
 - **10 colonnes × 20 lignes** par joueur
 - Chaque joueur a **sa propre grille**
 
 ### Les pièces (Tetriminos)
+
 - 7 formes originales (I, O, T, S, Z, J, L) avec leurs règles de rotation officielles
 - La séquence de pièces est **générée côté serveur**
 - **Tous les joueurs d'une même partie reçoivent les mêmes pièces dans le même ordre** — même si à des moments différents
 
 ### Mouvements disponibles
-| Touche | Action |
-|--------|--------|
-| ← → | Déplacement horizontal |
-| ↑ | Rotation |
-| ↓ | Soft drop (chute accélérée) |
+
+| Touche | Action                        |
+| ------ | ----------------------------- |
+| ← →    | Déplacement horizontal        |
+| ↑      | Rotation                      |
+| ↓      | Soft drop (chute accélérée)   |
 | Espace | Hard drop (chute instantanée) |
 
 ### Physique des pièces
+
 - Les pièces tombent à **vitesse constante**
 - Quand une pièce touche le tas existant, elle ne se fige qu'au **frame suivant** (permet les ajustements de dernière seconde)
 
 ### Complétion de lignes
+
 - Compléter **N lignes** → les adversaires reçoivent **N-1 lignes de pénalité indestructibles** au bas de leur grille
 - Pas de système de score dans la partie obligatoire
 - **Le dernier joueur encore en vie gagne**
 
 ### Modes supportés
+
 - **Solo** (1 joueur seul dans une room) : supporté
 - **Multijoueur** : plusieurs joueurs dans la même room
 - **Plusieurs parties simultanées** : supporté
@@ -141,12 +151,12 @@ http://<server_ip>:<port>/<room>/<player_name>
 
 ## Tests — Exigences exactes
 
-| Métrique | Seuil minimum |
-|----------|---------------|
-| Statements (instructions) | **≥ 70%** |
-| Functions (fonctions) | **≥ 70%** |
-| Lines (lignes) | **≥ 70%** |
-| Branches (chemins d'exécution) | **≥ 50%** |
+| Métrique                       | Seuil minimum |
+| ------------------------------ | ------------- |
+| Statements (instructions)      | **≥ 70%**     |
+| Functions (fonctions)          | **≥ 70%**     |
+| Lines (lignes)                 | **≥ 70%**     |
+| Branches (chemins d'exécution) | **≥ 50%**     |
 
 - Le boilerplate fourni inclut un pipeline de tests et des exemples
 - Les tests doivent être **automatisables** (pipeline CI)
@@ -160,6 +170,7 @@ http://<server_ip>:<port>/<room>/<player_name>
 Le sujet fournit un boilerplate officiel sur GitHub : `red_tetris_boilerplate`
 
 Il gère :
+
 - Le lancement du serveur
 - Le build des bundles JS pour le navigateur
 - L'exécution des tests et la couverture
@@ -218,4 +229,4 @@ red-tetris/
 
 ---
 
-*Synthèse réalisée à partir du sujet officiel Red-Tetris V5.2*
+_Synthèse réalisée à partir du sujet officiel Red-Tetris V5.2_
