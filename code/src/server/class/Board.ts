@@ -13,12 +13,21 @@ import { BoardIsEmpty, BoardIsFull } from '../utils/allLineAre.js';
 import { getRandomInt } from '../utils/rng.js';
 
 export class Board implements I_Board {
+
+	// =====================================================
+	// Attribut
+	// =====================================================
+
 	readonly real_height: number;
 	readonly real_width: number;
 	readonly height: number;
 	readonly width: number;
 	highest_point: number;
 	board: MatrixCellule;
+
+	// =====================================================
+	// Creation / acces
+	// =====================================================
 
 	private constructor(data: BoardData) {
 		this.height = data.height;
@@ -50,6 +59,10 @@ export class Board implements I_Board {
 		return board;
 	}
 
+	static fromData(data: BoardData): Board {
+		return new Board(data);
+	}
+
 	initBoard(): MatrixCellule {
 		return Array.from({ length: this.real_height }, (_, i) =>
 			Array.from({ length: this.real_width }, (_, j) => {
@@ -60,10 +73,6 @@ export class Board implements I_Board {
 		);
 	}
 
-	static fromData(data: BoardData): Board {
-		return new Board(data);
-	}
-
 	clone(): Board {
 		return Board.fromData(this.get());
 	}
@@ -71,6 +80,7 @@ export class Board implements I_Board {
 	getMatrix(): MatrixCellule {
 		return [...this.board];
 	}
+
 	get(): BoardData {
 		return {
 			real_height: this.real_height,
@@ -82,23 +92,23 @@ export class Board implements I_Board {
 		};
 	}
 
-	addPiece(piece: I_Piece, pos: Position): ResultMethod {
-		const matrix = piece.getMatrix();
+	// =====================================================
+	// Pieces
+	// =====================================================
 
-		for (let i = 0; i < matrix.length; i++) {
-			const pieceRow = matrix[i]!;
-			for (let j = 0; j < pieceRow.length; j++) {
-				if (pieceRow[j] !== 1) continue;
-				const r = pos.x + i;
-				const c = pos.y + j;
-				const boardRow = this.board[r];
-				if (boardRow === undefined || boardRow[c] === undefined)
-					throw new Error(`addPiece: écriture hors mémoire (${r}, ${c})`);
-				boardRow[c] = CelluleType.PIECE;
-			}
+	canSpawnPiece(piece: I_Piece): ResultMethod {
+		const largeurPiece = piece.getLargeur();
+		if (largeurPiece === -1) {
+			// throw new Error("canSpawnPiece : problème lors de la récupération de la largeur de la pièce");
+			return ResultMethod.ERROR;
 		}
-		piece.position = { ...pos };
-		return ResultMethod.SUCCESS;
+
+		const espaceRestant = this.width - largeurPiece;
+		const margeGauche = Math.ceil(espaceRestant / 2);
+		const colone_spawn = 1 + margeGauche;
+
+		const res = this.canAddPiece(piece, { x: 1, y: colone_spawn });
+		return res.res;
 	}
 
 	canAddPiece(piece: I_Piece, pos: Position): { matrix: Matrix<StatePieceCollision>; res: ResultMethod } {
@@ -137,22 +147,30 @@ export class Board implements I_Board {
 		return { matrix, res };
 	}
 
-	canSpawnPiece(piece: I_Piece): ResultMethod {
-		const largeurPiece = piece.getLargeur();
-		if (largeurPiece === -1) {
-			// throw new Error("canSpawnPiece : problème lors de la récupération de la largeur de la pièce");
-			return ResultMethod.ERROR;
+	addPiece(piece: I_Piece, pos: Position): ResultMethod {
+		const matrix = piece.getMatrix();
+
+		for (let i = 0; i < matrix.length; i++) {
+			const pieceRow = matrix[i]!;
+			for (let j = 0; j < pieceRow.length; j++) {
+				if (pieceRow[j] !== 1) continue;
+				const r = pos.x + i;
+				const c = pos.y + j;
+				const boardRow = this.board[r];
+				if (boardRow === undefined || boardRow[c] === undefined)
+					throw new Error(`addPiece: écriture hors mémoire (${r}, ${c})`);
+				boardRow[c] = CelluleType.PIECE;
+			}
 		}
-
-		const espaceRestant = this.width - largeurPiece;
-		const margeGauche = Math.ceil(espaceRestant / 2);
-		const colone_spawn = 1 + margeGauche;
-
-		const res = this.canAddPiece(piece, { x: 1, y: colone_spawn });
-		return res.res;
+		piece.position = { ...pos };
+		return ResultMethod.SUCCESS;
 	}
 
-	delLine(indexLine: number, verif: true | false = true): ResultMethod {
+	// =====================================================
+	// Line
+	// =====================================================
+
+	delLine(indexLine: number, verif: boolean = true): ResultMethod {
 		if (verif) {
 			if (indexLine <= 0 || indexLine >= this.real_height - 1) return ResultMethod.ERROR;
 		}
@@ -241,23 +259,6 @@ export class Board implements I_Board {
 		return this.createPartialLine(this.real_height - 2);
 	}
 
-	highestPointColumn(indexColumn: number): number {
-		if (indexColumn <= 0 || indexColumn >= this.real_width - 1) return -1;
-
-		for (let index = 0; index < this.real_height - 1; index++) {
-			if (this.board[index] === undefined) return -1;
-			else if ((this.board[index] as CelluleType[])[indexColumn] === CelluleType.PIECE) return index;
-		}
-		return this.real_height - 1;
-	}
-
-	highestPointsColumns(indexColumns: number[]): { indexColumn: number; highestPoint: number }[] {
-		return indexColumns.map((index) => {
-			const res = this.highestPointColumn(index);
-			return { indexColumn: index, highestPoint: res };
-		});
-	}
-
 	lineCellFall(): ResultMethod {
 		let same = true;
 		if (BoardIsFull(this) || BoardIsEmpty(this)) return ResultMethod.FAIL;
@@ -279,5 +280,26 @@ export class Board implements I_Board {
 		}
 		if (same) return ResultMethod.FAIL;
 		return ResultMethod.SUCCESS;
+	}
+
+	// =====================================================
+	// Column
+	// =====================================================
+
+	highestPointColumn(indexColumn: number): number {
+		if (indexColumn <= 0 || indexColumn >= this.real_width - 1) return -1;
+
+		for (let index = 0; index < this.real_height - 1; index++) {
+			if (this.board[index] === undefined) return -1;
+			else if ((this.board[index] as CelluleType[])[indexColumn] === CelluleType.PIECE) return index;
+		}
+		return this.real_height - 1;
+	}
+
+	highestPointsColumns(indexColumns: number[]): { indexColumn: number; highestPoint: number }[] {
+		return indexColumns.map((index) => {
+			const res = this.highestPointColumn(index);
+			return { indexColumn: index, highestPoint: res };
+		});
 	}
 }
