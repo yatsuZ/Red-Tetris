@@ -32,7 +32,7 @@ function test_isBoardFull() {
 	});
 
 	it('true', () => {
-		for (let i = 1; i < board.real_height - 1; i++) {
+		for (let i = 1; i < board.realHeight - 1; i++) {
 			for (let j = 1; j <= board.width; j++) {
 				board.addPiece(new Piece('.', { x: 1, y: 1 }), { x: i, y: j });
 			}

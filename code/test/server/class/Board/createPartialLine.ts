@@ -13,12 +13,12 @@ function filledWithPartialLines() {
 	// create
 	const board = Board.create();
 
-	for (let i = -1; i < board.real_height + 1; i++) {
+	for (let i = -1; i < board.realHeight + 1; i++) {
 		// Act
 		const res = board.createPartialLine(i);
 
 		// Vérification
-		if (i <= 0 || i >= board.real_height - 1) expect(res).toBe(ResultMethod.ERROR);
+		if (i <= 0 || i >= board.realHeight - 1) expect(res).toBe(ResultMethod.ERROR);
 		else expect(res).toBe(ResultMethod.SUCCESS);
 	}
 
@@ -33,17 +33,17 @@ function failCreatePartialLine() {
 
 	board.addPiece(piece, { x: 2, y: 2 });
 
-	for (let i = -1; i < board.real_height + 1; i++) {
+	for (let i = -1; i < board.realHeight + 1; i++) {
 		board.createPartialLine(i, 1);
-		if (i >= 1 && i <= board.real_height + -2 && i % 2)
+		if (i >= 1 && i <= board.realHeight + -2 && i % 2)
 			board.addPiece(new Piece('.', { x: 0, y: 0 }), { x: i, y: 1 });
 	}
 
-	for (let i = -1; i < board.real_height + 1; i++) {
+	for (let i = -1; i < board.realHeight + 1; i++) {
 		// Act
 		const res = board.createPartialLine(i);
 		// Vérification
-		if (i <= 0 || i >= board.real_height - 1) expect(res).toBe(ResultMethod.ERROR);
+		if (i <= 0 || i >= board.realHeight - 1) expect(res).toBe(ResultMethod.ERROR);
 		else expect(res).toBe(ResultMethod.FAIL);
 	}
 
@@ -53,16 +53,16 @@ function failCreatePartialLine() {
 function filledWithPartialLinesChosen() {
 	// create
 	const board = Board.create();
-	const indexEmptyColumn: number = getRandomInt(1, board.real_width - 2);
+	const indexEmptyColumn: number = getRandomInt(1, board.realWidth - 2);
 
-	for (let i = -1; i < board.real_height + 1; i++) {
+	for (let i = -1; i < board.realHeight + 1; i++) {
 		// Act
 		const res = board.createPartialLine(i, indexEmptyColumn);
 		// Vérification
-		if (i <= 0 || i >= board.real_height - 1) expect(res).toBe(ResultMethod.ERROR);
+		if (i <= 0 || i >= board.realHeight - 1) expect(res).toBe(ResultMethod.ERROR);
 		else {
 			expect(res).toBe(ResultMethod.SUCCESS);
-			for (let j = 1; j < board.real_width - 1; j++) {
+			for (let j = 1; j < board.realWidth - 1; j++) {
 				// Vérification
 				if (indexEmptyColumn === j) expect((board.board[i] as CelluleType[])[j]).toBe(CelluleType.EMPTY);
 				else expect((board.board[i] as CelluleType[])[j]).toBe(CelluleType.PIECE);
@@ -78,7 +78,7 @@ function failCreatePartialLineChosen() {
 	const board = Board.create();
 	const indexEmptyColumn: number = 0;
 
-	for (let i = -1; i < board.real_height + 1; i++) {
+	for (let i = -1; i < board.realHeight + 1; i++) {
 		// Act
 		const res = board.createPartialLine(i, indexEmptyColumn);
 		// Vérification

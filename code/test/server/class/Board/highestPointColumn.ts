@@ -18,7 +18,7 @@ function highestPointColumn_error() {
 	expect(results).toBe(-1);
 	//
 	// create
-	(board as any).real_height = 30;
+	(board as any).realHeight = 30;
 	expect(board.highestPointColumn(1)).toBe(-1);
 }
 
@@ -28,22 +28,22 @@ function highestPointColumn_test() {
 	const piece = new Piece('.', { x: 0, y: 0 });
 
 	// Act
-	for (let i = 1; i < board.real_width - 2; i++) {
+	for (let i = 1; i < board.realWidth - 2; i++) {
 		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 
-		const x = board.real_height - 1 - i;
+		const x = board.realHeight - 1 - i;
 		board.addPiece(piece, { x: x, y: i });
 	}
-	const index_x = board.real_height - board.real_width + 1;
-	board.addPiece(piece, { x: index_x, y: board.real_width - 2 });
+	const index_x = board.realHeight - board.realWidth + 1;
+	board.addPiece(piece, { x: index_x, y: board.realWidth - 2 });
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 
 	// Vérification
-	for (let i = 1; i < board.real_width - 1; i++) {
+	for (let i = 1; i < board.realWidth - 1; i++) {
 		const results = board.highestPointColumn(i);
 
 		if (SHOW_LOGS) console.log('result = ' + results);
-		expect(results).toBe(board.real_height - 1 - i);
+		expect(results).toBe(board.realHeight - 1 - i);
 	}
 }
 
@@ -55,7 +55,7 @@ function highestPointColumn_nothing() {
 	const results = board.highestPointColumn(1);
 
 	// Assert
-	expect(results).toBe(board.real_height - 1);
+	expect(results).toBe(board.realHeight - 1);
 }
 
 export function test_highestPointColumn(): void {

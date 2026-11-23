@@ -17,11 +17,11 @@ export class Board implements I_Board {
 	// Attributs
 	// =====================================================
 
-	readonly real_height: number;
-	readonly real_width: number;
+	readonly realHeight: number;
+	readonly realWidth: number;
 	readonly height: number;
 	readonly width: number;
-	highest_point: number;
+	highestPoint: number;
 	board: MatrixCellule;
 
 	// =====================================================
@@ -31,9 +31,9 @@ export class Board implements I_Board {
 	private constructor(data: BoardData) {
 		this.height = data.height;
 		this.width = data.width;
-		this.real_height = data.real_height;
-		this.real_width = data.real_width;
-		this.highest_point = data.highest_point;
+		this.realHeight = data.realHeight;
+		this.realWidth = data.realWidth;
+		this.highestPoint = data.highestPoint;
 		this.board = data.board.map((row) => [...row]);
 	}
 
@@ -44,14 +44,14 @@ export class Board implements I_Board {
 		else if (width > 40) throw new Error(ErrorInitMsgBoard.DEFAULT + ErrorInitMsgBoard.WIDTH_HIGH);
 		else if (height < width) throw new Error(ErrorInitMsgBoard.DEFAULT + ErrorInitMsgBoard.WIDTH_HEIGHT);
 
-		const real_height = height + 4;
-		const real_width = width + 2;
+		const realHeight = height + 4;
+		const realWidth = width + 2;
 		const board = new Board({
 			height,
 			width,
-			real_height,
-			real_width,
-			highest_point: height,
+			realHeight,
+			realWidth,
+			highestPoint: height,
 			board: [],
 		});
 		board.board = board.initBoard();
@@ -63,9 +63,9 @@ export class Board implements I_Board {
 	}
 
 	initBoard(): MatrixCellule {
-		return Array.from({ length: this.real_height }, (_, i) =>
-			Array.from({ length: this.real_width }, (_, j) => {
-				if (j === 0 || j === this.real_width - 1 || i === this.real_height - 1 || i === 0)
+		return Array.from({ length: this.realHeight }, (_, i) =>
+			Array.from({ length: this.realWidth }, (_, j) => {
+				if (j === 0 || j === this.realWidth - 1 || i === this.realHeight - 1 || i === 0)
 					return CelluleType.WALL;
 				return CelluleType.EMPTY;
 			}),
@@ -82,11 +82,11 @@ export class Board implements I_Board {
 
 	get(): BoardData {
 		return {
-			real_height: this.real_height,
-			real_width: this.real_width,
+			realHeight: this.realHeight,
+			realWidth: this.realWidth,
 			height: this.height,
 			width: this.width,
-			highest_point: this.highest_point,
+			highestPoint: this.highestPoint,
 			board: this.getMatrix(),
 		};
 	}
@@ -131,7 +131,7 @@ export class Board implements I_Board {
 				if (boardCell === CelluleType.WALL) {
 					res = ResultMethod.FAIL;
 
-					return r === this.real_height - 1
+					return r === this.realHeight - 1
 						? StatePieceCollision.GROUND_COLLISION
 						: StatePieceCollision.SIDE_COLLISION;
 				}
@@ -171,13 +171,13 @@ export class Board implements I_Board {
 
 	delLine(indexLine: number, verif: boolean = true): ResultMethod {
 		if (verif) {
-			if (indexLine <= 0 || indexLine >= this.real_height - 1) return ResultMethod.ERROR;
+			if (indexLine <= 0 || indexLine >= this.realHeight - 1) return ResultMethod.ERROR;
 		}
 		const row = this.board[indexLine];
 		if (row === undefined) return ResultMethod.ERROR;
 
 		row.forEach((_, indexRow) => {
-			if (indexRow === 0 || indexRow === this.real_width - 1) return;
+			if (indexRow === 0 || indexRow === this.realWidth - 1) return;
 
 			row[indexRow] = CelluleType.EMPTY;
 		});
@@ -196,7 +196,7 @@ export class Board implements I_Board {
 		const row = this.board[indexLine];
 
 		// Impossible de vérifier les murs
-		if (indexLine <= 0 || indexLine >= this.real_height - 1 || row === undefined || row[1] == undefined)
+		if (indexLine <= 0 || indexLine >= this.realHeight - 1 || row === undefined || row[1] == undefined)
 			return StateLine.ERROR;
 
 		const firstCelluleType = row[1];
@@ -215,22 +215,19 @@ export class Board implements I_Board {
 		});
 	}
 
-	createPartialLine(
-		indexLine: number,
-		indexEmptyColumn: number = getRandomInt(1, this.real_width - 2),
-	): ResultMethod {
+	createPartialLine(indexLine: number, indexEmptyColumn: number = getRandomInt(1, this.realWidth - 2)): ResultMethod {
 		if (
 			indexEmptyColumn < 1 ||
-			indexEmptyColumn >= this.real_width ||
+			indexEmptyColumn >= this.realWidth ||
 			indexLine < 1 ||
-			indexLine >= this.real_height - 1
+			indexLine >= this.realHeight - 1
 		)
 			return ResultMethod.ERROR;
 		const row = this.board[indexLine] as CelluleType[];
 		const stateRow = this.stateLine(indexLine);
 
 		if (stateRow === StateLine.EMPTY) {
-			for (let i = 1; i < this.real_width - 1; i++) {
+			for (let i = 1; i < this.realWidth - 1; i++) {
 				if (i !== indexEmptyColumn) row[i] = CelluleType.PIECE;
 			}
 		} else return ResultMethod.FAIL;
@@ -238,7 +235,7 @@ export class Board implements I_Board {
 	}
 
 	lineCellRise(): ResultMethod {
-		for (let i = 1; i < this.real_height - 1; i++) {
+		for (let i = 1; i < this.realHeight - 1; i++) {
 			const row = this.board[i];
 			const stateRow = this.stateLine(i);
 			const stateRowAbove = this.stateLine(i - 1);
@@ -248,20 +245,20 @@ export class Board implements I_Board {
 				stateRowAbove === StateLine.EMPTY &&
 				(stateRow === StateLine.FULL || stateRow === StateLine.PARTIAL)
 			) {
-				for (let j = 1; j < this.real_width - 1; j++) {
+				for (let j = 1; j < this.realWidth - 1; j++) {
 					(this.board[i - 1] as CelluleType[])[j] = row[j] as CelluleType;
 					row[j] = CelluleType.EMPTY;
 				}
 			}
 		}
 		// Fait apparaître une nouvelle ligne avec une colonne vide
-		return this.createPartialLine(this.real_height - 2);
+		return this.createPartialLine(this.realHeight - 2);
 	}
 
 	lineCellFall(): ResultMethod {
 		let same = true;
 		if (isBoardFull(this) || isBoardEmpty(this)) return ResultMethod.FAIL;
-		for (let i = this.real_height - 3; i > 0; i--) {
+		for (let i = this.realHeight - 3; i > 0; i--) {
 			const row = this.board[i];
 			const stateRow = this.stateLine(i);
 			const stateRowBelow = this.stateLine(i + 1);
@@ -271,7 +268,7 @@ export class Board implements I_Board {
 				(stateRow === StateLine.FULL || stateRow === StateLine.PARTIAL)
 			) {
 				same = false;
-				for (let j = 1; j < this.real_width - 1; j++) {
+				for (let j = 1; j < this.realWidth - 1; j++) {
 					(this.board[i + 1] as CelluleType[])[j] = row[j] as CelluleType;
 					row[j] = CelluleType.EMPTY;
 				}
@@ -286,13 +283,13 @@ export class Board implements I_Board {
 	// =====================================================
 
 	highestPointColumn(indexColumn: number): number {
-		if (indexColumn <= 0 || indexColumn >= this.real_width - 1) return -1;
+		if (indexColumn <= 0 || indexColumn >= this.realWidth - 1) return -1;
 
-		for (let index = 0; index < this.real_height - 1; index++) {
+		for (let index = 0; index < this.realHeight - 1; index++) {
 			if (this.board[index] === undefined) return -1;
 			else if ((this.board[index] as CelluleType[])[indexColumn] === CelluleType.PIECE) return index;
 		}
-		return this.real_height - 1;
+		return this.realHeight - 1;
 	}
 
 	highestPointsColumns(indexColumns: number[]): { indexColumn: number; highestPoint: number }[] {

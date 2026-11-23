@@ -10,7 +10,7 @@ const SHOW_BOARD = false;
 function highestPointColumns_error() {
 	// create
 	const board = Board.create();
-	const columns = [-1, 0, board.real_width - 1, board.real_width];
+	const columns = [-1, 0, board.realWidth - 1, board.realWidth];
 	// Vérification
 	const results = board.highestPointsColumns(columns);
 
@@ -24,25 +24,25 @@ function highestPointColumns_test() {
 	// create
 	const board = Board.create();
 	const piece = new Piece('.', { x: 0, y: 0 });
-	const columns = Array.from({ length: board.real_width - 2 }, (_, i) => i + 1);
+	const columns = Array.from({ length: board.realWidth - 2 }, (_, i) => i + 1);
 
 	// Act
-	for (let i = 1; i < board.real_width - 2; i++) {
+	for (let i = 1; i < board.realWidth - 2; i++) {
 		if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 
-		const x = board.real_height - 1 - i;
+		const x = board.realHeight - 1 - i;
 		board.addPiece(piece, { x: x, y: i });
 	}
 
-	const index_x = board.real_height - board.real_width + 1;
-	board.addPiece(piece, { x: index_x, y: board.real_width - 2 });
+	const index_x = board.realHeight - board.realWidth + 1;
+	board.addPiece(piece, { x: index_x, y: board.realWidth - 2 });
 
 	if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 
 	// Vérification
 	const results = board.highestPointsColumns(columns);
 	results.map((res, i) => {
-		expect(res.highestPoint).toBe(board.real_height - (i + 2));
+		expect(res.highestPoint).toBe(board.realHeight - (i + 2));
 	});
 	if (SHOW_LOGS) console.log(results);
 }
@@ -50,12 +50,12 @@ function highestPointColumns_test() {
 function highestPointColumn_nothing() {
 	// create
 	const board = Board.create();
-	const columns = Array.from({ length: board.real_width - 2 }, (_, i) => i + 1);
+	const columns = Array.from({ length: board.realWidth - 2 }, (_, i) => i + 1);
 	// Vérification
 	const results = board.highestPointsColumns(columns);
 
 	results.map((index) => {
-		expect(index.highestPoint).toBe(board.real_height - 1);
+		expect(index.highestPoint).toBe(board.realHeight - 1);
 	});
 }
 

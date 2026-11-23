@@ -13,9 +13,9 @@ function filledWithlineCellRiseEmpty() {
 	// create
 	const board = Board.create();
 
-	for (let i = 0; i < board.real_height; i++) {
+	for (let i = 0; i < board.realHeight; i++) {
 		const res = board.lineCellRise();
-		if (i >= board.real_height - 2) expect(res).toBe(ResultMethod.FAIL);
+		if (i >= board.realHeight - 2) expect(res).toBe(ResultMethod.FAIL);
 		else {
 			if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 			expect(res).toBe(ResultMethod.SUCCESS);
@@ -31,9 +31,9 @@ function filledWithlineCellRise() {
 
 	board.addPiece(piece, { x: 21, y: 1 });
 
-	for (let i = 0; i < board.real_height; i++) {
+	for (let i = 0; i < board.realHeight; i++) {
 		const res = board.lineCellRise();
-		if (i >= board.real_height - 4) expect(res).toBe(ResultMethod.FAIL);
+		if (i >= board.realHeight - 4) expect(res).toBe(ResultMethod.FAIL);
 		else {
 			if (SHOW_BOARD) showBoard(board.board, 'ASCII');
 			expect(res).toBe(ResultMethod.SUCCESS);

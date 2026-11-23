@@ -46,13 +46,13 @@ function delLine_valide() {
 	expect(row_apres[5]).toBe(CelluleType.EMPTY);
 	// murs preserves
 	expect(row_apres[0]).toBe(CelluleType.WALL);
-	expect(row_apres[board.real_width - 1]).toBe(CelluleType.WALL);
+	expect(row_apres[board.realWidth - 1]).toBe(CelluleType.WALL);
 }
 
 function delLine_invalide() {
 	// Arrange
 	const board = Board.create();
-	const overflow_max = board.real_height - 1; // = 23, mur du bas
+	const overflow_max = board.realHeight - 1; // = 23, mur du bas
 	const overflow_min = 0; // = 0,  mur du haut
 
 	if (SHOW_LOGS) {

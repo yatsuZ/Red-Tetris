@@ -16,11 +16,11 @@ const ERROR = [-1, 0, 23, 24, 25];
 function place_piece(board: Board) {
 	const piece = new Piece('.', { x: 1, y: 1 });
 
-	for (let i = 1; i < board.real_width - 1; i++) {
-		for (let j = 1; j < board.real_height; j++) {
+	for (let i = 1; i < board.realWidth - 1; i++) {
+		for (let j = 1; j < board.realHeight; j++) {
 			if (FULL.includes(j)) board.addPiece(piece, { x: j, y: i });
 			else if (PARTIAL.includes(j)) {
-				if (i != board.real_width - 2) board.addPiece(piece, { x: j, y: i });
+				if (i != board.realWidth - 2) board.addPiece(piece, { x: j, y: i });
 			}
 		}
 	}

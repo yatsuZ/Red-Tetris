@@ -9,7 +9,7 @@ import { logCollisionMatrix } from '../../../../src/server/utils/showCollision.j
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;
 // Piece 'O' = [[1,1],[1,1]] — 2x2
-// Board par défaut : real_height=24 (sol=ligne 23), real_width=12 (murs col 0 et 11)
+// Board par défaut : realHeight=24 (sol=ligne 23), realWidth=12 (murs col 0 et 11)
 
 function position_valide() {
 	// Arrange
@@ -81,7 +81,7 @@ function collision_mur_lateral() {
 }
 
 function collision_sol() {
-	// Arrange — O en (22,5) : ligne 23 = sol (real_height-1)
+	// Arrange — O en (22,5) : ligne 23 = sol (realHeight-1)
 	const board = Board.create();
 	const piece = new Piece('O', { x: 0, y: 0 });
 	const pos: Position = { x: 22, y: 5 };

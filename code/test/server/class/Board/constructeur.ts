@@ -22,9 +22,9 @@ function defaut() {
 	const ref: BoardData = {
 		width: DEFAULT_WIDTH_BOARD,
 		height: DEFAULT_HEIGHT_BOARD,
-		real_height: DEFAULT_HEIGHT_BOARD + 4,
-		real_width: DEFAULT_WIDTH_BOARD + 2,
-		highest_point: DEFAULT_HEIGHT_BOARD,
+		realHeight: DEFAULT_HEIGHT_BOARD + 4,
+		realWidth: DEFAULT_WIDTH_BOARD + 2,
+		highestPoint: DEFAULT_HEIGHT_BOARD,
 		board: [...EXEMPLE_DEFAULT_BOARD_MATRIX],
 	};
 	expect(terrain.get()).toEqual(ref);
@@ -35,9 +35,9 @@ function init(width: number, height: number) {
 	const ref: BoardData = {
 		width: width,
 		height: height,
-		real_height: height + 4,
-		real_width: width + 2,
-		highest_point: height,
+		realHeight: height + 4,
+		realWidth: width + 2,
+		highestPoint: height,
 		board: [...terrain.getMatrix()],
 	};
 	expect(terrain.get()).toEqual(ref);

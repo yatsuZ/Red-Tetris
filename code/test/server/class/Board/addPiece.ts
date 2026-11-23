@@ -9,7 +9,7 @@ import type { Position } from '../../../../src/server/interface/I_Piece.js';
 const SHOW_LOGS = false;
 
 // Piece 'O' = [[1,1],[1,1]] — 2x2, simple a verifier
-// Board defaut : real_height=24, real_width=12
+// Board defaut : realHeight=24, realWidth=12
 // Positions valides pour 'O' : x dans [1,21], y dans [1,9]
 function place_valide(pos: Position) {
 	// Arrange

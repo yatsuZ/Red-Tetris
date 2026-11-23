@@ -7,7 +7,7 @@ import { showBoard } from '../../../../src/server/utils/showBoard.js';
 const SHOW_LOGS = false;
 const SHOW_BOARD = false;
 
-// Board defaut : real_height=24, real_width=12
+// Board defaut : realHeight=24, realWidth=12
 // Lignes jouables valides : 1 a 22
 // Piece 'O' = [[1,1],[1,1]] — 2x2
 
@@ -46,14 +46,14 @@ function delLines_valide() {
 		expect(row[5]).toBe(CelluleType.EMPTY);
 		// murs preserves
 		expect(row[0]).toBe(CelluleType.WALL);
-		expect(row[board.real_width - 1]).toBe(CelluleType.WALL);
+		expect(row[board.realWidth - 1]).toBe(CelluleType.WALL);
 	});
 }
 
 function delLines_invalide() {
 	// Arrange
 	const board = Board.create();
-	const indexLines = [0, board.real_height - 1]; // mur haut et mur bas
+	const indexLines = [0, board.realHeight - 1]; // mur haut et mur bas
 
 	if (SHOW_LOGS) {
 		console.log(`=== delLines invalide (${indexLines}) ===`);
@@ -80,7 +80,7 @@ function delLines_mixte() {
 	const piece = new Piece('O', { x: 6, y: 4 });
 	board.addPiece(piece, piece.position);
 
-	const indexLines = [0, 6, board.real_height - 1]; // invalide, valide, invalide
+	const indexLines = [0, 6, board.realHeight - 1]; // invalide, valide, invalide
 
 	if (SHOW_LOGS) {
 		console.log(`=== AVANT delLines mixte (${indexLines}) ===`);

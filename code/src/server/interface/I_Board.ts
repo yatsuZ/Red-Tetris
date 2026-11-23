@@ -8,11 +8,11 @@ export type MatrixCellule = Matrix<CelluleType>;
 // =====================================================
 
 export type BoardData = {
-	readonly real_height: number;
-	readonly real_width: number;
+	readonly realHeight: number;
+	readonly realWidth: number;
 	readonly height: number;
 	readonly width: number;
-	highest_point: number;
+	highestPoint: number;
 	board: MatrixCellule;
 };
 
@@ -25,7 +25,7 @@ export interface I_Board extends BoardData {
 	clone(): I_Board;
 	// Retourne la grille sous forme de matrice de CelluleType
 	getMatrix(): MatrixCellule;
-	// Retourne les données du board (height, width, highest_point)
+	// Retourne les données du board (height, width, highestPoint)
 	get(): BoardData;
 
 	// =====================================================
