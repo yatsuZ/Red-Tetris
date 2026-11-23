@@ -1,12 +1,12 @@
 import type { Matrix } from '../interface/I_Piece.js';
 
 export enum ErrorInitMsgBoard {
-	DEFAULT = 'No valid input constructor Board. ',
-	HEIGHT_LOW = 'Cause : height too low.',
-	HEIGHT_HIGH = 'Cause : height too high.',
-	WIDTH_LOW = 'Cause : width too low.',
-	WIDTH_HIGH = 'Cause : width too high.',
-	WIDTH_HEIGHT = 'Cause : width too large in relation to height',
+	DEFAULT = 'Invalid input for Board.create. ',
+	HEIGHT_LOW = 'Cause: height too low.',
+	HEIGHT_HIGH = 'Cause: height too high.',
+	WIDTH_LOW = 'Cause: width too low.',
+	WIDTH_HIGH = 'Cause: width too high.',
+	WIDTH_HEIGHT = 'Cause: width greater than height.',
 }
 
 export const DEFAULT_HEIGHT_BOARD: number = 20;

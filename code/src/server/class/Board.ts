@@ -157,7 +157,7 @@ export class Board implements I_Board {
 				const c = pos.y + j;
 				const boardRow = this.board[r];
 				if (boardRow === undefined || boardRow[c] === undefined)
-					throw new Error(`addPiece: écriture hors mémoire (${r}, ${c})`);
+					throw new Error(`addPiece: out of bounds write at (${r}, ${c})`);
 				boardRow[c] = CelluleType.PIECE;
 			}
 		}

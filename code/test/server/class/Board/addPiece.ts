@@ -83,7 +83,7 @@ function hors_memoire() {
 	const pos = { x: -1, y: 1 };
 
 	// Assert
-	expect(() => board.addPiece(piece, pos)).toThrow('addPiece: écriture hors mémoire');
+	expect(() => board.addPiece(piece, pos)).toThrow('addPiece: out of bounds write');
 }
 
 function imbriquer() {
