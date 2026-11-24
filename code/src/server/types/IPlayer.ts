@@ -1,23 +1,23 @@
-import type { MethodResult } from "../constants/board.js";
-import type { PieceMove } from "../constants/player.js";
-import type { IBoard } from "./IBoard.js";
-import type { IPiece } from "./IPiece.js";
+import type { MethodResult } from '../constants/board.js';
+import type { PieceMove } from '../constants/player.js';
+import type { IBoard } from './IBoard.js';
+import type { IPiece } from './IPiece.js';
 
 // =====================================================
 // Attributs
 // =====================================================
 
 export type PlayerData = {
-    readonly id : number;
-    name: string;// maximum 10 char
-    isAlive: boolean;
+	readonly id: number;
+	name: string; // maximum 10 char
+	isAlive: boolean;
 
-    board: IBoard;
+	board: IBoard;
 
-    readonly seedPiece: number;
-    currentPiece: IPiece;
-    heldPiece: IPiece | null;
-    indexPiece: number;
+	readonly seedPiece: number;
+	currentPiece: IPiece;
+	heldPiece: IPiece | null;
+	indexPiece: number;
 };
 
 export interface IPlayer extends PlayerData {
@@ -32,12 +32,12 @@ export interface IPlayer extends PlayerData {
 	// Action jeux
 	// =====================================================
 
-    // permet de recuper la piece suivante pour currentPiece
-    nextPiece(): MethodResult;
-    // switch currentPiece avec heldPiece et si heldPiece est null alors on passe à next piece et heldPiece deviens current
+	// permet de recuper la piece suivante pour currentPiece
+	nextPiece(): MethodResult;
+	// switch currentPiece avec heldPiece et si heldPiece est null alors on passe à next piece et heldPiece deviens current
 	holdPiece(): MethodResult;
-    // Deplace une piece  
-    movePiece(action: PieceMove): MethodResult;
-    // Tourne une pieces
-    rotatePiece(): MethodResult;
+	// Deplace une piece
+	movePiece(action: PieceMove): MethodResult;
+	// Tourne une pieces
+	rotatePiece(): MethodResult;
 }
