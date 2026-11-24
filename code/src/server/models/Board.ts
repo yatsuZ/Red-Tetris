@@ -161,6 +161,11 @@ export class Board implements IBoard {
 		return MethodResult.SUCCESS;
 	}
 
+	positionHardDrop(piece: IPiece, pos: Position): Position
+	{
+		throw new Error("positionHardDrop: not implemented");
+	}
+
 	// =====================================================
 	// Lignes
 	// =====================================================

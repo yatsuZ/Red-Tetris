@@ -38,6 +38,8 @@ export interface IBoard extends BoardData {
 	canAddPiece(piece: IPiece, pos: Position): { matrix: Matrix<CollisionState>; result: MethodResult };
 	// Ajoute une pièce dans la grille. Retourne SUCCESS, lève une erreur si hors de la grille
 	addPiece(piece: IPiece, pos: Position): MethodResult;
+	// Verifie la position de la piece si elle est lachée
+	positionHardDrop(piece: IPiece, pos: Position): Position;
 
 	// =====================================================
 	// Lignes
