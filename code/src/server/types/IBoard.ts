@@ -39,7 +39,7 @@ export interface IBoard extends BoardData {
 	// Ajoute une pièce dans la grille. Retourne SUCCESS, lève une erreur si hors de la grille
 	addPiece(piece: IPiece, pos: Position): MethodResult;
 	// Verifie la position de la piece si elle est lachée
-	positionHardDrop(piece: IPiece, pos: Position): Position;
+	positionHardDrop(piece: IPiece, pos: Position): { pos: Position | null; result: MethodResult };
 
 	// =====================================================
 	// Lignes

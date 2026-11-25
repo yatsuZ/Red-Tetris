@@ -10,7 +10,8 @@
 		"test:coverage": "vitest run --coverage",
 		"dev": "tsx --env-file=.env src/server/main.ts & vite",
 		"dev:server": "tsx --env-file=.env src/server/main.ts",
-		"dev:client": "vite"
+		"dev:client": "vite",
+		"prettier:write": "exec prettier --write ."
 	},
 	"keywords": [],
 	"author": "",

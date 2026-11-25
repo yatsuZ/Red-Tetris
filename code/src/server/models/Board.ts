@@ -161,8 +161,15 @@ export class Board implements IBoard {
 		return MethodResult.SUCCESS;
 	}
 
-	positionHardDrop(piece: IPiece, pos: Position): Position {
-		throw new Error('positionHardDrop: not implemented');
+	positionHardDrop(piece: IPiece, pos: Position): { pos: Position | null; result: MethodResult } {
+		let resVerif = this.canAddPiece(piece, pos);
+		if (resVerif.result !== MethodResult.SUCCESS) return { pos: null, result: resVerif.result };
+		let resPos = pos;
+		while (resVerif.result === MethodResult.SUCCESS) {
+			resPos = { row: resPos.row + 1, col: resPos.col };
+			resVerif = this.canAddPiece(piece, resPos);
+		}
+		return { pos: { row: resPos.row - 1, col: resPos.col }, result: MethodResult.SUCCESS };
 	}
 
 	// =====================================================
