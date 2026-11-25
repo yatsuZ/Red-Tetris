@@ -162,14 +162,14 @@ export class Board implements IBoard {
 	}
 
 	positionHardDrop(piece: IPiece, pos: Position): { pos: Position | null; result: MethodResult } {
-		let resVerif = this.canAddPiece(piece, pos);
-		if (resVerif.result !== MethodResult.SUCCESS) return { pos: null, result: resVerif.result };
-		let resPos = pos;
-		while (resVerif.result === MethodResult.SUCCESS) {
-			resPos = { row: resPos.row + 1, col: resPos.col };
-			resVerif = this.canAddPiece(piece, resPos);
+		let check = this.canAddPiece(piece, pos);
+		if (check.result !== MethodResult.SUCCESS) return { pos: null, result: check.result };
+		let landing = pos;
+		while (check.result === MethodResult.SUCCESS) {
+			landing = { row: landing.row + 1, col: landing.col };
+			check = this.canAddPiece(piece, landing);
 		}
-		return { pos: { row: resPos.row - 1, col: resPos.col }, result: MethodResult.SUCCESS };
+		return { pos: { row: landing.row - 1, col: landing.col }, result: MethodResult.SUCCESS };
 	}
 
 	// =====================================================
@@ -285,6 +285,11 @@ export class Board implements IBoard {
 		return MethodResult.SUCCESS;
 	}
 
+	getRandomLine(piece?: IPiece): number {
+		if (piece === undefined)  return getRandomInt(1, this.realHeight - 2);
+		return getRandomInt(1, (this.realHeight - piece.getHeight()) - 1);
+	}
+
 	// =====================================================
 	// Colonnes
 	// =====================================================
@@ -304,5 +309,10 @@ export class Board implements IBoard {
 			const res = this.highestPointColumn(index);
 			return { indexColumn: index, highestPoint: res };
 		});
+	}
+
+	getRandomColumn(piece?: IPiece): number {
+		if (piece === undefined) return getRandomInt(1, this.realWidth - 2);
+		return getRandomInt(1, (this.realWidth - piece.getWidth()) - 1);
 	}
 }

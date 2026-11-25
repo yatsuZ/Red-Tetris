@@ -14,6 +14,9 @@ import { testLineCellRise } from './Board/lineCellRise.js';
 import { testHighestPointColumn } from './Board/highestPointColumn.js';
 import { testHighestPointsColumns } from './Board/highestPointsColumns.js';
 import { testLineCellFall } from './Board/lineCellFall.js';
+import { testPositionHardDrop } from './Board/positionHardDrop.js';
+import { testGetRandomColumn } from './Board/getRandomColumn.js';
+import { testGetRandomLine } from './Board/getRandomLine.js';
 
 describe('Board', () => {
 	describe('constructor', testConstructor);
@@ -31,4 +34,7 @@ describe('Board', () => {
 	describe('highestPointColumn', testHighestPointColumn);
 	describe('highestPointsColumns', testHighestPointsColumns);
 	describe('lineCellFall', testLineCellFall);
+	describe('positionHardDrop', testPositionHardDrop);
+	describe('getRandomColumn', testGetRandomColumn);
+	describe('getRandomLine', testGetRandomLine);
 });

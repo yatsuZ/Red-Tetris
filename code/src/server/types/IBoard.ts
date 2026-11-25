@@ -1,5 +1,6 @@
 import type { CellType, MethodResult, LineState, CollisionState } from '../constants/board.js';
-import type { IPiece, Matrix, Position } from './IPiece.js';
+import type { Piece } from '../models/Piece.js';
+import type { IPiece, Matrix, PieceShape, Position } from './IPiece.js';
 
 export type CellMatrix = Matrix<CellType>;
 
@@ -38,7 +39,8 @@ export interface IBoard extends BoardData {
 	canAddPiece(piece: IPiece, pos: Position): { matrix: Matrix<CollisionState>; result: MethodResult };
 	// Ajoute une pièce dans la grille. Retourne SUCCESS, lève une erreur si hors de la grille
 	addPiece(piece: IPiece, pos: Position): MethodResult;
-	// Verifie la position de la piece si elle est lachée
+	// Renvoie la position où la pièce atterrit si on la lâche depuis pos (sans l'ajouter à la grille).
+	// Si pos est invalide : pos = null et result = celui de canAddPiece (FAIL collision, ERROR hors tableau)
 	positionHardDrop(piece: IPiece, pos: Position): { pos: Position | null; result: MethodResult };
 
 	// =====================================================
@@ -59,6 +61,8 @@ export interface IBoard extends BoardData {
 	lineCellRise(): MethodResult;
 	// Fait descendre toutes les lignes non vides s'il y a des lignes vides en dessous
 	lineCellFall(): MethodResult;
+	// Donne l'index d'une ligne aléatoire
+	getRandomLine(piece?: IPiece): number;
 
 	// =====================================================
 	// Colonnes
@@ -66,6 +70,8 @@ export interface IBoard extends BoardData {
 
 	// Retourne l'indice de la cellule la plus haute dans une colonne
 	highestPointColumn(indexColumn: number): number;
-	// Retourne l'indice de la cellule la plus haute pour plusieurs colonnes
+	// Retourne l'indice de la cellule la plus haute pour plusieurs colonne
 	highestPointsColumns(indexColumns: number[]): { indexColumn: number; highestPoint: number }[];
+	// Donne l'index d'une colonnes aléatoire
+	getRandomColumn(piece?: IPiece): number;
 }

@@ -8,7 +8,7 @@ import type { Position } from '../../../../src/server/types/IPiece.js';
 
 const SHOW_LOGS = false;
 
-// Piece 'O' = [[1,1],[1,1]] — 2x2, simple a verifier
+// Piece 'O' = [[1,1],[1,1]] — 2x2, simple a vérifie
 // Board defaut : realHeight=24, realWidth=12
 // Positions valides pour 'O' : x dans [1,21], y dans [1,9]
 function validPlacement(pos: Position) {
