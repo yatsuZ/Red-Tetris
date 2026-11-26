@@ -19,6 +19,7 @@ function emptyBoard(shape: PieceShape) {
 	const resultHardDrop = board.positionHardDrop(piece, piece.position);
 
 	// Assert
+	if (SHOW_LOGS) {console.log(`=== Before canAddPiece ${piece.shape} en (row:${piece.position.row} col:${piece.position.col}) ===`);}
 	expect(resultHardDrop.result).toBe(MethodResult.SUCCESS);
 	expect(resultHardDrop.pos?.row).toBe((board.realHeight - piece.getHeight()) - 1);
 	expect(resultHardDrop.pos?.col).toBe(piece.position.col);

@@ -1,24 +1,11 @@
 import { expect, it, vi } from 'vitest';
 import { Board } from '../../../../src/server/models/Board.js';
 import { CellType, MethodResult } from '../../../../src/server/constants/board.js';
-import type { IPiece, Position } from '../../../../src/server/types/IPiece.js';
+import type { IPiece } from '../../../../src/server/types/IPiece.js';
 import { ALL_SHAPES, ORIENTATION_SYMBOLS } from '../../../../src/server/constants/shapes.js';
 import { Piece } from '../../../../src/server/models/Piece.js';
 
-
-function rngColumnWithPiece({ piece }: { piece: IPiece }) {
-	it("Reste dans les bornes (1000 tirages) que l'aletoire est bien bornée", () => {
-    	for (let i = 0; i < 1000; i++) {
-    		const board = Board.create();
-    		const indexColumn = board.getRandomColumn(piece);
-    		expect(indexColumn).toBeGreaterThanOrEqual(1);
-    		expect(indexColumn).toBeLessThanOrEqual((board.realWidth - piece.getWidth()) - 1);
-    		expect(Number.isInteger(indexColumn)).toBeTruthy();
-    		expect(board.canAddPiece(piece, { row: 1, col: indexColumn}).result).toBe(MethodResult.SUCCESS);
-    	}
-	});
-    
-	it("l'aléatoire est bien borné", () => {
+function rngColumnWithPieceMinMax({ piece }: { piece: IPiece }) {
 		const board = Board.create();
 
 		vi.spyOn(Math, 'random').mockReturnValue(0);
@@ -27,11 +14,20 @@ function rngColumnWithPiece({ piece }: { piece: IPiece }) {
 
 		vi.spyOn(Math, 'random').mockReturnValue(0.9999);
 		const maxRes = board.getRandomColumn(piece);
-		expect(maxRes).toBe((board.realWidth - piece.getWidth()) - 1); // max
+		expect(maxRes).toBe((board.realWidth - piece.getWidth()) - 3); // max
 
 		vi.restoreAllMocks();
-	});
+}
 
+function rngColumnWithPiece100time({ piece }: { piece: IPiece }) {
+  	for (let i = 0; i < 1000; i++) {
+  		const board = Board.create();
+  		const indexColumn = board.getRandomColumn(piece);
+  		expect(indexColumn).toBeGreaterThanOrEqual(1);
+  		expect(indexColumn).toBeLessThanOrEqual((board.realWidth - piece.getWidth()) - 3);
+  		expect(Number.isInteger(indexColumn)).toBeTruthy();
+  		expect(board.canAddPiece(piece, { row: 1, col: indexColumn}).result).toBe(MethodResult.SUCCESS);
+  	}
 }
 
 export function testGetRandomColumn() {
@@ -75,6 +71,7 @@ export function testGetRandomColumn() {
                 }
             )),
         );
-    it.each(allPieces)('Shape $shape — rotation $arrow ', rngColumnWithPiece);
+    it.each(allPieces)("Shape $shape — rotation $arrow - l'aléatoire est bien borné", rngColumnWithPieceMinMax);
+    it.each(allPieces)("Shape $shape — rotation $arrow - Reste dans les bornes (1000 tirages) que l'aletoire est bien bornée", rngColumnWithPiece100time);
     
 }
